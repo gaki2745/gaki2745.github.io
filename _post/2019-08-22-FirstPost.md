@@ -1,14 +1,15 @@
 ---
-layout: post 
+layout: post
 current: post
-cover: assets/images/bus.jpg 
-navigation: True title: "처음쓰는 POST 입니다"
-date: 2018-09-20 11:00:00 +0900 
-tags: getting-started fables 
+cover: 
+navigation: True
+title: Gettysburg Address
+date: 2018-07-19 13:18:00
+tags:
 class: post-template
-subclass: 'post tag-fiction'
-author: gaki 
---- 
+subclass: 'post'
+author: gaki
+---
 
 contents
 
