@@ -10,7 +10,7 @@ baseurl:
 
 # Website info
 title: gaki블로그
-description: iOS/swift/Algorithm/CS 공부를 기록하고 공유
+description: iOS/swift/Algorithm/CS 공부를 기록
 cover: assets/images/blog-cover.jpg
 logo: assets/images/blog-icon.png
 logo_dark: assets/images/favicon.png
