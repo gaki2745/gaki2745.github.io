@@ -1,14 +1,14 @@
 ---
 layout: post
 current: post
-cover: assets/images/sky.jpg
+cover: 'assets/images/summit.jpg'
 navigation: True
-title: I Have a Dream
-date: 1963-08-28 10:18:00
-tags: speeches
+title: Looking-Glass house
+date: 1871-03-18 10:18:00
+tags: fiction
 class: post-template
-subclass: 'post tag-speeches'
-author: martin
+subclass: 'post tag-fiction'
+author: lewis
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
