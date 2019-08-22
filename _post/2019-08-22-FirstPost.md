@@ -1,5 +1,4 @@
-
---- 
+---
 layout: post 
 current: post
 cover: assets/images/bus.jpg 
