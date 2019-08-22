@@ -1,14 +1,15 @@
 ---
 layout: post
 current: post
-cover: 'assets/images/summit.jpg'
+cover: assets/images/water.jpg
 navigation: True
-title: Looking-Glass house
-date: 1871-03-18 10:18:00
-tags: fiction
+title: The Businessman & The Fisherman
+date: 2014-08-12 10:18:00
+tags: fables
 class: post-template
-subclass: 'post tag-fiction'
-author: lewis
+subclass: 'post tag-fables'
+logo: assets/images/ghost.png
+author: hannah
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
