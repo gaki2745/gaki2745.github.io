@@ -1,7 +1,15 @@
 ---
-title: "Welcome to Jekyll!"
-date: 2017-10-20 08:26:28 -0400
-categories: jekyll update
+layout: post
+current: post
+cover: assets/images/water.jpg
+navigation: True
+title: The Businessman & The Fisherman
+date: 2014-08-12 10:18:00
+tags: fables
+class: post-template
+subclass: 'post tag-fables'
+logo: assets/images/ghost.png
+author: hannah
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
