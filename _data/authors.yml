@@ -8,6 +8,16 @@ gaki:
   facebook: ghost
   twitter: tryghost
   cover: False
+ghost:
+  username: ghost
+  name: Ghost
+  url_full: http://jekyller.github.io/jasper2/
+  url: jekyller.github.io/jasper2
+  bio: The professional publishing platform
+  picture: assets/images/ghost.png
+  facebook: ghost
+  twitter: tryghost
+  cover: False
 hannah:
   username: hannah
   name: Hannah Wolfe
