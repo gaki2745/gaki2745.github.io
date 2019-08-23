@@ -4,7 +4,7 @@ current: post
 navigation: True
 title: iOS 생명주기
 date: 2019-08-22 10:18:00
-tags: fables
+tags: Swift iOS
 class: post-template
 subclass: 'post tag-fables'
 author: gaki
