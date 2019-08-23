@@ -14,11 +14,7 @@ into the {body} of the default.hbs template -->
     <div class="inner">
         <div class="site-header-content">
             <h1 class="site-title">
-                {% if site.logo %}
-                    {{Gaki 블로그}}
-                {% else %}
-                    {{ GAKI블로그 }}
-                {% endif %}
+                Gaki 블로그
             </h1>
             <h2 class="site-description">{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}</h2>
         </div>
