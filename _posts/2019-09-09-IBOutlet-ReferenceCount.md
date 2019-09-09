@@ -11,9 +11,6 @@ author: gaki
 ---  
 
 
-# IBOutlet Reference Count 와 메모리 관리 
-
-
 ## IBOutlet을 Strong으로 연결  
 
 <img width="863" alt="image" src="https://user-images.githubusercontent.com/33486820/58239064-56aee100-7d83-11e9-976b-6c62a2aef43d.png">  
