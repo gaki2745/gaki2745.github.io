@@ -1,4 +1,18 @@
-# IBOutlet
+---
+layout: post
+current: post
+navigation: True
+title: IBOutlet Reference Count 와 메모리 관리
+date: 2019-09-09 09:18:00
+tags: iOS
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---  
+
+
+# IBOutlet Reference Count 와 메모리 관리 
+
 
 ## IBOutlet을 Strong으로 연결  
 
