@@ -25,12 +25,12 @@ author: gaki
 	myView: 1, myLabel: 2  
     
     <img width="363" alt="image" src="https://user-images.githubusercontent.com/33486820/58254538-f1b8b280-7da5-11e9-8127-b11b1d095d5f.png">
+    
+<br>
 
-    
-    
-    
-### 메모리 누수가 발생하는 상황  
+### 메모리 누수가 발생하는 상황 
 
+<br>
 `ViewController`가 dealloc이 된다고 가정  
 
 - myView의 Reference Count를 감소(0이되므로) => myView가 메모리에서 해제
@@ -43,6 +43,7 @@ author: gaki
 
 ### 메모리 부족에 의해 Weak을 지향  
 
+<br>
 Default 값이 Weak인 이유는 Weak이 유리한 상황 또한 존재한다.  
 바로 **메모리 부족**상황이다.  
 메모리가 부족하면 ViewController의 `didReceiveMemoryWarning()` 메서드가 호출된다.  
