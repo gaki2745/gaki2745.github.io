@@ -1,3 +1,15 @@
+---
+layout: post
+current: post
+navigation: True
+title: iOS AVFoundation & Media Playback Programming
+date: 2019-09-20 1:00:00
+tags: Swift iOS
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---
+
 # AVFoundation  
 
 
