@@ -1,4 +1,17 @@
-# Swift Queue & Stack  
+---
+layout: post
+current: post
+navigation: True
+title: Swift의 Queue&Stack 구현
+date: 2019-09-20 10:18:00
+tags: Swift Algorithm
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---  
+
+
+# Swift의 Queue & Stack 구현
 
 Swift의 경우 C 처럼 STL을 제공하 않기 때문에 직접 자료구조를 직접 작성해주어야 한다.  
 기본적으로 Queue와 Stack은 배열 기반으로 해당 기능을 구혀 해주는데 Swift에서 기본적으로 제공하는 array 메서드를 사용하여 기능을 구현하면된다.
