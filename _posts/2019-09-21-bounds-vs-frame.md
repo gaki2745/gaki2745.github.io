@@ -1,15 +1,15 @@
 ---
 layout: post
 current: post
-navigation: true
-title: 'Bounds vs Frame, CGPoint, CGSize, CGRect의 개념'
-date: {}
+navigation: True
+title: Bounds vs Frame, CGPoint, CGSize, CGRect의 개념
+date: 2019-09-22 10:18:00
 tags: iOS
 class: post-template
-subclass: post tag-fables
+subclass: 'post tag-fables'
 author: gaki
-published: true
----
+---  
+
   
 
 # iOS Bounds vs Frame , CGRect? CGSize? CGPoint? 
