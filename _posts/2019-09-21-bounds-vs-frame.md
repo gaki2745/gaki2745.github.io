@@ -1,14 +1,16 @@
 ---
 layout: post
 current: post
-navigation: True
-title: Bounds vs Frame, CGPoint, CGSize, CGRect의 개념
-date: 2019-09-22 10:18:00
+navigation: true
+title: 'Bounds vs Frame, CGPoint, CGSize, CGRect의 개념'
+date: {}
 tags: iOS
 class: post-template
-subclass: 'post tag-fables'
+subclass: post tag-fables
 author: gaki
----  
+published: true
+---
+  
 
   
 
@@ -182,11 +184,25 @@ View의 위치와 크기를 **자신만의 좌표시스템**안에서 나타낸�
 <img width="578" alt="image" src="https://user-images.githubusercontent.com/33486820/65382529-888c8000-dd42-11e9-96db-4486f337120c.png">  
 
 
+<br>
 
 
+## Bounds : 자기자신만의 좌표 
+
+마찬가지로위의 상황에서 RedView와 BludeView의 bounds의 origing을 출력해보았다.
+
+<img width="426" alt="image" src="https://user-images.githubusercontent.com/33486820/65386258-411ee780-dd74-11e9-9ffb-102a3dae53a5.png">  
 
 
+결과는 위와 같이 0,0으로 두 View 모두 동일하게 나왔다. 그 이유는 **Bounds는 자신만의 좌표시스템을 갖기 때문이다.**   
+위의 상황에서 RedView의 bounds 값을 각각 50, 100 을 주면 아래와 같이 변경이된다.  
 
+<img width="578" alt="image" src="https://user-images.githubusercontent.com/33486820/65386427-93f99e80-dd76-11e9-9d3f-497f3b801906.png">  
+
+
+**bounds의 값을 변경한다는 것은 해당 origin에서 View를 다시 그린다는 의미가 된다.** 상위의 View와는 아무런 관계가 없기 때문에 RedView의 origin 만 변경이 되어 위와 같이 BlueView가 움직인 거 처럼 보인다 사실은 아래와 같이 RedView가 움직인 것이다. 우리가 보는 디바이스의View는 고정이 되어있기 떄문에 위와 같이 보이는 것이다.  
+
+![image](https://user-images.githubusercontent.com/33486820/65386602-d45a1c00-dd78-11e9-9d2f-0d803050a34c.png)  
 
 
 
