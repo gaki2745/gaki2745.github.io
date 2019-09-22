@@ -1,14 +1,16 @@
 ---
 layout: post
 current: post
-navigation: True
-title: Bounds vs Frame, CGPoint, CGSize, CGRect의 개념
-date: 2019-09-21 10:18:00
+navigation: true
+title: 'Bounds vs Frame, CGPoint, CGSize, CGRect의 개념'
+date: {}
 tags: iOS
 class: post-template
-subclass: 'post tag-fables'
+subclass: post tag-fables
 author: gaki
----  
+published: true
+---
+  
 
 # iOS Bounds vs Frame , CGRect? CGSize? CGPoint? 
 
@@ -140,41 +142,44 @@ Bounds와 Frame 모두 CGRect 구조체형 인스턴스 이기 때문에 이는 
 
 ## Bounds  
 
-View의 위치와 크기를 **자신만의 좌표시스템**안에서 나타낸다.
+View의 위치와 크기를 **자신만의 좌표시스템**안에서 나타낸다.  
+
+<br>
+
+## Frame : SuperView와의 관계  
 
 
+![image](https://user-images.githubusercontent.com/33486820/65382409-7826d600-dd3f-11e9-991b-d1e4095e1bfa.png)
+
+위의 View 상황을 가정하여 설명하겠다.  
+
+- YellowView: SuperView
+- RedView: SubView
+- BlueView: RedView의 SubView  
+
+이렇게 상황을 가정하고 Frame의 값 `origin: CGPoint` 와 `size: CGRect`의 값을 출력한 것이다.
+앞서 Frame의 개념은 **SuperView의 좌표시스템 안에서**라는 말이 핵심이다.  
+
+![image](https://user-images.githubusercontent.com/33486820/65382496-ce951400-dd41-11e9-9a35-f5aa409cb1ec.png)  
+
+즉 위의 그림설명에서 알 수 있듯이 RedView의 경우 SuperView인 YellowView의 좌표계에서 origin좌표가 **x: 60, y: 100**만큼 떨어져있고 BlueView의 경우 YellowView에서 **x:25, y:200**이 아닌 RedView로 부터 해당 값 만큼 origin이 떨어져있다는 것을 출력을 통해 확인 할 수 있었다.  
+
+<br>
+
+```swift
+   redView.frame.origin.x = 0
+   redView.frame.origin.y = 0
+        
+   blueView.frame.origin.x = 0
+   blueView.frame.origin.y = 0
+``` 
+
+<br>
+
+만약 여기서 모든 origin 의 값을 0으로 바꾸게 되면 RedView의 origin  은 YellowView로 부터 0,0 만큼 마찬가지로 변화가 된 RedView의 origin에 맞추어 BlueView의 origin도 0,0 이 되어 아래와 같은 모양이 된다.  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<img width="578" alt="image" src="https://user-images.githubusercontent.com/33486820/65382529-888c8000-dd42-11e9-96db-4486f337120c.png">  
 
 
 
