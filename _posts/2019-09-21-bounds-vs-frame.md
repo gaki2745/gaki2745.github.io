@@ -200,9 +200,28 @@ View의 위치와 크기를 **자신만의 좌표시스템**안에서 나타낸�
 <img width="578" alt="image" src="https://user-images.githubusercontent.com/33486820/65386427-93f99e80-dd76-11e9-9d3f-497f3b801906.png">  
 
 
-**bounds의 값을 변경한다는 것은 해당 origin에서 View를 다시 그린다는 의미가 된다.** 상위의 View와는 아무런 관계가 없기 때문에 RedView의 origin 만 변경이 되어 위와 같이 BlueView가 움직인 거 처럼 보인다 사실은 아래와 같이 RedView가 움직인 것이다. 우리가 보는 디바이스의View는 고정이 되어있기 떄문에 위와 같이 보이는 것이다.  
+**bounds의 값을 변경한다는 것은 해당 origin에서 View를 다시 그린다는 의미가 된다.** 상위의 View와는 아무런 관계가 없기 때문에 RedView의 origin 만 변경이 되어 위와 같이 BlueView가 움직인 거 처럼 보인다 사실은 아래와 같이 RedView가 움직인 것이다. 우리가 보는 디바이스의View는 고정이 되어있기 때문에 위와 같이 보이는 것이다.  
 
 ![image](https://user-images.githubusercontent.com/33486820/65386602-d45a1c00-dd78-11e9-9d2f-0d803050a34c.png)  
+
+<br>
+
+## Frame 과 Bounds의 사용  
+
+- Frame의 경우 UIView의 크기와 위치를 변경시켜야할때 사용하여 값을 변경 시켜준다. 
+
+- Bounds의 경우 View 내부에 View 내부에 그림을 그릴때(DrawRect), Trasnformation 후에 View의 크기를 알고싶을때, SubView를 정렬하는 것과 같이 내부적으로 변경하는 경우에 사용한다.  
+
+
+<hr>
+
+## Reference 
+
+- [ZediOS](https://zeddios.tistory.com/203)
+- [Apple Developer](https://developer.apple.com)
+
+
+
 
 
 
