@@ -2,8 +2,8 @@
 layout: post
 current: post
 navigation: True
-title: Swift Protocol Basic & Pop (Protocol Oriented Programming)
-date: 2019-09-226 10:18:00
+title: Swift Protocol Basic & Protocol Oriented Programming
+date: 2019-09-26 10:18:00
 tags: Swift iOS
 class: post-template
 subclass: 'post tag-fables'
