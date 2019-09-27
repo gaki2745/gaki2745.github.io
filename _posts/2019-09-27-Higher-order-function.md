@@ -61,7 +61,7 @@ for number in numbers {
 
 - map을 사용  
 
-```
+```swift
 doubledNumber = numbers.map({ (number: Int) -> Int in
     return number * 2
 })
