@@ -231,12 +231,27 @@ var doubledNubmers: [Int] = numbers.reduce(into: [1, 2]) { (result: inout [Int],
 print(doubledNubmers) //[1, 2, 4]
 ```
 
+위와 같이 초기 배열 `into: [1, 2]`에 numbers에 서 짝수 인 값 '2'를 찾아 두배를 시켜 초기 배열에 append 하는 작업을 한다.
+그리고 reduce 메서드가 종료가 되면 해당 초기 배열에서 append 한 결과 값을 doubledNumbers 배열에 반환한다.  
+
+- filter와 map을 사용  
+
+```swift 
+doubledNubmers = [1, 2] + numbers.filter{ $0 % 2 == 0 }.map{ $0 * 2 }
+
+print(doubledNubmers) //[1, 2, 4]
+```
+
+> 언제 사용하는가? : 초기 값이 주어지고 해당 배열 뒤에 값을 붙여서 나가야할 때 사용하면 좋다. 하지만 filter와 map을 통해서도 reduce(into:)와 동일한 동작하는 것을 구현할 수 있다는 것을 알고 있어야한다.
 
 
+<br>
+<hr>
 
 
+## Reference  
 
-
+- [야곰의 Swift4 프로그래밍](https://smartstore.naver.com/bookinside/products/718869728?NaPm=ct%3Dk11tve68%7Cci%3D648d94297c600994574f48543fbaee3d6ddb2a6e%7Ctr%3Dsls%7Csn%3D478741%7Chk%3D8b38c9ad290075ca7f7cdf16c2af19ed242eb70e)
 
 
 
