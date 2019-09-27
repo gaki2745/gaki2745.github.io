@@ -2,7 +2,7 @@
 layout: post
 current: post
 navigation: True
-title: Swift) flatMap과 compactMap 사용법 
+title: Swift flatMap과 compactMap 사용법 
 date: 2019-09-27 05:18:00
 tags: Swift 
 class: post-template
@@ -10,6 +10,8 @@ subclass: 'post tag-fables'
 author: gaki
 ---  
 
+
+<br>
 
 # flatMap? comapctMap? 변경사항
 
@@ -19,7 +21,7 @@ Swift 4.1 에서 부터 이름이 변경 되었다. 하지만 `flatMap`의 사�
 
 ## flatMap -> compactMap 변경  
 
-<br?
+<br>
 
 Swift의 array와 같은 sequence에 flatMap을 사용하면 nil이 매핑 되는 것을 필터링하는 작업을 해주느 메서드이다.
 
