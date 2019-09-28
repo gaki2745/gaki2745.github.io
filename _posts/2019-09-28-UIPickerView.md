@@ -103,13 +103,13 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 ```
 
 
-- PickerView의 열의 개수 즉 Component의 개수를 설정하는 메서드
-
+- PickerView의 열의 개수 즉 Component의 개수를 설정하는 메서드다.
 ```swift
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2	// pickerView에 2개의 열이 생성된다.
     }
 ```    
+
 
 - PickerView의 행의 개수를 설정한다.(보통 PickerView에 담기는 Sequence나 collection의 count를 반환하도록한다)
 ```swift
@@ -118,8 +118,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 ```  
 
-- PickerView의 이벤트를 감지하여 선택된 row 값을 알 수 있다  
 
+- PickerView의 이벤트를 감지하여 선택된 row 값을 알 수 있다.
 ```swift
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 0 {
@@ -132,8 +132,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 ```  
 
-- PickerView에서 row의 title을 설정하는 메서드이다. 메서드를 보면 String 반환 타입이기때문에 단순하게 행의 text가 될 String을 반환 해주는 함수이다.  
 
+- PickerView에서 row의 title을 설정하는 메서드이다. 메서드를 보면 String 반환 타입이기때문에 단순하게 행의 text가 될 String을 반환 해주는 함수이다.
 ```swift
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
@@ -142,7 +142,8 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
             return pickerData2[row]
         }
     }
-```  
+```   
+
 
 - PickerView에서 row의 View를 설정할 수 있는 함수이다. UIView를 return 하기 때문에 아래와 같이 UILabel을 리턴 할 수 있다.
 ```swift
@@ -164,12 +165,14 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 ```     
 
+
+
 <img width="582" alt="image" src="https://user-images.githubusercontent.com/33486820/65815456-b124e600-e22a-11e9-840b-194112127178.png">
 
 
 
-- `pickerView(viewForRow:)`메서드에서 `UIImageView` 반환 테스트  
 
+- `pickerView(viewForRow:)`메서드에서 `UIImageView` 반환 테스트
 ```swift
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let pickerImageView = UIImageView()
@@ -179,23 +182,22 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 ```
 
-위의 코드를 실행하면 Row의 height 크기가 default값으로 매우 작아 imageView를 볼 수없다. height와 width를 수정할 수 있는 delegate 메서드는 아래의 두개이다.  
-- `pickerView(rowHeightForComponent:)`  
 
+위의 코드를 실행하면 Row의 height 크기가 default값으로 매우 작아 imageView를 볼 수없다. height와 width를 수정할 수 있는 delegate 메서드는 아래의 두개이다.  
+- `pickerView(rowHeightForComponent:)`
 ```swift
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 200.0
     }
     
 ```  
-- `pickerView(rowWidthForComponent:)`
 
+- `pickerView(rowWidthForComponent:)`
 ```swift
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return 200.0
     }
 ```
-
 
 아래와 같이 얼굴이 나오는 걸 확인 할 수 있다.
 
