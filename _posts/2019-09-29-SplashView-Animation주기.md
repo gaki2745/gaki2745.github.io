@@ -80,7 +80,4 @@ extension ViewController: CAAnimationDelegate {
         self.imageView.layer.mask = nil
     }
 }
-```  
-
-
-
+```
