@@ -1,6 +1,15 @@
 ---
-published: false
----
+layout: post
+current: post
+navigation: True
+title: Swift Type Casting 과 as, as! as?의 차이점
+date: 2019-10-02 11:18:00
+tags: Swift 
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---  
+
 # Swift Type Casting
 
 다른 객체지향 언어에서 제공하는 Type Casting이 Swift에서는 어떻게 다루어지는지 확실하게 정리하고 넘어가겠습니다. `is, as, as?, as!` 키워드에 관해서 정의와 차이점등을 중점적으로 정리하도록 하겠습니다.
