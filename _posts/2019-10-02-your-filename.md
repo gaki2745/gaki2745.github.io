@@ -9,7 +9,7 @@ published: false
 
 ## Type Casting  
 
-TypeCasting의 정의는 **인스턴스의 타입을 확인하거나, 인스턴스의 타입을 Super Class또는 Sub Calss 타입처럼 다루기 위해 사용된다.  
+TypeCasting의 정의는 **인스턴스의 타입을 확인하거나, 인스턴스의 타입을 Super Class또는 Sub Calss 타입처럼 다루기 위해 사용된다.**  
 
 > Swfit에서 타입 캐스팅은 `is` 와 `as` 연산자로 구현할 수 있고, 이 두 연산자의 값의 타입을 확인하거나, 값을 다른 타입으로 변환하는 간단하고 Swift만의 표현적인 방법을 제공한다.  
 
@@ -90,6 +90,7 @@ class Song: MediaItem {
 위와 같이 구조로 이루어진 상태에서 `is`를 사용하여 하위 클래스에 대한 동작이 어떻게 이루어지는 확인해보겠습니다.
 
 <br>
+
 ##### SuperClass Type Array: **library**  
 
 ```swift
@@ -328,15 +329,3 @@ let favoritMovie: Movie = marvelMovie as Movie
 - [Type casting in swift : difference between is, as, as?, as!](https://medium.com/@abhimuralidharan/typecastinginswift-1bafacd39c99)
 - [야곰의 Swift Programming 개정판](http://www.hanbit.co.kr/store/books/look.php?p_code=B2206901403)
 - [Apple Developer](https://developer.apple.com/documentation)
-
-
-
-
-
-
-
-
-
-
-
-
