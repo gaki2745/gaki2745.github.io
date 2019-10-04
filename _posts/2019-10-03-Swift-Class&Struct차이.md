@@ -1,7 +1,14 @@
 ---
-published: false
----
-
+layout: post
+current: post
+navigation: True
+title: Swift struct, class 차이와 적재적소에 사용하기
+date: 2019-10-04 20:18:00
+tags: Swift 
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---  
 
 
 # Swift struct vs class  
@@ -148,6 +155,13 @@ print(gakiClone.age)    // 25
 
 gakiClone의 age 프로퍼티를 변경 시켜도 gaki의 age에는 아무런 영향이 없는 것을 확인 할 수 있습니다. 이는 값만 복사가 되었기 때문에 전혀 서로에게 형향을 주지 않는 다는 것을 알수 있습니다.  
 
+그럼 `getOld()`라는 함수를 통해 나이를 한살 더 먹어 보겠습니다.
+
+<img width="821" alt="image" src="https://user-images.githubusercontent.com/33486820/66203018-2dfc0800-e6e2-11e9-9777-5c926fed41ce.png">  
+
+하지만 위처럼 에러가 발생합니다. 그 이유는 매개변수로 받는 `info: BasicInformation`의 구조체타입 매개변수가 `let`형이기 때문입니다. 이는 결국 매개변수로 넘겨주면 value로 고정이되어 변경할 수 없다는 것을 의미합니다.  
+
+
 <br>
 
 ##### class: 참조 타입  
@@ -172,4 +186,66 @@ clone.stack = "Android Developer"
 
 print("gaki는 \(gaki.stack) 입니다.")
 // gaki는 Android Developer 입니다.
-```
+```  
+
+구조체에서는 함수에 구조체를 매개변수로 넘겼을 경우 값을 수정 할 수 없었습니다. 클래스에서는 이런 행위가 가능한데 아래 처럼 `growUpCareer`라는 경력을 1년 더 올려주는 함수를 선언하고 gaki를 매개변수로 넘겨보겠습니다.  
+
+```swift
+
+func growwUpCareer(_ developer: Developer) {
+    developer.career += 1
+}
+print(gaki.career)  // 1
+
+growwUpCareer(gaki)
+
+print(gaki.career)	// 2
+```  
+
+gaki라는 클래스 인스턴스가 함수에서 호출이 되어 인스턴스의 프로퍼티의 값이 변경 되는 것을 확인할 수 있습니다. 이는 직접 gaki라는 인스턴스에 대한 참조가 일어나기 때문에 값이 변경한 다는 것을 알 수 있습니다. 즉 새로운 인스턴스가 넘겨지는 것이 아니라 기존의 인스턴스(gaki)의 참조를 전달하기 떄문입니다.  
+
+<br>
+
+## 식별 연산자(Identity Operation)  
+
+클래스의 경우 인스턴스 끼리 참조가 같은지 확인할 때 **식별 연산자**를 사용하면 됩니다.  
+
+```swift
+var gaki: Developer = Developer()
+var clone: Developer = gaki
+var friend: Developer = Developer()
+
+print(gaki === clone) // true
+print(gaki === friend) // false
+print(gaki !== friend) // true
+```  
+
+<br>
+
+## Swift의 기본 데이터 타입은 모두 구조체이다.  
+
+**Int, Double, Float, String, Bool..** 등 스위프트의 기본 데이터 타입은 모두 구조체 입니다. 함수에 이런 값 타입의 기본 데이터를 넘길 경우 모두 값이 복사되어 전달 될뿐 함수 내부에서 아무리 전달된 값을 변경 해도 기존의 변수나 상수에는 전혀 영향을 미치지 못합니다.  
+> 참고) inout 키워드를 사용하여 참조가 일어나게 할 수 있습니다!  
+
+<br>
+
+## 적재적소에 struct, class 사용하기  
+
+애플 가이드라인에서 권장하는 사항은 다음과 같습니다.  
+
+- 연관된 간단한 값의 집합을 캡슐화하는 것만이 목적일때 구조체를 사용
+- 캡슐화한 값을 참조하는 것보다 복사하는 것이 합당할 때 구조체를 사용
+- 구조체에 저장된 프러파티가 값 타입이며 참조하는 것보다 복사하는 것이 합당할 때 구조체를 사용
+- 다른 타입으로부터 상속받거나 모델의 사이즈가 그리 크지 않다면 구조체를 사용 
+- 해당 모델을 serialize 해서 전송하거나 파일로 저장할 경우가 발생하면 클래스 사용
+- 해당 모델이 Objective-C에서도 사용되어야 한다면 클래스 사용  
+
+<br>
+
+<hr>
+
+## Reference  
+
+- [Siwft Programming Language Guide](https://docs.swift.org/swift-book/index.html)
+- [Swift struct vs class 차이점 비교 분석](https://www.letmecompile.com/swift-struct-vs-class-차이점-비교-분석/)
+- [야곰의 스위프트 프로그래밍](https://book.naver.com/bookdb/book_detail.nhn?bid=12571019)
