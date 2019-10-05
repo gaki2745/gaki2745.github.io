@@ -127,8 +127,7 @@ var alert: UIAlertController = UIAlertController()
 
 ```
 
-<img src="/Users/youngjungoo/Library/Application Support/typora-user-images/image-20191005121112054.png" alt="image-20191005121112054" style="zoom:33%;" />
-
+<img width="582" alt="image" src="https://user-images.githubusercontent.com/33486820/66249427-4285e200-e76e-11e9-8213-f6c00a442c73.png">
 
 
 ##### UIAlertAction 으로 추후 처리  
