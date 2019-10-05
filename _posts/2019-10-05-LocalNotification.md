@@ -168,10 +168,7 @@ extension ViewController : UNUserNotificationCenterDelegate{
 
 `applicationWillResignActive(_:)` 메서드는 앱이 **활성화 상태를 잃었을 때 실행되는 메서드** 입니다. 앱이 백그라운드로 내려가 비활성화가 되었을때 이 메서드가 호출이 됩니다. 그렇기 때문에 앱이 종료 되었을때 알림을 띄워 주기 위해선 해당 메서드에서 작업을 해주어야합니다.
 
-![image-20191005231009743](/Users/youngjungoo/Library/Application Support/typora-user-images/image-20191005231009743.png)
-
-
-
+![image](https://user-images.githubusercontent.com/33486820/66256191-6543e500-e7c6-11e9-92da-9857e120880e.png)
 
 
 <hr>
