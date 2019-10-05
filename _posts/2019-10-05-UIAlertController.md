@@ -2,7 +2,7 @@
 layout: post
 current: post
 navigation: True
-title: iOS Message - UIAlertController편(1/3)
+title: iOS Message(1/3) - UIAlertController편
 date: 2019-10-05 10:18:00
 tags: Swift iOS
 class: post-template
