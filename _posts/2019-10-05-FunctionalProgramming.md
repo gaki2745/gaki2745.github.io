@@ -110,19 +110,19 @@ evens = Array(1...10).filter{ $0 % 2 == 0 }
 ##  Swift 의 함수형 프로그래밍의 특징
 
 
-1.고차 함수(Higher-order function)
+1. 고차 함수(Higher-order function)
 
--함수를 다른 함수의 매개변수로 전달 할 수 있습니다.
+- 함수를 다른 함수의 매개변수로 전달 할 수 있습니다.
 
 ex) filter 함수는 isEven 함수를 매개변수로 전달 받고 있습니다.
 
-2.일등 함수(First-class function)
+2. 일등 함수(First-class function)
 
 -함수를 변수처럼 취급 할 수 있습니다. 함수를 변수에 대입하고 마찬가지로 다른 함수의 파라미터로 전달 할 수 있습니다.
 
-3.클로저(Closures)
+3. 클로저(Closures)
 
--익명함수
+- 익명함수
 
 ex) filter { } 형태의 구문
 
