@@ -161,7 +161,7 @@ kingfisher의 큰 장점 중 하나는 이미지를 캐싱하여 재접근 할 �
 - `clearMemoryCache` : memory warning notification 을 받았을때 호출한다 호출하면 `memoryCache`를 다지워준다.
 - `clearExpiredDiskCache`: 앱이 꺼지거나 백그라운드 진입시에 호출되는 함수이다. expire 된 것들을 지운다음, 여전히 디스크 용량을 많이 차지하고 있으면 `contentAccessData`로 정렬하여 지운다.
 
-### 추가) KingFisher에서 URL에 한국어파 포함 되어있을 때 대처 
+### 추가) KingFisher에서 URL에 한국어가 포함 되어있을 때 대처 
 
 - `addingPercentEncoding()` 메서드 사용
 
