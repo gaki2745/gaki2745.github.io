@@ -1,0 +1,209 @@
+---
+layout: post
+current: post
+navigation: True
+title: Swift Subscript
+date: 2019-10-13 11:47:00
+tags: Swift
+class: post-template
+subclass: 'post tag-fables'
+author: gaki
+---  
+
+## Subscript 란?
+
+클래스, 구조체, enum 형은 Swift에서 Collection, List, Sequence 타입의 **개별 요소에 접근** 하는 서브스크립트를 정의할 수 있다. 설정하거나 가져오는 별개의 메소드, 없이 인덱스(Index)로 값을 설정하거나 가져오기 위해 서브스크립트를 사용한다.
+
+예를 들어 `let someArray = [1, 2, 3]` 에서 `someArray[1]` 과 같이 배열의 Index를 통해 쉽게 접근하여 2 라는 배열의 요소를 가져올 수 있다. 이 `[index]` 를 통해 인스턴스의 개별 요소를 가져 오는 서브스크립트는 스위프트 표준 라이브러리에 정의된 array 구조체 내부에 이미 서브스크립트가 구현되어있다.
+
+>  **내가 원하는 값을 쉽게 찾기 위해 정의하는 문법** 서브스크립트라고 한다. 
+
+
+
+## Subscript 문법과 구현
+
+서브스크립트는 인스턴스 이름 뒤에 대괄호(square bracket `[]`) 하나 이상의 값들을 작성해서, 타입의 인스턴스를 조회하는 것이 가능하다. 이러한 문법은 인스턴스 메소드 문법과 계산 프로퍼티 문법과 비슷하다
+
+아래와 같이 `subscript` 키워드를 작성하여 서브스크립트를 정의하고, 하나 이상의 입력 매개변수와 반환 타입을 지정한다. 인스턴스 메소드와 다르게, 서브스크립트는 **읽기-쓰기(read- write) 또는 읽기 전용(read-only)** 이 가능하다. 이 오작은 계산 프로퍼티와 같은 방법으로 `getter` 와 `setter`를 사용한다.
+
+```swift
+subscript(index: Int) -> Int { 
+  get { 
+    // return an appropriate subscript value here 
+  } set(newValue) { 
+    // perform a suitable setting action here 
+  } 
+}
+```
+
+`newValue`의 타입은 서브스크립트의 반환 타입과 같다. 계산 프로퍼티처럼 .`setter`의 `(newValue)` 매개변수를 지정하지 않도록 선택할 수 있다.
+
+읽기전용(read-only) 계산 프로퍼티 처럼, get 키워드와 중괄호를 제거해서 아래와 같이 읽기전용 서브스크립트 선언을 단순하게 할 수 있다
+
+```swift
+subscript(index: Int) -> Int { 
+  // return an appropriate subscript value here 
+}
+```
+
+
+
+### Subscript 예제
+
+아래의 코드는 애플 공식문서에서 서브스크립트의 이해를 돕기위한 예제로 등록되어있다.
+
+```swift
+// 구구단 
+struct TimesTable { // 구구단!
+    let multiplier: Int
+    subscript(index: Int) -> Int {
+        return multiplier * index 
+        // 서브스크립트에 입력하는 정수만큼 곱하는 것.
+        // set 없이 읽기 전용
+    }
+}
+let threeTimesTable = TimesTable(multiplier: 3) // 구구단 3단
+print("six times three is \(threeTimesTable[6])") // 18 ( 3 * 6 값 출력)
+
+```
+
+위의 예제를 보면 TimeTable이라는 구조체를 선언과 동시에 프로퍼티 multiplier 와 읽기전용 서브스크립트를 선언했다.
+
+서브스크립트의 구조를 보면 index를 매개변수로 받아 프로퍼티 multipler 와 곱한 값을 반환하는 서브스크립트다. 구조체 인스턴스를 생성하고 생성 할 때 구조체 프로퍼티를 3으로 초기화했다. 그리고 실제 배열과 같은 컬렉션 타입을 접근할때 처럼 `[index]` 로 값을 출력해보면 서브스크립트가 동작하여 값이 반환된다.
+
+```swift
+class MovieList { // 영화 리스트 클래스.
+    private var tracks = ["The Godfather", "The Dark Night", "Superman"]
+    subscript(index: Int) -> String {
+        get {
+            return self.tracks[index]
+        }
+        set{
+            self.tracks[index] = newValue
+        }
+    }
+}
+ 
+var movieList = MovieList() // 클래스 인스턴스 만들고
+print("영화 리스트에서 두 번째 영화는 \(movieList[1])") // The Dark Night 출력됨.
+ 
+```
+
+클래스의 서브스크립트를 만들어본 예제이다. 내부에 미리 저장되어있는 tracks 프로퍼티의 값을 반환하는 서브스크립트를 이용하여 요소를 가져올수도 있고 read-write 타입이기 때문에 값을 변경하는 것 또한 가능하다.
+
+
+
+## 복수 서브스크립트
+
+```swift
+struct Student {
+    var name: String
+    var number: Int
+}
+
+class School {
+    
+    var number: Int = 0
+    var students: [Student] = [Student]()
+    
+    func addStudent(name: String) {
+        let student: Student = Student(name: name, number: self.number)
+        self.students.append(student)
+        self.number += 1
+    }
+    
+    func addStudentGroup(names: String...) {
+        for name in names {
+            self.addStudent(name: name)
+        }
+    }
+    // Subscript 1
+    subscript(index: Int) -> Student? {
+        get {
+            if index < self.number {
+                return self.students[index]
+            }
+            return nil
+        }
+        set {   // newValue 는 Student 형
+            guard var newStudent: Student = newValue else {
+                return
+            }
+            
+            var number: Int = index
+            
+            if index > self.number {
+                number = self.number
+                self.number += 1
+            }
+            
+            newStudent.number = number
+            self.students[number] = newStudent
+        }
+    }
+    // Subscript 2 
+    subscript(name: String) -> Int? {
+        get {
+            return self.students.filter{ $0.name == name }.first?.number
+        }
+        set {
+            guard var number: Int = newValue else {
+                return
+            }
+            
+            if number > self.number {
+                number = self.number
+                self.number += 1
+            }
+            
+            let newStudent: Student = Student(name: name, number: number)
+            self.students[number] = newStudent
+        }
+    }
+    // Subscript 3 
+    subscript(name: String, number: Int) -> Student? {
+        return self.students.filter{ $0.name == name && $0.number == number }.first
+    }
+}
+
+let highSchool: School = School()
+highSchool.addStudentGroup(names: "A","B","C","D","E","F")
+
+// 1번째 서브스크립트 get 동작
+let student1: Student? = highSchool[1]
+print("\(student1?.name) \(student1?.number)")	//Optional("B") Optional(1)
+
+// 2번째 서브스크립트 get 동작
+print(highSchool["A"])	// Optional(0)
+print(highSchool["B"])	// Optional(1)
+
+// 1번째 서브스크립트 set 동작
+highSchool[0] = Student(name: "newA", number: 0)	// Optional(Student(name: "newA", number: 0))
+// 2번째 서브스크립트 set 동작
+highSchool["G"] = 1
+
+print(highSchool["B"])  // nil
+print(highSchool["G"])  // 새롭게 index가 변경되었기 때문에 1 이 출력
+
+// 3번째 서브스크립트 동작
+print(highSchool["E", 4])   // Optional(Student(name: "E", number: 4)) 해당 index와 name이 모두 맞아야 Student 객체를 반환한다.
+
+```
+
+- 첫번째 서브스크립트 : 학생의 번호를 전달받아 해당하는 학생이 존재하면 Student 인스턴스를 반환하거나 특정 번호에 학생을 할당하는 서브스크립트다.
+- 두번째 서브스크립트:  학생의 이름을 전달받아 해당하는 학생이 있다면 번호를 반환하거나 특정 이름의 학생을 해당 번호에 할당하는 서브스크립트다.
+- 세번째 서브스크립트: 이름과 번호를 전달받아 해당하는 학생이 있다면 찾아서 Student 인스턴스를 반환한다.
+
+
+
+<hr>
+
+## Reference
+
+- [Apple Swift 5.1 Programming Language](https://docs.swift.org/swift-book/LanguageGuide/Subscripts.html)
+- [야곰 스위프트 프로그래밍](https://m.search.naver.com/search.naver?sm=mtp_hty.top&where=m&query=야곰+스위프트+프로그래밍#api=%3F_lp_type%3Dcm%26col_prs%3Dcsa%26format%3Dtext%26nqx_theme%3D%257B%2B%2522theme%2522%253A%257B%2522main%2522%253A%257B%2522name%2522%253A%2522book_info%2522%252C%2522os%2522%253A15479573%252C%2522pkid%2522%253A20000%257D%257D%2B%257D%26query%3D%25EC%2595%25BC%25EA%25B3%25B0%2B%25EC%258A%25A4%25EC%259C%2584%25ED%2594%2584%25ED%258A%25B8%2B%25ED%2594%2584%25EB%25A1%259C%25EA%25B7%25B8%25EB%259E%2598%25EB%25B0%258D%26sm%3Digr_brg%26tab%3Dinfo%26tab_prs%3Dcsa%26where%3Dbridge&_lp_type=cm)
+
+
+
+
+
