@@ -3,7 +3,7 @@ layout: post
 current: post
 navigation: True
 title: Swift Subscript
-date: 2019-10-13 11:47:00
+date: 2019-10-14 09:47:00
 tags: Swift
 class: post-template
 subclass: 'post tag-fables'
