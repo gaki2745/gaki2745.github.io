@@ -150,7 +150,7 @@ class CommentView: UIView {
             self.addSubview(textField)
         }
     }
-  	// 각 button을 터치피 delegate의 메서드가 호출되게 한다.
+    // 각 button을 터치 시 delegate의 메서드가 호출되게 한다.
     @objc func tapCommentButton() {
         delegate?.touchUpCommentButton()
     }
