@@ -196,7 +196,7 @@ class BestWebToonViewController: UIViewController {
 
 }
 // CommentViewDelegate 프로토콜을 상속하여 명시된 task 를 구체적으로 구현 하는 작업
-extension ViewController: CommentViewDelegate {
+extension BestWebToonViewController: CommentViewDelegate {
     func touchUpCommentButton() {
         print("commentButton Touched!")
     }
