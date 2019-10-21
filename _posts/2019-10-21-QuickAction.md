@@ -29,9 +29,9 @@ Apple은 iPhone11 과 동시에 발표된 새로운 모델들에 3DTouch 대신 
 
 ## 홈 화면 Static Quick Action
 
-홈화면 에서 Long Touch 로 앱들의 ShortCut을 보여줘서 빠르게 앱의 원하는 기능으로 접근할 수 있는 기능을 **Static Home Screen Quick a Actions** 라고 한다.
+홈화면 에서 Long Touch시에 앱의 기능을 ShortCut을 보여줘서 빠르게 원하는 영역으로 접근할 수 있는 기능을 **Static Home Screen Quick a Actions** 라고 한다.
 
-기존에 Apple 에서 제공하고있는 앱들은 위와 같이 다양한 shortcut 기능을 제공하고 있다. 이것을 구현할려면 우선 프로젝트의 `info.plist` 에 **UIApplicationShortcutItems** 을 추가하여 Quick Action을 설정해주어야한다.
+기존에 Apple 에서 제공하고있는 앱들은 위와 같이 다양한 shortcut 기능을 제공하고 있다. 이것을 구현할려면 우선 프로젝트의 `info.plist` 에**UIApplicationShortcutItems** 을 추가하여 Quick Action을 설정해주어야한다.
 
 ##### UIApplicationShortcutItems
 
@@ -46,7 +46,7 @@ UIApplicationShortcutItems 배열 안에는 Dictionory 값이 들어가게 되�
 - **UIApplicationShortcutItemType** : 사용자가 해당 Quick Action을 호출 할 때, 엡에 전달되는 문자열을 사용하여 Quick Action작업을 타입으로 분류한 다음, 수신한 작업 타입을 명확하게 구분 할 수 있다.
 - **UIApplicationShortcutitemTitle** : Quick Action의 제목으로, 홈 화면에서 사용자에게 표시되는 문자열이다. 타이틀이 너무 길거나 UIApplicationShortcutItemSubtitle을 지정하지 않은 경우, 타이틀이 두줄로 표시된다. 
 
-##### 그밖의 옵션값 4개
+##### 추가 옵션 값 4개
 
 - **UIApplicationShortcutItemSubtitle** : 홈 화면에서, 사용자에게 해당 타이틀 문자열 바로 아래에 표시되는 선택적(optional) 문자열(있어도 되고 없어도 된다.) quick action을 위한 Subtitle을 지정하면 시스템은 타이틀의 길이에 관계없이 한 줄에 quick action 타이틀을 표시한다.
 
@@ -66,7 +66,7 @@ UIApplicationShortcutItems 배열 안에는 Dictionory 값이 들어가게 되�
 
 
 
-Naver 앱과 같이 보통 해당 Quick Action을 통해 앱에 접근하게 되면 해당 영역으로 가게된다. 예를 들어 내가 "음성검색" 을 터치했을 떄는 UIApplicationShortcutItemType에 대한 정보가 앱에 전달이 되어 실제 음성검색영역으로 시스템이 곧바로 앱을 시작하거나 다시시작한다.
+Naver 앱과 같이 보통 해당 Quick Action을 통해 앱에 접근하게 되면 해당 영역으로 가게된다. 예를 들어 내가 "음성검색" 을 터치했을 때는 UIApplicationShortcutItemType에 대한 정보가 앱에 전달이 되어 실제 음성검색영역으로 시스템이 곧바로 앱을 시작하거나 다시시작한다.
 
 이는 UIKit의 AppDelegate가 **`application:performActionForShortcutItem:completionHandler` 메서드를 호출한다** .
 
