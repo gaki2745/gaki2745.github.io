@@ -15,7 +15,7 @@ author: gaki
 
 ![image](https://user-images.githubusercontent.com/33486820/67206943-8efb3e00-f44d-11e9-8f12-6535395fb986.png)
 
-자료영상 : https://www.youtube.com/watch?v=ivWChvW2eCU
+[iOS13 3D Touch 변경된 부분 가이드 영상](https://www.youtube.com/watch?v=tttfXuFiFYk)
 
 Apple은 iPhone11 과 동시에 발표된 새로운 모델들에 3DTouch 대신 **햅틱 터치** 를 탑재해서 출시가 되었다. 예전부터 3Dtouch가 일반 long touch와의 차이가 모호하다는 비판이 많았고 내부에 들어가는 압력 감지 센서때문에 디바이스의 크기가 두꺼워지고 가격도 늘어난다는 단점 때문에 뺀게아닌게 생각이 든다. 
 
