@@ -92,7 +92,7 @@ author: gaki
 
 문제를 이해하는데 힘들었다. 우선 1초안에서의 최대 처리량을 구한다는 것을 너무 00 ~ 01 간격으로만 생각했는데 그게 아니고 어느 구간이든 될 수 있다는 생각에 **시작과 종료** 즉 timeStamp를 두어 이 timeStamp를 기준으로 1초사이에 발생한 모든 처리량을 더하여 구했다.
 
-
+<hr>
 
 - [소스코드 바로가기](https://github.com/gaki2745/Algorithm-with-Swift/blob/master/프로그래머스/Programmers_카카오2018_추석트래픽/Programmers_카카오2018_추석트래픽/main.swift)
 
