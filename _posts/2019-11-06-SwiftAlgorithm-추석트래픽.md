@@ -2,7 +2,7 @@
 layout: post
 current: post
 navigation: True
-title: [Swift] 프로그래머스 추석트래픽 
+title: \[Swift\] 프로그래머스 추석트래픽 
 date: 2019-11-06 00:30:00
 tags: Swift Algorithm
 class: post-template
