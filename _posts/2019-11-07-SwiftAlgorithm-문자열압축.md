@@ -95,6 +95,8 @@ print(str[4..<str.count]) // Developer
 
 이렇게 반복작업을 수행하다가 압축해야할 남은 문자열이 압축할려는 길이보다 작으면 그냥 붙이고 종료하면 된다.
 
+<hr>
+
 - [소스코드 바로가기](https://github.com/gaki2745/Algorithm-with-Swift/blob/master/프로그래머스/Programmers_2020카카오_문자열압축/Programmers_2020카카오_문자열압축/main.swift)
 - 문제 출처 : [2020 KAKAO BLIND RECRUITMENT 문자열 압축](https://programmers.co.kr/learn/courses/30/lessons/60057)
 
