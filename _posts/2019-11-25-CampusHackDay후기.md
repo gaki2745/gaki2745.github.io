@@ -12,7 +12,7 @@ author: gaki
 
 ## 2019 Naver Campus HackDay Winter를 마치며
 
-![image](https://user-images.githubusercontent.com/33486820/69505575-f6853b80-0f6d-11ea-9504-40595096b928.png)
+<img width="720" alt="image" src="https://user-images.githubusercontent.com/33486820/69505671-672c5800-0f6e-11ea-888c-f868eb997ae7.png">
 
 
 2019년 Summer를 1회차로 Winter도 정말 좋은 기회로 참여하게 되었다. 주제는 Naver Maps 를 활용한 프로젝트였다.
