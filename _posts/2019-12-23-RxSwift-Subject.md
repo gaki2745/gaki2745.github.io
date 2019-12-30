@@ -2,7 +2,7 @@
 layout: post
 current: post
 navigation: True
-title: RxSwift Subject
+title: RxSwift Subject, RxCocoa Relay
 date: 2019-12-23 18:00:00
 tags: RxSwift
 class: post-template
@@ -369,6 +369,126 @@ Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전�
 만약 도중에 에러가 발생하면 구독자도 에러이벤트를 처리하고 종료가 된다.
 
 ![image](https://user-images.githubusercontent.com/33486820/71347314-6c041c00-25ad-11ea-8b03-8f4910fab24e.png)
+
+
+## Relay
+
+
+
+Relay Class는 RxCocoa의 RxRelay에 구현이 되어 있다. 두가지의 클래스가 존재한다
+
+- `PublishRelay`
+- `BehaviorRelay`
+
+<br>
+
+RxSwift의 Subject와 어떤 차이점이 있고 언제 사용하는지는 다음과 같다.
+
+- RxSwift의 Subject의 경우 `onNexct` 로 이벤트를 처리하는데 Relay는 `accept` 로 처리한다.
+- error와 complete를 내보낼 수 없다. 즉 오직 `accept` 만 내보낼 수 있다. 이는 도중에 에러가 발생하거나, 완료가 되면 무시를한다. 
+- 에러로 인한 종료, 완료로 인한 종료가 되지 않는다 이는 스트림이 죽지않는 다는 것을 의미하고 UI와 같은 경우 에러가 나거나 완료가 났다고 종료가 되면 안되기 때문에 **UI 전용으로 사용** 하는 것이 주 목적이다.
+
+<br>
+
+## RxCocoa Relay
+
+<br>
+
+### Publish Relay
+
+<br>
+
+`PublishRelay`는 `PublishSubject`의 `Wrapper 클래스` 이다.
+
+`PublishSubject` 처럼 구독 이후의 발생하는 이벤트 들만 알 수 있다.
+
+```swift
+/// PublishRelay is a wrapper for `PublishSubject`.
+///
+/// Unlike `PublishSubject` it can't terminate with error or completed.
+public final class PublishRelay<Element>: ObservableType {
+    public typealias E = Element
+
+    private let _subject: PublishSubject<Element>
+    
+    // Accepts `event` and emits it to subscribers
+    public func accept(_ event: Element) {
+        self._subject.onNext(event)
+    }
+    
+    /// Initializes with internal empty subject.
+    public init() {
+        self._subject = PublishSubject()
+    }
+
+    /// Subscribes observer
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+        return self._subject.subscribe(observer)
+    }
+    
+    /// - returns: Canonical interface for push style sequence
+    public func asObservable() -> Observable<Element> {
+        return self._subject.asObservable()
+    }
+}
+```
+
+<br>
+
+
+
+### Behavior Relay
+
+<br>
+
+`BehaviorRelay` 는  `BehaviorSubject`의 `Wrapper 클래스` 이다.
+
+마찬가지로 `BehaviorSubject` 와 동일하게 이전의 최신 이벤트값을 가져 올 수 있다. 고로 초기 값이 있어야한다
+
+값은 `.value`를 통해서 현재의 값을 가져 올 수 있다.
+
+
+
+```swift
+/// BehaviorRelay is a wrapper for `BehaviorSubject`.
+///
+/// Unlike `BehaviorSubject` it can't terminate with error or completed.
+public final class BehaviorRelay<Element>: ObservableType {
+    public typealias E = Element
+
+    private let _subject: BehaviorSubject<Element>
+
+    /// Accepts `event` and emits it to subscribers
+    public func accept(_ event: Element) {
+        self._subject.onNext(event)
+    }
+
+    /// Current value of behavior subject
+    public var value: Element {
+        // this try! is ok because subject can't error out or be disposed
+        return try! self._subject.value()
+    }
+
+    /// Initializes behavior relay with initial value.
+    public init(value: Element) {
+        self._subject = BehaviorSubject(value: value)
+    }
+
+    /// Subscribes observer
+    public func subscribe<O: ObserverType>(_ observer: O) -> Disposable where O.E == E {
+        return self._subject.subscribe(observer)
+    }
+
+    /// - returns: Canonical interface for push style sequence
+    public func asObservable() -> Observable<Element> {
+        return self._subject.asObservable()
+    }
+}
+```
+
+
+
+
 
 
 
