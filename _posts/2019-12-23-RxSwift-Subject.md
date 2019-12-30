@@ -8,16 +8,20 @@ tags: RxSwift
 class: post-template
 subclass: 'post tag-fables'
 author: gaki
----  
+---    
 
-## RxSwift Subject
+<br>
+
+## RxSwift Subject  
+
+<br>
 
 
 기본적으로 RxSwift를 실제로 적용시킬때는 크게 **실시간으로 Observable에 새로운 값을 수동으로 추가하고 Subscriber에게 방출하는 것** 이다. 즉 **Observable**과 **Observer** 이 둘 모두 동작할 수 있는 것이 필요하다.
 
 이를 Subject가 관리한다. 데이터를 추가(emit) 할 수도 있고, 방출(Subscribe)할수도 있다.
 
-
+<br>
 
 #### Subject Example
 
@@ -56,13 +60,13 @@ ReactiveX Observable에는 "Hot Observable" 과 "Cold Observable"의 개념이 �
 >
 > 정말 좋은 비유로 설명이 잘되어있다..
 
-
+<br>
 
 ##### Hot Observable
 
 생성과 동시에 이벤트를 방출하기 시작한다. 구독(`subscribe` )시점과 상관 없이 Observer 들에게 이벤트를 중간부터 전송해준다. 같은말로 Connectable Observable 이라고도 한다.
 
-##### Cold Observable
+##### Cold Observable 
 
 Observer가  구독(`subscribe` ) 되는 시점부터 이벤트를 생성하여 방출하기 시작한다. Hot Observable로 생성 되지 않은 것들은 모두 여기에 속한다.
 
@@ -74,13 +78,16 @@ Observer가  구독(`subscribe` ) 되는 시점부터 이벤트를 생성하여 
 
 다시 정리를 해보자면 Subject는 구독의 시점부터 순차적으로 이벤트를 발행하던 것(Cold Observable)을 구독 시점에 관계 없이 이벤트를 발행(Hot Observable)할 수 있다는 것이다.
 
+<br>
+
+### Subject의 4가지 종류  
+
+<br>
 
 
-### Subject의 4가지 종류
+## 1. PublishSubject  
 
-
-
-## 1. PublishSubject
+<br>
 
 - 구독(`subscribe`)된 순간 새로운 이벤트 수신을 알리고 싶을때 사용한다.
 - 구독 되는 시점에서 구독을 멈추거나, `.completed`, `.error` 이벤트를 통해 subject가 완전 종료 될 때까지 계속 지속된다.
@@ -146,7 +153,9 @@ Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전�
 
 
 
-## 2. BehaviorSubject
+## 2. BehaviorSubject  
+
+<br>
 
 - `PublisherSubject` 과 차이점은 구독 시점 바로 이전의 `.next` 이벤트를 반복한다는 점 그 외에는 모두 동일하다.
 
@@ -192,10 +201,12 @@ Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전�
 > BehaviorSubject의 경우 구독자(Subscriber)가 항상 Subject 이벤트의 최신을 가지고 있다는 점이 특징이다. 고로 이 점은 View를 가장 최신의 데이터로 미리 채우기 위한 경우 용이하다. 예를 들어 유튜브 같은 동영상 서비스에서 서버에 대용량 데이터를 요청했을때 사용자는 하얀 바탕에 네트워크 인디 케이터가 돌아가는것만 보면서 기다리기 보다는 먼저 가져온 데이터를 미리 세팅하여 UI를 가장 이전의 최신으로 세팅해놓고 보여주는 방식이면 효과적일 것이다.
 
 
-
+<br>
 
 
 ## 3. ReplaySubject
+
+<br>
 
 - `ReplaySubject` 는 생성시 선택한 특정 크기까지, 방출하는 최신 요소를 일시적으로 **캐시나 버퍼** 한다. 그리고 저장된 이 요소들을 새 Subscriber에게 방출한다.
 
@@ -331,10 +342,12 @@ Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전�
 > 예를들어 사용자의 특정 이벤트를 알고있어야할때 이것을 쓰면 된다. 검색이나, 최근 항목, 최근 행한 이벤트 등을 버퍼에 저장하여 구독하는 즉시 그 이벤트 들을 처리 할 수 있을 것이다.
 
 
-
+<br>
 
 
 ## 4. AsyncSubject
+
+<br>
 
 - 구독의 시점과 상관 없이 Subject가 Complete 이벤트를 방출하여 정상 종료가 될때 구독자는 마지막 요소를  발생하고 종료를 한다.
 
@@ -370,10 +383,12 @@ Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전�
 
 ![image](https://user-images.githubusercontent.com/33486820/71347314-6c041c00-25ad-11ea-8b03-8f4910fab24e.png)
 
+<br>
 
-## Relay
 
+## RxCocoa Relay
 
+<br>
 
 Relay Class는 RxCocoa의 RxRelay에 구현이 되어 있다. 두가지의 클래스가 존재한다
 
@@ -390,7 +405,7 @@ RxSwift의 Subject와 어떤 차이점이 있고 언제 사용하는지는 다�
 
 <br>
 
-## RxCocoa Relay
+
 
 <br>
 
