@@ -282,8 +282,7 @@ extension Reactive where Base: CLLocationManager {
 ```
 
 
-
-이제 Delegate proxy 작업은 모두 끝났다 지금 두개의 delegate를 rx와 연동을 하였다
+아래 두개의 delegate를 rx와 연동을 하였고 Delegate proxy 작업은 모두 끝났다
 
 - `NMFMapViewDelegate`
 - `CLLocationManagerDelegate`
@@ -371,7 +370,7 @@ class NMViewController: UIViewController {
 
 ```
 
-총 3개의 delegate proxy를 활용하여 delegate 내부의 메서드를 Rx와 연결 했다.
+총 3개의 delegate proxy를 활용하여 delegate 내부의 메서드를 Rx와 연결했다.
 
 
 
