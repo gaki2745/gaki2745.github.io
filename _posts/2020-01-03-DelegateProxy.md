@@ -3,7 +3,7 @@ layout: post
 current: post
 navigation: True
 title: Naver Maps에 Delegate Proxy 적용시켜보자
-date: 2020-1-03 11:18:00
+date: 2020-01-03 11:18:00
 tags: RxSwift
 class: post-template
 subclass: 'post tag-fables'
