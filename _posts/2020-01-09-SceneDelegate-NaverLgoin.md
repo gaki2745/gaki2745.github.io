@@ -2,15 +2,13 @@
 layout: post
 current: post
 navigation: True
-title: iOS13 이상 프로젝트의 SceneDelegate를 AppDelegate로 이관 방법
+title: iOS13 SceneDelegate 네아로 대응 방법
 date: 2020-01-09 13:18:00
 tags: Swift iOS
 class: post-template
 subclass: 'post tag-fables'
 author: gaki
 ---  
-
-## iOS 13 SceneDelegate를 AppDelegate로 이관 방법
 
 <br>
 
@@ -76,7 +74,46 @@ Xcode에서 SwiftUI, iOS 13, iPadOs 13 등의 SDK가 포함되면서 **SceneDele
 
 
 
-하지만 네이버 로그인의 경우 인스턴스를 가져오는 작업을 요청할때 아직까지는 SceneDelegate의 UIScene에 대응하는 함수가 제공되지 않는 것을 확인할 수 있었습니다.
+### 1. SceneDelegate scene(_:openURLContexts:) 사용
+
+<img width="700" alt="image" src="https://user-images.githubusercontent.com/33486820/72046965-d088e000-32fc-11ea-83a4-e0001040399e.png">
+
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/33486820/72046996-ea2a2780-32fc-11ea-8ebc-0665a1752d08.png">
+
+
+
+SceneDelegate 에서는  [`scene(_:openURLContexts:)`](https://developer.apple.com/documentation/uikit/uiscenedelegate/3238059-scene) 를 통해 URL을 UIOpenURLContext Set으로 제어하고 있습니다. 여기서 우리는 네이버 아이디 토큰을 url을 통해 요청하여 인스턴스를 가져올 수 있습니다.
+
+이 메서드의 경우 기존의 AppDelegate [`application(_open:options:)` ](https://developer.apple.com/documentation/uikit/uiapplicationdelegate/1623112-application) 메서드와 동일하게 앱이 백그라운드에서 넘어왔을때 호출이 되고 delegate에게 url 호출에 관한 요청또한 동일하게 동작합니다.
+
+마찬가지로 네아로에서도 url을 통해 토큰을 요청하는 함수 또한 아래와 같이 제공하고 있습니다.
+
+<img width="918" alt="image" src="https://user-images.githubusercontent.com/33486820/72047743-915b8e80-32fe-11ea-9979-da23a4c38355.png">
+
+이 메서드를 사용하여 아래와 같이 SceneDelegate에 추가를 하면 정상적으로 토큰을 요청하여 인스턴스를 생성하는 것을 확인할 수 있습니다.
+
+```swift
+// SceneDelegate    
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        NaverThirdPartyLoginConnection
+            .getSharedInstance()?
+            .receiveAccessToken(URLContexts.first?.url)
+}
+```
+
+
+
+<br>
+
+
+
+만약 프로젝트가 SceneDelegate를 사용하지 않는 다면 아래와 같이 SceneDelegate를 지우고 AppDelegate로 이관하는 방법이 우선 있습니다.
+
+<br>
+
+### 2. SceneDelegate를 AppDelegate로 이관하는 방법
+
+
 
 그래서 해결책으로 iOS 13 이상의 프로젝트에서 SceneDelegate의 역할을 없애고 AppDelegate 이관하는 작업을 해보겠습니다.
 
@@ -134,23 +171,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-      
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-    
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 }
 ```
