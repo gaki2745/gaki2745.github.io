@@ -2,8 +2,8 @@
 layout: post
 current: post
 navigation: True
-title: iOS Reference Count
-date: 2019-08-22 10:18:00
+title: iOS13 이상 프로젝트의 SceneDelegate를 AppDelegate로 이관 방법
+date: 2020-01-09 13:18:00
 tags: Swift iOS
 class: post-template
 subclass: 'post tag-fables'
