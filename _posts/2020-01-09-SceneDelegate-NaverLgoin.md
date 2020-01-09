@@ -169,7 +169,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 <img width="863" alt="image" src="https://user-images.githubusercontent.com/33486820/72037266-dd97d600-32e0-11ea-8ea6-4e45e9a1cb82.png">
 
-### 
 
 > Application Scene Manifest 에 관련된 내용은 이 블로그를 참고하시길 바랍니다.(https://jercy.tistory.com/11)
 
