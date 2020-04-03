@@ -33,22 +33,23 @@ author: gaki
 
 ```swift
 func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (T?) -> Void) {
-	// URLComponent 생성
-  guard let url = createComponent(input).url else { 
-  	return completion(nil)
-  }
-  // URLSession을 통한 데이터 요청
-  URLSession.shared.dataTask(with: url) { data, response, error in 
-  	guard let data = data else { 
-    	return completion(nil)
+    // URLComponent 생성
+    guard let url = createComponent(input).url else {
+        return completion(nil)
     }
-    // JSON Decoding
-    guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
-      return completion(nil)
-    }
- 		completion(places)
-  }.resume()
+    // URLSession을 통한 데이터 요청
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        guard let data = data else {
+            return completion(nil)
+        }
+        // JSON Decoding
+        guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
+            return completion(nil)
+        }
+        completion(places)
+    }.resume()
 }
+
 ```
 
 위의 코드를 보면 `searchPlaces` 라는 메서드는 input을 넘겨받고 urlComponent 생성 -> URLSession요청 -> Decoding 순으로 진행하고 있습니다.
@@ -61,10 +62,11 @@ func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (T?) -> Vo
 
 ```swift
 searchPlaces { (place: Place?) in
-	if let plcae = model {
-   	// API요청 성공
-  }
+    if let plcae = model {
+        // API요청 성공
+    }
 }
+
 ```
 
 최종적으로 요청한 Place  JSON 객체가 디코딩이 잘되어 nil 이 아닌지 체크를 하면 끝입니다.
@@ -79,28 +81,29 @@ searchPlaces { (place: Place?) in
 
 ```swift
 enum NetworkError: Error {
-  case urlError					// URL생성에러
-  case sessionError			// session에러
-  case decodingError		// jsonDecoding에러
+    case urlError             // URL생성에러
+    case sessionError         // session에러
+    case decodingError        // jsonDecoding에러
 }
 
 func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (T?, NetworkError) -> Void) {
-	// URLComponent 생성
-  guard let url = createComponent(input).url else { 
-  	return completion(nil, .urlError)
-  }
-  // URLSession을 통한 데이터 요청
-  URLSession.shared.dataTask(with: url) { data, response, error in 
-  	guard let data = data else { 
-    	return completion(nil, .sessionError)
+    // URLComponent 생성
+    guard let url = createComponent(input).url else {
+        return completion(nil, .urlError)
     }
-    // JSON Decoding
-    guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
-      return completion(nil, .decodingError)
-    }
- 		completion(places, nil)
-  }.resume()
+    // URLSession을 통한 데이터 요청
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        guard let data = data else {
+            return completion(nil, .sessionError)
+        }
+        // JSON Decoding
+        guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
+            return completion(nil, .decodingError)
+        }
+        completion(places, nil)
+    }.resume()
 }
+
 ```
 
 
@@ -109,13 +112,14 @@ func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (T?, Netwo
 
 ```swift
 searchPlaces { (place: Place?, error) in
-	if let error = error {
-    print(error)
-  }              
-	if let plcae = model {
-   	// API요청 성공
-  }
+    if let error = error {
+        print(error)
+    }
+    if let plcae = model {
+        // API요청 성공
+    }
 }
+
 ```
 
 
@@ -132,46 +136,48 @@ searchPlaces { (place: Place?, error) in
 
 ```swift
 enum APIResult<T> {
-  case success(T)
-  case failure(NetworkError)
+    case success(T)
+    case failure(NetworkError)
 }
 
 enum NetworkError: Error {
-  case urlError					// URL생성에러
-  case sessionError			// session에러
-  case decodingError		// jsonDecoding에러
+    case urlError             // URL생성에러
+    case sessionError         // session에러
+    case decodingError        // jsonDecoding에러
 }
 
 func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (APIResult<T>) -> Void) {
-	// URLComponent 생성
-  guard let url = createComponent(input).url else { 
-  	return completion(.failure(.urlError))
-  }
-  // URLSession을 통한 데이터 요청
-  URLSession.shared.dataTask(with: url) { data, response, error in 
-  	guard let data = data else { 
-    	return completion(.failure(.sessionError))
+    // URLComponent 생성
+    guard let url = createComponent(input).url else {
+        return completion(.failure(.urlError))
     }
-    // JSON Decoding
-    guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
-      return completion(.failure(.decodingError))
-    }
- 		completion(.success(places))
-  }.resume()
+    // URLSession을 통한 데이터 요청
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        guard let data = data else {
+            return completion(.failure(.sessionError))
+        }
+        // JSON Decoding
+        guard let places = try? JSONDecoder().decode(T.self, fron: data) else {
+            return completion(.failure(.decodingError))
+        }
+        completion(.success(places))
+    }.resume()
 }
+
 ```
 
 
 
 ```swift
-searchPlaces{ (result: APIResult<Place>) in
-	switch result {
+searchPlaces { (result: APIResult<Place>) in
+    switch result {
     case .success(let place):
-    	// 성공
+    // 성공
     case .failure(let error):
-    	// 실패
-  }
+    // 실패
+    }
 }
+
 ```
 
 
@@ -192,43 +198,45 @@ searchPlaces{ (result: APIResult<Place>) in
 
 ```swift
 enum NetworkError: Error {
-  case urlError					// URL생성에러
-  case sessionError			// session에러
-  case decodingError		// jsonDecoding에러
+    case urlError             // URL생성에러
+    case sessionError         // session에러
+    case decodingError        // jsonDecoding에러
 }
 
 func searchPlaces<T: Decodable>(_ input: Input, completion: @escaping (Result<T, NetworkError>) -> Void) {
-	// URLComponent 생성
-  guard let url = createComponent(input).url else { 
-  	return completion(.failure(.urlError))
-  }
-  // URLSession을 통한 데이터 요청
-  URLSession.shared.dataTask(with: url) { data, response, error in 
-  	guard let data = data else { 
-    	return completion(.failure(.sessionError))
+    // URLComponent 생성
+    guard let url = createComponent(input).url else {
+        return completion(.failure(.urlError))
     }
-    // JSON Decoding
-		do {
-      let places = try? JSONDecoder().decode(T.self, from: data)
-      completion(.success(places))
-    } catch {
-      completion(.failure(.decodingError))
-    }
-  }.resume()
+    // URLSession을 통한 데이터 요청
+    URLSession.shared.dataTask(with: url) { data, response, error in
+        guard let data = data else {
+            return completion(.failure(.sessionError))
+        }
+        // JSON Decoding
+        do {
+            let places = try? JSONDecoder().decode(T.self, from: data)
+            completion(.success(places))
+        } catch {
+            completion(.failure(.decodingError))
+        }
+    }.resume()
 }
+
 ```
 
 
 
 ```swift
-searchPlaces{ (result: Result<Place, NetworkError>) in
-	switch result {
+searchPlaces { (result: Result<Place, NetworkError>) in
+    switch result {
     case .success(let place):
-    	// 성공
+    // 성공
     case .failure(let error):
-    	// 실패
-  }
+    // 실패
+    }
 }
+
 ```
 
 
@@ -251,38 +259,40 @@ searchPlaces{ (result: Result<Place, NetworkError>) in
 
 ```swift
 func searchPlaces<T: Decodable>(input: PlaceInput) -> Observable<Result<[T], NetworkError>> {
-	guard let url = createSearchComponents(input: input).url else {
-		return .just(.failure(urlError))
-	}
-	var request = URLRequest(url: url)
-	return session.rx.data(request: request)
-		.map { data in
-				do {
-					let response = try JSONDecoder().decode(T.self, from: data)
-					return .success(response.places ?? [])
-					} catch {
-						return .failure(.decodingError)
-					}
+    guard let url = createSearchComponents(input: input).url else {
+        return .just(.failure(urlError))
+    }
+    var request = URLRequest(url: url)
+    return session.rx.data(request: request)
+        .map { data in
+            do {
+                let response = try JSONDecoder().decode(T.self, from: data)
+                return .success(response.places ?? [])
+            } catch {
+                return .failure(.decodingError)
+            }
     }
 }
+
 ```
 
 
 
 ```swift
 let initValue = initialResult
-	.map { result -> [Place] in
-		guard case .success(let value) = result else { return [] }
-		return value
-	}
-  .asDriver(onErrorJustReturn: [])
-        
+    .map { result -> [Place] in
+        guard case .success(let value) = result else { return [] }
+        return value
+}
+.asDriver(onErrorJustReturn: [])
+
 let initError = initialResult
-   .map { result -> String? in
-			guard case .failure(let error) = result else { return nil }
-			return error.message
-   }
-	.filterNil()
+    .map { result -> String? in
+        guard case .failure(let error) = result else { return nil }
+        return error.message
+}
+    .filterNil()
+
 ```
 
 
