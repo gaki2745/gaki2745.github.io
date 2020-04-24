@@ -125,7 +125,7 @@ Rx에서의 생산자-소비자와 동일하게 성공하거나 실해할시에 
 
 `Just` 는 오직 하나의 값만을 출력하고 끝나게 되는 가장 단순한 형태의 Publisher로 Combine에서 빌트인(Built-in)형태로 제공하는 Publisher입니다.
 
-각 Subscriber에게 output을 **오직 한번만(just once) ** 출력한 다음 완료하는 Publisher입니다.
+각 Subscriber에게 output을 **오직 한번만(just once)** 출력한 다음 완료하는 Publisher입니다.
 
 
 
