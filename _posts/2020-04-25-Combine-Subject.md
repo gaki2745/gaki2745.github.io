@@ -3,7 +3,7 @@ layout: post
 current: post
 navigation: True
 title: SwiftUI Combine(2) - Subject
-date: 2020-04-25 21:00:00
+date: 2020-04-25 21:15:00
 tags: SwiftUI
 class: post-template
 subclass: 'post tag-fables'
