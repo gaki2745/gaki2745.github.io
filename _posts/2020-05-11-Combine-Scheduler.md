@@ -22,7 +22,7 @@ author: gaki
 
 Scheduler는 Publisher의 작업들이 **언제 그리고 어떻게** 수행될지를 결정하기 위한 객체입니다. 작업들을 적절한 시간에 수행이 되어야 하고 또 어 떤 Thread에서 수행되어야 하는지를 제어할 수 있습니다. 
 
-비동기 처리에 있어서 적절한 시기에 스레드 사용을 하는 것은 필수적이빈다. 그래서 Apple에서는 GCD(Grand Central Dispatch)를 제공하고 있습니다. 
+비동기 처리에 있어서 적절한 시기에 스레드 사용을 하는 것은 필수적입니다. 그래서 Apple에서는 GCD(Grand Central Dispatch)를 제공하고 있습니다. 
 
 ```swift
 DispatchQueue.global().async {
