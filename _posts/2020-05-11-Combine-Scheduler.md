@@ -44,7 +44,7 @@ Apple에서 제공하는 Scheduler 타입객체는 DispatchQueue, OperationQueue
 
 Combine에는 Schduler를 switching 하여 명시적으로 지정할 수 있는 방법이 두가지 있습니다.
 
-**`receive(on:)` 과 `subscribe(on:)` ** 두가지 방식으로 지정할 수 있습니다.
+`receive(on:)` 과 `subscribe(on:)` 두가지 방식으로 지정할 수 있습니다.
 
 
 
