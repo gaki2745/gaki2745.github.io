@@ -2,7 +2,7 @@
 layout: post
 current: post
 navigation: True
-title: SwiftUI Combine(3) - Shceduler
+title: SwiftUI Combine(3) - Scheduler
 date: 2020-05-11 00:25:00
 tags: SwiftUI
 class: post-template
