@@ -3,7 +3,7 @@ layout: post
 current: post
 navigation: True
 title: SwiftUI Essentials(1)
-date: 2020-05-20 23:155:00
+date: 2020-05-20 23:55:00
 tags: WWDC SwiftUI
 class: post-template
 subclass: 'post tag-fables'
