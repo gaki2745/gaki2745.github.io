@@ -1,6 +1,6 @@
 ---
 layout: post
-title: # Swift의 Queue & Stack 구현
+title: Swift의 Queue & Stack 구현
 subtitle: ""
 categories: algorithm
 tags: swiftAlgorithm
