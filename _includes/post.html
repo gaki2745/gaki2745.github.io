@@ -22,7 +22,7 @@
   {% endunless %}
   {% endfor %}
 
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
   {% unless include.excerpt %}
   <div class="markdown-body">
 
@@ -65,22 +65,12 @@
         height: 258px;
       }
     </style>
-    <div class='row'>
-      <ins class="adsbygoogle myAd1190" data-ad-client="ca-pub-9134477021095729" data-ad-slot="6559875097"></ins>
-      <ins class="adsbygoogle myAd1290" data-ad-client="ca-pub-9134477021095729" data-ad-slot="6559875097"></ins>
-    </div>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
-    <br />
+   
+    <!--<br />-->
     {{ post.content }}
     <br />
     <br />
   </div>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
   {% else %}
   {{ post.excerpt }}
   <p class="read-more"><a class="heading" href="{{ post.url | relative_url }}" data-flip="title">Continue reading </a>
@@ -89,8 +79,8 @@
 
 </article>
 {% unless include.link_title %}
-<hr class="dingbat" />
-
+<!--<hr class="dingbat" />-->
+<!--
 <div class="share">
   <h2>Share this post</h2>
   <div class="share-body">
@@ -106,5 +96,6 @@
     </a>
   </div>
 </div>
+-->
 <br />
 {% endunless %}
