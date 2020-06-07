@@ -23,8 +23,8 @@ description:         >
 
 # This should be the same author as first entry in `_data/authors.yml`
 author:
-  name:              aiden min
-  email:             zoqozqz@gmail.com
+  name:              youngjun gu
+  email:             youngjun.gu@navercorp.com
 
 # Fallback image and color
 image:               /assets/img/kumo.jpg
