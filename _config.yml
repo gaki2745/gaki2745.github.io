@@ -13,12 +13,11 @@ url:                 https://gaki2745.github.io
 baseurl:             ""
 
 # A very short description of your page
-tagline:             오늘을 기록하고 내일을 코딩하는 개발자
+tagline:             오늘을 기록하고 내일을 코딩하는 iOS 개발자
 
 # A short description of the page, used in the sidebar and as fallback for the meta description tag.
 # Markdown enabled, but don't use more than one paragraph (enforced by `>`)
 description:         >
-  iOS Developer
   Be Faithful to the Basic!!
 
 # This should be the same author as first entry in `_data/authors.yml`
@@ -48,7 +47,7 @@ google_fonts:        Lato
 google_analytics:    UA-92346434-1
 
 # Setting a disqus shortname will enable the comment section on pages with `comments: true` in the front matter
-disqus_shortname:    Gaki
+disqus_shortname:    gaki
 
 # This text will appear in the footer of every page. Markdown enabled.
 copyright:           '&copy; 2020. by Gaki'
