@@ -1,54 +1,53 @@
 {
-    "name": "casper",
-    "description": "The default personal blogging theme for Ghost. Beautiful, minimal and responsive.",
-    "demo": "https://demo.ghost.io",
-    "version": "2.1.9",
-    "engines": {
-        "ghost": ">=1.2.0"
-    },
-    "license": "MIT",
-    "screenshots": {
-        "desktop": "assets/screenshot-desktop.jpg",
-        "mobile": "assets/screenshot-mobile.jpg"
-    },
-    "author": {
-        "name": "Ghost Foundation",
-        "email": "hello@ghost.org",
-        "url": "https://ghost.org"
-    },
-    "gpm": {
-        "type": "theme",
-        "categories": [
-            "Minimal",
-            "Magazine"
-        ]
-    },
-    "keywords": [
-        "ghost",
-        "theme"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/TryGhost/Casper.git"
-    },
-    "bugs": "https://github.com/TryGhost/Casper/issues",
-    "contributors": "https://github.com/TryGhost/Casper/graphs/contributors",
-    "devDependencies": {
-        "autoprefixer": "6.3.6",
-        "cssnano": "3.7.1",
-        "gulp": "3.9.1",
-        "gulp-livereload": "3.8.1",
-        "gulp-nodemon": "2.1.0",
-        "gulp-postcss": "6.1.1",
-        "gulp-sourcemaps": "1.6.0",
-        "gulp-util": "3.0.7",
-        "gulp-watch": "4.3.8",
-        "gulp-zip": "4.0.0",
-        "postcss-color-function": "2.0.1",
-        "postcss-custom-properties": "5.0.1",
-        "postcss-easy-import": "1.0.1"
-    },
-    "config": {
-        "posts_per_page": 25
-    }
+  "name": "hydejack",
+  "version": "6.4.0",
+  "description": "Hydejack is a pretentious two-column [Jekyll](http://jekyllrb.com) theme, stolen by [`@qwtel`](https://twitter.com/qwtel) from [Hyde](http://hyde.getpoole.com). You could say it was.. [hydejacked](http://media3.giphy.com/media/makedRIckZBW8/giphy.gif).",
+  "scripts": {
+    "clean": "rm -f assets/js/hydejack.js & rm -f assets/js/hydejack.min.js",
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "build": "cat _includes/copyright-header.txt > assets/js/hydejack.js; cross-env NODE_ENV=production browserify _js/src/index.js -g babelify | uglifyjs -c -m >> assets/js/hydejack.js",
+    "watch": "watchify -d _js/src/index.js -g babelify -o assets/js/hydejack.js",
+    "lint": "eslint _js/src",
+    "dev": "npm run watch",
+    "prepare": "npm run lint && npm run test && npm run clean && npm run build",
+    "resume": "json2yaml _data/resume.json > _data/resume.yml"
+  },
+  "author": "Florian Klampfer <f.klampfer@gmail.com> (https://qwtel.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.24.1",
+    "babel-plugin-transform-function-bind": "6.22.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-es2016": "6.24.1",
+    "babelify": "7.3.0",
+    "browserify": "14.4.0",
+    "cross-env": "5.0.1",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "7.1.0",
+    "json2yaml": "1.1.0",
+    "uglify-js": "3.0.18",
+    "watchify": "3.9.0"
+  },
+  "dependencies": {
+    "color": "1.0.3",
+    "core-js": "2.4.1",
+    "elem-dataset": "1.1.1",
+    "katex": "0.7.1",
+    "rxjs": "5.4.1",
+    "web-animations-js": "2.2.5",
+    "y-drawer": "6.1.1",
+    "y-push-state": "6.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwtel/hydejack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qwtel/hydejack/issues"
+  },
+  "homepage": "https://github.com/qwtel/hydejack#readme"
 }
