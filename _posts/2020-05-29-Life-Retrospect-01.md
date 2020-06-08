@@ -2,7 +2,7 @@
 layout: post
 title: 개인앱 회고 및 리팩터링
 subtitle: ""
-categories: Life
+categories: life
 tags: retrospect
 comments: false
 --- 
