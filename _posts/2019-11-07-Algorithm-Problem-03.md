@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [프로그래머스] 자물쇠와열쇠
+title: 프로그래머스) 자물쇠와열쇠
 subtitle: ""
 categories: algorithm
 tags: solving

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [프로그래머스] 문자열 압축
+title: 프로그래머스) 문자열 압축
 subtitle: ""
 categories: algorithm
 tags: solving

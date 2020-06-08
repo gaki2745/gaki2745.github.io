@@ -1,6 +1,6 @@
 ---
 layout: post
-title: [프로그래머스] 추석트래픽
+title: 프로그래머스) 추석트래픽
 subtitle: ""
 categories: algorithm
 tags: solving
