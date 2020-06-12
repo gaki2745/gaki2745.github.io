@@ -155,7 +155,8 @@ SRP를 준수하기 때문에 클래스는 본인이 수행해야할 업무를 �
 
 - 현실..
 
-![image-20200612230631134](/Users/youngjungoo/Library/Application Support/typora-user-images/image-20200612230631134.png)
+![image](https://user-images.githubusercontent.com/33486820/84514488-0eec5600-ad06-11ea-989f-07cfd3fa7e35.png)
+
 
 Cocoa MVC는 위와 같이 Massive ViewController를 야기하게 됩니다. 그 이유는 View와 Controller가 뒤 엉켜 버리는 문제가 발생하게 됩니다. 그 이유는 View에서 발생하는 액션을 Controller에서 처리하도록 보내기 때문입니다. TableView를 예로 들어보면 TableView Delegate나 Datasource를 Controller에서 처리하게 되고 또 추가적으로 네트워크 요청과 같은 로직이 Controller에 존재할 수도 있습니다(극단적인 예시..)
 
