@@ -136,7 +136,7 @@ override init(frame: CGRect) {
 
 
 
-#### `initWithCoder`
+### `initWithCoder`
 
 스토리보드 내에 정의된 VC들은 보통 코드상에서 직접 인스턴스화 하지 않습니다. 대신에 해당 Scene이 필요한 경우에 스토리보드에 의해서 자동으로 혹은 `instantiateViewController(withIdentifier:)` 를 스토리보드에게 보내서 VC의 인스턴스를 호출하게 됩니다.
 
