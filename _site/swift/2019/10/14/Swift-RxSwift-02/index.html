@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="RxSwift Observable,Subscribe 개념" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>RxSwift Observable,Subscribe 개념 &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="RxSwift Observable
+
+"
+/>
+<meta
+  property="og:description"
+  content="RxSwift Observable
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2019/10/14/Swift-RxSwift-02/" />
+<meta property="og:url" content="http://localhost:4000/swift/2019/10/14/Swift-RxSwift-02/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/swift/2019/10/14/Swift-Basic-09/" />
+ 
+<link rel="next" href="http://localhost:4000/ios/2019/10/14/iOS-Basic-12/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2019/10/14/Swift-RxSwift-02" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        RxSwift Observable,Subscribe 개념
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-10-14T00:00:00+09:00">14 Oct 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-rxswift/" data-flip="title">RxSwift</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h1 id="rxswift-observable">RxSwift Observable</h1>
+
+<p>비동기 프로그래밍의 기본은 관찰할 수 있는 이벤트(Observable) 가 발생하는 시점을 관찰, 구독(Subscribe) 함에 있다. 그중에 RxSwift에서 제공하는 <strong>Observable</strong>이라는 클래스는 관찰할 수 있는 이벤트 그 자체를 의미한다.</p>
+
+<h2 id="observable-이란">Observable 이란?</h2>
+
+<p>Rx에서 핵심이 되는 기능이다.  Observable 들은 일정 기간 동안 계속해서 <strong>이벤트</strong> 를 생성하며, 이러한 과정을 보통 <strong>emitting(방출)</strong> 이라고 표현한다. 그리고 각각의 이벤트들은 숫자나 커스텀한 인스턴스 등과 같은 값을 가질 수 있으며, 또는 탭과 같은 제스처를 인식할 수 있다.</p>
+
+<p>이러한 개념들을 가장 잘 이해할 수 있는 방법은 marble diagrams를 이용하는 것이다</p>
+
+<blockquote>
+  <p>marble diagram: 시간의 흐름에 따라서 값을 표시하는 방식으로 왼쪽에서 오른쪽으로 흐른다고 가정한다.</p>
+
+  <p>참고 : <a href="https://rxmarbles.com">RxMarble</a></p>
+</blockquote>
+
+<p>이전에 Escaping 클로저를 통해 File 객체를 다운로드 완료하면 반환하는 코드를 작성했다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> 
+    <span class="kd">func</span> <span class="nf">downLoadFile</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">()</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+            <span class="kt">Thread</span><span class="o">.</span><span class="nf">sleep</span><span class="p">(</span><span class="nv">forTimeInterval</span><span class="p">:</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"비동기파일"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">42512</span><span class="p">)</span>
+            <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+                <span class="nf">completion</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>이를 RxSwift Observable 의 개념을 활용하여 다음과 같이 변경할 수 있다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>	<span class="kd">func</span> <span class="nf">downLodFileObservable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;</span><span class="p">{</span>
+		<span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;.</span><span class="n">create</span><span class="p">{</span><span class="n">observer</span> <span class="k">in</span>
+			<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"비동기파일"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">42512</span><span class="p">)</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"file이 생성되었습니다"</span><span class="p">)</span>
+			<span class="n">observer</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+			<span class="n">observer</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="n">completed</span><span class="p">)</span>
+			<span class="k">return</span> <span class="kt">Disposables</span><span class="o">.</span><span class="nf">create</span><span class="p">()</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>가장 큰 변화는 completion 의 인자로 넣어주던 Escaping 메서드가 사라지고 <strong>Observable</strong> 타입을 반환한다. Observable 타입은 제네릭 클래스 이기 때문에 기본 구조체 타입 뿐만아니라 인스턴스등 어떤 타입이던지 들어올 수 있다.</p>
+
+<p>Observable <strong>관찰 가능한 이벤트</strong> 를 의미한다고 했다. 이는 Observable은 생성 될때 곧바로 그 안에 명시된 코드가 실행되는 것은 아니다. <code class="highlighter-rouge">.subscribe()</code> 메서드를 이용해 구독을 당할때 비로서야 그 안에 명시된 코드가 실행되고 이벤트를 전송한다.</p>
+
+<p>즉 , <code class="highlighter-rouge">downLodFileObservable</code> 함수가 호출 되어 Observable이 만들어 질때 안의 “file이 생성되었습니다” 가 출력이 되는 것이 아니라 <strong>Observable을 subscribe 메서드를 이용해서 관찰하기 시작한 후에야 File 객체가 만들어져서 출력된다</strong></p>
+
+<p>아래와 같이 File을 다운로드 받기위해 함수를 호출 해보겠다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// 현재 fileObservable 상수는 Observable 타입 인스턴스</span>
+<span class="k">let</span> <span class="nv">fileObservable</span> <span class="o">=</span> <span class="nf">downLodFileObservable</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>현재 상황에서는 함수를 호출 했기에 예상한 <code class="highlighter-rouge">print("file이 생성되었습니다")</code> 가 호출될거 같지만 아무것도 호출이 되지 않는다.</p>
+
+<p>그리고 <code class="highlighter-rouge">.subscribe</code> 메서드를 통해 이제 구독을 해보겠다</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>   <span class="n">fileObservable</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="n">event</span> <span class="k">in</span>
+ <span class="c1">//file이 생성되었습니다</span>
+       <span class="k">switch</span> <span class="n">event</span> <span class="p">{</span>
+           <span class="k">case</span> <span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="k">let</span> <span class="nv">file</span><span class="p">):</span>
+               <span class="nf">print</span><span class="p">(</span><span class="s">"onNext : </span><span class="se">\(</span><span class="n">file</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+               <span class="k">self</span><span class="o">.</span><span class="n">downLoadLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span>
+           <span class="k">case</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+               <span class="nf">print</span><span class="p">(</span><span class="s">"onError : </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+           <span class="k">case</span> <span class="o">.</span><span class="nv">completed</span><span class="p">:</span>
+               <span class="nf">print</span><span class="p">(</span><span class="s">"onComplete"</span><span class="p">)</span>
+        <span class="p">}</span>
+   <span class="p">}</span>
+<span class="c1">//onNext : File(name: "비동기파일", size: 42512)</span>
+<span class="c1">//onComplete</span>
+</code></pre>
+</div>
+
+<p>위와 같이 Observable은 해당 인스턴스 타입의 Observable이 생성될때 <strong>어떻게 이벤트를 발생시키고 언제 종료하고, 어느 상황에서 에러가 발생하게 할지를 결정해주는 역할</strong> 을한다.</p>
+
+<h2 id="observable의-생명주기">Observable의 생명주기</h2>
+
+<p>위에서 간략하게 나마 Observable이 어떻게 동작하는지 살펴보았다. 과연 이 Observable이 언제 생성되고 언제 종료가 되는지 도식화를 해보겠다.</p>
+
+<p><img width="596" alt="image" src="https://user-images.githubusercontent.com/33486820/66701286-b22f3a80-ed35-11e9-9680-9d9f5cce2ad4.png" /></p>
+
+<p>위의 Marble Diagram 에서 3가지 구성요소가 있다. Observable 에서는 <code class="highlighter-rouge">.next</code> 이벤트를 통해 각각의 요소들을 방출하는 것이 가능하다. 위의 다이어그램에서 1,2,3 의 요소들은 tap 이벤트를 방출 한 뒤 완전 종료가 된다고 하자. 이것을 완벽하게 문제없이 수행을 하게 되면 <code class="highlighter-rouge">.compeleted</code> 이벤트를 통해 정상 종료 된다.</p>
+
+<p><img width="592" alt="image" src="https://user-images.githubusercontent.com/33486820/66701318-12be7780-ed36-11e9-833f-9eb7234e3e39.png" /></p>
+
+<p>하지만 위의 다이어그램처럼 3의 요소에서 에러가 발생하게 되면 Observable 종료 되었다는 측면에서는 정상적으로 3개를 완료했거나 에러가발생했거나는 동일하지만  3의 요소는 <code class="highlighter-rouge">.completed</code> 가 아닌 <code class="highlighter-rouge">.error</code> 이벤트를 통해 종료되었다.</p>
+
+<h5 id="observable-3가지-이벤트">Observable 3가지 이벤트</h5>
+
+<ul>
+  <li><code class="highlighter-rouge">.next</code>: 정상적으 이벤트(데이터)를 전달시키는 것</li>
+  <li><code class="highlighter-rouge">.error</code>: 데티어 전달 과정에서 무언가 에러가 난 상황을 알려준다. 이 이벤트를 방출하면 완전 종료 된다.</li>
+  <li><code class="highlighter-rouge">.completed</code> : 모든 데이터 전송이 끝난 상황을 의미한다. 이 이벤트를 방출하면 완전 종료 된다.</li>
+</ul>
+
+<p>RxSwift 에서는 이 3개의 이벤트를 enum으로 관리하는데 이를 좀더 실전에 가까운 예제를 확인해보자</p>
+
+<h5 id="실전예제--file의-사이즈에-제한을-두고-다운로드">실전예제 : File의 사이즈에 제한을 두고 다운로드</h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">enum</span> <span class="kt">DownloadError</span><span class="p">:</span> <span class="kt">Error</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">sizeError</span>
+    <span class="k">case</span> <span class="n">timeError</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">DownloadError</span><span class="p">:</span> <span class="kt">LocalizedError</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">switch</span> <span class="k">self</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">sizeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="s">"Size가 너무 큰 파일입니다"</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">"DownloadError"</span><span class="p">)</span>
+        <span class="k">case</span> <span class="o">.</span><span class="nv">timeError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kt">NSLocalizedString</span><span class="p">(</span><span class="s">"파일 다운로드 응답시간 초과입니다."</span><span class="p">,</span> <span class="nv">comment</span><span class="p">:</span> <span class="s">"DownloadError"</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">downLoadFileObservableLimitSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;.</span><span class="n">create</span> <span class="p">{</span> <span class="n">observer</span> <span class="k">in</span>
+            <span class="k">let</span> <span class="nv">files</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file1"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">3000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file2"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">5000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file3"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">7000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file4"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">10000</span><span class="p">)</span>
+            <span class="p">]</span>
+            
+            <span class="k">for</span> <span class="n">file</span> <span class="k">in</span> <span class="n">files</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">7000</span> <span class="p">{</span>
+                    <span class="n">observer</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="kt">DownloadError</span><span class="o">.</span><span class="n">sizeError</span><span class="p">))</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">observer</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            
+            <span class="n">observer</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="n">completed</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kt">Disposables</span><span class="o">.</span><span class="nf">create</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>다운로드 받는 file의 사이즈가 7000 이상이면 에러가 발생하게 Observable을 반환하는 함수를 구현했다. 이제 이 함수를 <code class="highlighter-rouge">.subscribe()</code> 를 통해 구독하면 아래와 같이 결과가 나온다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">fileObservable</span> <span class="o">=</span> <span class="nf">downLoadFileObservableLimitSize</span><span class="p">()</span>
+        
+            
+        <span class="n">fileObservable</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span> <span class="p">[</span><span class="k">unowned</span> <span class="k">self</span><span class="p">]</span> <span class="n">event</span> <span class="k">in</span>
+            <span class="k">switch</span> <span class="n">event</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="k">let</span> <span class="nv">file</span><span class="p">):</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"onNext : </span><span class="se">\(</span><span class="n">file</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+                <span class="k">self</span><span class="o">.</span><span class="n">downLoadLabel</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nf">error</span><span class="p">(</span><span class="k">let</span> <span class="nv">error</span><span class="p">):</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"onError : </span><span class="se">\(</span><span class="n">error</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nv">completed</span><span class="p">:</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"onComplete"</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+<span class="c1">//onNext : File(name: "file1", size: 3000)</span>
+<span class="c1">//onNext : File(name: "file2", size: 5000)</span>
+<span class="c1">//onError : sizeError</span>
+</code></pre>
+</div>
+
+<p>size가 7000인 이상인 파일이 드렁오면 onError 를 호출하고 그 뒤의 파일들의 작업의 작업 즉 다음 이벤트들이 전송되지 않고 <code class="highlighter-rouge">onComplete</code> 함수가 호출되지 않은채 종료가 된다.</p>
+
+<p>만약 files의 배열의 모든 file의 사이즈가 7000 미만이었으면 정상적으로 <code class="highlighter-rouge">.next</code> 이벤트가 모든 file 인자를 거쳐 마지막에 <code class="highlighter-rouge">onComplete</code> 함수가 호출되고 정상종료가 된다.</p>
+
+<h2 id="observable-생성">Observable 생성</h2>
+
+<p>위의 예제에서는 <code class="highlighter-rouge">create</code>를 사용해서 Observable 객체를 만들었지만 이 외에도 <code class="highlighter-rouge">just</code> 와 <code class="highlighter-rouge">from</code> 두가지가 더 존재한다.</p>
+
+<h3 id="1-just">1. just</h3>
+
+<p><img width="635" alt="image" src="https://user-images.githubusercontent.com/33486820/66702511-684d5100-ed43-11e9-88e0-5a593036c238.png" /></p>
+
+<p>Just의 역할은 Marble Diagram에서 보면 Source 즉 가곡된 데이터를 그대로 전달해주는 연산이다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>	<span class="kd">func</span> <span class="nf">downLodFileObservable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;</span><span class="p">{</span>
+		<span class="k">let</span> <span class="nv">file</span> <span class="o">=</span> <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"비동기파일"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">12512</span><span class="p">)</span>
+		<span class="k">return</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">just</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+	<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>위와 같이 File 객체를 그대로 전달해주는 Observable 객체를 만들어 줄 수 있다.</p>
+
+<h3 id="2-from">2. from</h3>
+
+<p>from의 경우는 배열, 딕셔너리 등의 컬렉션에서 <strong>연속적인 데이터</strong> 를 전달해주는 Observable을 만들어준다.</p>
+
+<p><img width="649" alt="image" src="https://user-images.githubusercontent.com/33486820/66702630-a9923080-ed44-11e9-9d81-dd28cea46935.png" /></p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>    <span class="kd">func</span> <span class="nf">downLoadFileObservableLimitSize</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">File</span><span class="o">&gt;</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">files</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file1"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">3000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file2"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">5000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file3"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">7000</span><span class="p">),</span>
+                <span class="kt">File</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"file4"</span><span class="p">,</span> <span class="nv">size</span><span class="p">:</span> <span class="mi">10000</span><span class="p">)</span>
+            <span class="p">]</span>
+      			<span class="k">return</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">from</span><span class="p">(</span><span class="n">videos</span><span class="p">)</span>
+		<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="observable-구독subscribe">Observable 구독(Subscribe)</h2>
+
+<p>RxSwift를 알기 이전에 모두 <code class="highlighter-rouge">NotificationCenter</code> 를 사용하여 변화를 감지해 왔다. 아래는 <code class="highlighter-rouge">NotificationCenter</code>를 활용한 KVO(Key-Value Observing) 방식이다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="k">let</span> <span class="nv">observer</span> <span class="o">=</span> <span class="kt">NotificationCenter</span><span class="o">.</span><span class="k">default</span><span class="o">.</span><span class="nf">addObserver</span><span class="p">(</span>
+ 	<span class="nv">forName</span><span class="p">:</span> <span class="o">.</span><span class="kt">UIKeyboardDidChangeFrame</span><span class="p">,</span>
+ 	<span class="nv">object</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+ 	<span class="nv">queue</span><span class="p">:</span> <span class="kc">nil</span>
+ <span class="p">)</span> <span class="p">{</span> <span class="n">notification</span> <span class="k">in</span>
+ 	<span class="c1">// Handle receiving notification</span>
+ <span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">NotificationCenter</code> 를 활용하게 되면 <code class="highlighter-rouge">.default</code> 싱글턴 인스턴스에만 <code class="highlighter-rouge">.addObserver</code> 를 통해서 사용가능했다. 하지만 RxSwift의 Observable은 그렇지 않다</p>
+
+<blockquote>
+  <p><strong>Observable은 단순한 정의</strong> 일 뿐 “이런 이벤트가 있을 것이다” 하고 명시 할뿐, 구독(subscribe) 되기 전에는 아무런 이벤트도 보내지 않는다.</p>
+</blockquote>
+
+<p>Observable은 Swift 기본 라이브러리의 반복문에서 <code class="highlighter-rouge">.next()</code> 를 구현하는 것과 매우 유사하다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="k">let</span> <span class="nv">sequence</span> <span class="o">=</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">3</span>
+ <span class="k">var</span> <span class="nv">iterator</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="nf">makeIterater</span><span class="p">()</span>
+ <span class="k">while</span> <span class="k">let</span> <span class="nv">n</span> <span class="o">=</span> <span class="n">iterator</span><span class="o">.</span><span class="nf">next</span><span class="p">()</span> <span class="p">{</span>
+ 	<span class="nf">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+ <span class="p">}</span>
+ 
+<span class="cm">/*
+0
+1
+2
+*/</span>
+</code></pre>
+</div>
+
+<p>Observable의 구독은 이것보다 더 간단하며 또한 위에서 언급한 3가지 이벤트 타입(<strong>next, error, completed</strong>)에 대해서 handler를 추가할 수 있다.</p>
+
+<h3 id="subscribe"><code class="highlighter-rouge">.subscribe()</code></h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="nf">example</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">"subscribe"</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">let</span> <span class="nv">one</span> <span class="o">=</span> <span class="mi">1</span>
+     <span class="k">let</span> <span class="nv">two</span> <span class="o">=</span> <span class="mi">2</span>
+     <span class="k">let</span> <span class="nv">three</span> <span class="o">=</span> <span class="mi">3</span>
+     
+     <span class="k">let</span> <span class="nv">observable</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">of</span><span class="p">(</span><span class="n">one</span><span class="p">,</span> <span class="n">two</span><span class="p">,</span> <span class="n">three</span><span class="p">)</span>
+     <span class="n">observable</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">({</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="k">in</span>
+    	 <span class="nf">print</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+ 	<span class="p">})</span>
+ 	
+ 	<span class="cm">/*
+ 	 next(1)
+ 	 next(2)
+ 	 next(3)
+ 	 completed
+ 	*/</span>
+ <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>위의 예제 코드에서 <code class="highlighter-rouge">.subscrivbe</code> 는 escaping 클로저로 Int 타입을 Evnet로 갖는다. escaping에 대한 리턴 값은 Void 이고 전체 <code class="highlighter-rouge">.subscribe</code> 는 <code class="highlighter-rouge">Disposable</code> 를 리턴한다. one, two , three 이 세개의 요소들에 대해 <code class="highlighter-rouge">.next</code> 이벤트를 방출했다. 그리고 최종적으로 error가 발생하지 않고 모든 요소들에 대한 이벤트를 완전 종료 했기 때문에 <code class="highlighter-rouge">.completed</code> 를 방출했다.</p>
+
+<h3 id="subscribeonnext"><code class="highlighter-rouge">.subscribe(onNext:)</code></h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="n">observable</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">in</span>
+ 	<span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+ <span class="p">})</span>
+ 
+ <span class="cm">/*
+  1
+  2
+  3
+ */</span>
+</code></pre>
+</div>
+
+<p>축약형으로 많이 사용한다. <code class="highlighter-rouge">.onNext</code> 클로저는 <code class="highlighter-rouge">.next</code> 이벤트만을 전달인자로 취한 다음 핸들링하고 다른 것들은 모두 무시한다.</p>
+
+<h3 id="empty"><code class="highlighter-rouge">.empty()</code></h3>
+
+<p>요소를 하나도 가지지 않는 Observable 의 경우 <code class="highlighter-rouge">.empty()</code> 연산자를 통해 <code class="highlighter-rouge">completed</code> 이벤트만 방출하게 된다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="nf">example</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">"empty"</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">let</span> <span class="nv">observable</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;.</span><span class="nf">empty</span><span class="p">()</span>
+     
+     <span class="n">observable</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span>
+       <span class="c1">// .next 이벤트 핸들링</span>
+         <span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">in</span>
+             <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+     <span class="p">},</span>
+       <span class="c1">// .completed 이벤트 핸들링</span>
+         <span class="nv">onCompleted</span><span class="p">:</span> <span class="p">{</span>
+             <span class="nf">print</span><span class="p">(</span><span class="s">"Completed"</span><span class="p">)</span>
+     <span class="p">}</span>
+     <span class="p">)</span>
+ <span class="p">}</span>
+ 
+ <span class="cm">/*
+  Completed
+ */</span>
+</code></pre>
+</div>
+
+<p>Observable은 제네릭 타입으로 반드시 특정 타입으로 정의가 되어야한다. 타입추론할 것이 없으면 Void 형으로 위와 같이 명시적으로 정의를 해주어야 한다. 이 메서드의 용도는 다음과 같다</p>
+
+<ul>
+  <li>즉시 종료할 수 있는 Observable를 리턴하고 싶을때 (바로 .completed 이벤트로 넘어감)</li>
+  <li>의도적으로 0개의 값을 가지는 Observable을 리턴하고 싶을때 (개발자가 의도로 아무 Source도 없는 Observable 생성 가능)</li>
+</ul>
+
+<h3 id="never"><code class="highlighter-rouge">.never()</code></h3>
+
+<p><code class="highlighter-rouge">.empty()</code> 와 반대되는 기능을 한다. 이렇게 하면 Completed 가 피린트 되지 않는다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="nf">example</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">"never"</span><span class="p">)</span> <span class="p">{</span>
+     <span class="k">let</span> <span class="nv">observable</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Any</span><span class="o">&gt;.</span><span class="nf">never</span><span class="p">()</span>
+     
+     <span class="n">observable</span>
+         <span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span>
+             <span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="k">in</span>
+                 <span class="nf">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+         <span class="p">},</span>
+             <span class="nv">onCompleted</span><span class="p">:</span> <span class="p">{</span>
+                 <span class="nf">print</span><span class="p">(</span><span class="s">"Completed"</span><span class="p">)</span>
+         <span class="p">}</span>
+     <span class="p">)</span>
+ <span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="range"><code class="highlighter-rouge">.range()</code></h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code> <span class="nf">example</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="s">"range"</span><span class="p">)</span> <span class="p">{</span>
+     
+     <span class="c1">//1 range 연산자를 이용해 start ~ count 크기 만큼의 값을 갖는 Observable 생성</span>
+     <span class="k">let</span> <span class="nv">observable</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">range</span><span class="p">(</span><span class="nv">start</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">count</span><span class="p">:</span> <span class="mi">10</span><span class="p">)</span>
+     
+     <span class="n">observable</span>
+         <span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">in</span>
+             
+             <span class="c1">//2 방출된 Source에 대한 n번째 피보나치 숫자를 계산하고 출력</span>
+             <span class="k">let</span> <span class="nv">n</span> <span class="o">=</span> <span class="kt">Double</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+             <span class="k">let</span> <span class="nv">fibonacci</span> <span class="o">=</span> <span class="kt">Int</span><span class="p">(((</span><span class="nf">pow</span><span class="p">(</span><span class="mf">1.61803</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="nf">pow</span><span class="p">(</span><span class="mf">0.61803</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.23606</span><span class="p">)</span><span class="o">.</span><span class="nf">rounded</span><span class="p">())</span>
+             <span class="nf">print</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">)</span>
+         <span class="p">})</span>
+ <span class="p">}</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>결론 : Observable 에서 반환해야할 source(데이터)가 옳은지 핸들링을 해서 subscribe 에게 “ 이렇게 이벤트를 방출 하겠다” 라고 정의할 뿐이다. 그렇기 때문에 Observable에서 명확하게 <code class="highlighter-rouge">.next</code> <code class="highlighter-rouge">.error</code> <code class="highlighter-rouge">.completed</code> 이 세개의 이벤트가 방출 될지를 고려하면서 핸들링 해야한다. 그리고 Subscribe를 통해 비로소 Observable에서 반환하는 모든 요소들의 이벤트들을 핸들링한다.</p>
+</blockquote>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li>https://github.com/fimuxd/RxSwift</li>
+  <li><a href="https://mym0404.blog.me/221585744991">순한맛 RxSwift</a></li>
+  <li><a href="http://reactivex.io/documentation/ko/observable.html">Reactive X: Observable</a></li>
+  <li><a href="https://rxmarbles.com">RxJs Marbles</a></li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=RxSwift Observable,Subscribe 개념&amp;url=http://localhost:4000/swift/2019/10/14/Swift-RxSwift-02/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2019/10/14/Swift-RxSwift-02/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/19/Swift-OOP-LSP/" data-flip="title">
+    <span>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)</span>
+  </a>
+  <small><time datetime="2020-07-19T00:00:00+09:00">
+    19 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="RxSwift Observable,Subscribe 개념",this.page.identifier="/swift/2019/10/14/Swift-RxSwift-02",this.page.url="http://localhost:4000/swift/2019/10/14/Swift-RxSwift-02/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

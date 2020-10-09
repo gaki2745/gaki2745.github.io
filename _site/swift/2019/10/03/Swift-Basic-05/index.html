@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Swift struct, class 차이와 적재적소에 사용하기" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Swift struct, class 차이와 적재적소에 사용하기 &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="Swift struct vs class
+
+"
+/>
+<meta
+  property="og:description"
+  content="Swift struct vs class
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2019/10/03/Swift-Basic-05/" />
+<meta property="og:url" content="http://localhost:4000/swift/2019/10/03/Swift-Basic-05/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/swift/2019/10/02/Swift-Basic-04/" />
+ 
+<link rel="next" href="http://localhost:4000/swift/2019/10/05/Swift-Basic-06/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2019/10/03/Swift-Basic-05" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Swift struct, class 차이와 적재적소에 사용하기
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-10-03T00:00:00+09:00">03 Oct 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-basic/" data-flip="title">Basic</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h1 id="swift-struct-vs-class">Swift struct vs class</h1>
+
+<p>Swift에서 구조체를 사용해야할지 아니면 새로운 클래스를 사용해야할지 순간 망설인 적이 몇번 있습니다. 그렇기에 두개의 차이점을 확실히 알고 일말의 망설임 없이 사용할 수 있도록 하고자 합니다!</p>
+
+<p><br /></p>
+
+<h2 id="공통점">공통점</h2>
+
+<ul>
+  <li>값을 저장하기 위해 Property의 정의가 가능하다.</li>
+  <li>기능 실행을 위해 메소드 정의가 가능하다.</li>
+  <li>서브스크립트 문법을 통해 구조체 또는 클래스가 갖는 프로퍼티에 접근하도록 서브스크립트를 정의할 수 있다.</li>
+  <li><code class="highlighter-rouge">initializer</code> 정의가 가능하다.</li>
+  <li><code class="highlighter-rouge">extension</code> 정의가 가능하다.</li>
+  <li><code class="highlighter-rouge">protocol</code>을 준수 할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="차이점">차이점</h2>
+
+<h5 id="struct구조체">struct(구조체)</h5>
+
+<ul>
+  <li>구조체는 <strong>value type</strong>이므로 매개변수 전달시 value copy가 일어나는 <strong>Call By Value</strong>이다.</li>
+  <li>stack memory영역에 할당 한다.
+    <ul>
+      <li>이는 속도가 매우 빠르다</li>
+      <li>scope based lifetime: 컴파일 타임에 컴파일러가 언제 메모리를 할당 해제 할지 정확히 알고 있다.</li>
+      <li>data locality: CPU 캐시 히트율이 높다</li>
+    </ul>
+  </li>
+  <li>구조체는 상속이 불가능하다.</li>
+  <li><code class="highlighter-rouge">Cadable</code> 프로토콜을 이용하여 보다 편리하게 JSON과 struct를 변환 가능하다.(swift4이상)</li>
+  <li>항상 새로운 변수로 value copy가 일어나기 때문에 멀티스레드 환경에서 공유 변수로 인해 문제를 일으킬 확률이 적다.</li>
+  <li>구조체에서는 <strong>AnyObject</strong> 로 타입캐스팅이 불가능하고 오직 클래스에서만 가능하다.</li>
+  <li>구조체는 생성자를 구현하지 않을 때 기본 <code class="highlighter-rouge">initializer</code>를 사용할 수 있다.</li>
+</ul>
+
+<p><br /></p>
+
+<h5 id="class클래스">class(클래스)</h5>
+
+<ul>
+  <li>클래스는 <strong>reference type</strong>이므로  할당 또는 매개변수 전달시 객체를 가리키고 있는 메모리 주소 값만 복사되는 <strong>Call By Reference</strong>이다.</li>
+  <li>heap memory영역에 할당 한다.
+    <ul>
+      <li>이는 속도가 느리다.</li>
+      <li>런타임에 직접 alloc(할당) 하며 Reference Counting을 통해 delloc이 필요하다.</li>
+      <li>Memory Fragmentation(메모리 단편화) 등의 Overhead가 존재한다.</li>
+    </ul>
+  </li>
+  <li>상속이 가능하다.</li>
+  <li><code class="highlighter-rouge">NSData</code> 직렬화(Serialize)가 가능하다.</li>
+  <li><code class="highlighter-rouge">Codable</code> 프로토콜을 사용 불가능하다.</li>
+  <li>런타임에서 타입 캐스팅을 통해서 클래스 인스턴스에 따라 여러 동작이 가능하다(참고로 런타임에 타입 캐스팅이 이루어 지는 것은 as?,as! 를 통한 타운캐스팅이 해당된다)</li>
+  <li><code class="highlighter-rouge">deinitializer</code>가 존재한다.</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="값-타입과-참조-타입">값 타입과 참조 타입</h2>
+
+<p>구조체의 경우 <code class="highlighter-rouge">call by value</code>가 일어나 value copy가 발생하고 , 클래스는 <code class="highlighter-rouge">call by reference</code>가 일어나 실제로 그 객체의 주소가 전달 되어 접근이 가능합니다. 일단 값 타입과 참조 타입의 가장 큰 차이점은 <strong>무엇이 전달 되느냐</strong>입니다. 참조라는 개념은 C언어 기반의 C++,Objective-C등의 언어에서 사용되는 Pointer(포인터)의 개념과 유사한 개념입니다. 우선 이해를 돕기 위해 C언어에서 <code class="highlighter-rouge">call by value</code> 와 <code class="highlighter-rouge">call by reference</code>의 차이점을 간략하게 설명 드리겠습니다.</p>
+
+<p><br /></p>
+
+<h5 id="call-by-value-vs-call-by-reference">call by value vs call by reference</h5>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="c1">// 편의를 위해 call by value : cbv, call by reference : cbr 이라고 하겠습니다.
+</span>
+<span class="c1">// call by value 
+</span><span class="kt">int</span> <span class="nf">cbvSum</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  
+  <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+  
+  <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">sum</span><span class="p">;</span>
+  
+  <span class="c1">// 1. call by value로 단순하게 a,b의 값만 복사하여 cbvSum 함수에 매개변수러 전달 한다.
+</span>  <span class="c1">// 값에 대한 복사만 일어났기 때문에 a, b에는 아무런 영향이 없다 
+</span>  <span class="n">sum</span> <span class="o">=</span> <span class="n">cbvSum</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="c1">// 종료 시점에도 a = 10, b = 20 유지
+</span>   
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<h5 id="call-by-reference">call by reference</h5>
+
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="c1">// call by reference
+</span><span class="kt">void</span> <span class="nf">cbrDoubleSum</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span><span class="n">pA</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span><span class="n">pB</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span><span class="n">pSum</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 3. 함수 내부에선 포인터로 a, b의 값을 접근하여 a,b의 값을 직접 두배로 올리고
+</span>  <span class="o">*</span><span class="n">pA</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">pB</span> <span class="o">*=</span> <span class="mi">2</span><span class="p">;</span>
+  
+  <span class="c1">// 매개변수로 받은 pSum( main에서는 sum) 에 집접 값을 넣고 함수를 종료한다.
+</span>  <span class="o">*</span><span class="n">pSum</span> <span class="o">=</span> <span class="o">*</span><span class="n">pA</span> <span class="o">+</span> <span class="o">*</span><span class="n">pB</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">sum</span><span class="p">;</span>
+  
+  <span class="c1">// 1. call by reference로 a,b의 주소값(&amp;)을 함수 매개변수로 넘겨주고 실제 그 주소값의 변수에 접근하기 위해 
+</span>  <span class="c1">// 2. cbrDoubleSum함수에서는 매개변수를 대응하기위해 포인터(*)를 통해 실제 값에 접근한다.
+</span>  <span class="n">cbrDoubleSum</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sum</span><span class="p">);</span>
+  <span class="c1">// 함수가 종료되면 a = 20, b = 40, sum = 60으로 실제 값에 변화가 발생한 것을 알 수 있다.
+</span> 
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>위에서 두개의 개념을 간략하게나마 소개를 드렸습니다. 하지만 Swift에서는 참조라는 것을 표현해주기 위해 애스터리스크(<code class="highlighter-rouge">*</code>) 를 사용하지는 않습니다.</p>
+
+<p><br /></p>
+
+<h2 id="swift의-값-타입과-참조타입">Swift의 값 타입과 참조타입</h2>
+
+<p><br /></p>
+
+<h5 id="struct-값-타입">struct: 값 타입</h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">BasicInformation</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">var</span> <span class="nv">age</span><span class="p">:</span> <span class="kt">Int</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">gakiInfo</span><span class="p">:</span> <span class="kt">BasicInformation</span> <span class="o">=</span> <span class="kt">BasicInformation</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Gaki"</span><span class="p">,</span> <span class="nv">age</span><span class="p">:</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">gakiInfo</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="k">var</span> <span class="nv">gakiClone</span><span class="p">:</span> <span class="kt">BasicInformation</span> <span class="o">=</span> <span class="n">gakiInfo</span>
+<span class="n">gakiClone</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">gakiInfo</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>     <span class="c1">// 100</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gakiClone</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>    <span class="c1">// 25</span>
+</code></pre>
+</div>
+
+<p>gakiClone의 age 프로퍼티를 변경 시켜도 gaki의 age에는 아무런 영향이 없는 것을 확인 할 수 있습니다. 이는 값만 복사가 되었기 때문에 전혀 서로에게 형향을 주지 않는 다는 것을 알수 있습니다.</p>
+
+<p>그럼 <code class="highlighter-rouge">getOld()</code>라는 함수를 통해 나이를 한살 더 먹어 보겠습니다.</p>
+
+<p><img width="821" alt="image" src="https://user-images.githubusercontent.com/33486820/66203018-2dfc0800-e6e2-11e9-9777-5c926fed41ce.png" /></p>
+
+<p>하지만 위처럼 에러가 발생합니다. 그 이유는 매개변수로 받는 <code class="highlighter-rouge">info: BasicInformation</code>의 구조체타입 매개변수가 <code class="highlighter-rouge">let</code>형이기 때문입니다. 이는 결국 매개변수로 넘겨주면 value로 고정이되어 변경할 수 없다는 것을 의미합니다.</p>
+
+<p><br /></p>
+
+<h5 id="class-참조-타입">class: 참조 타입</h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Developer</span> <span class="p">{</span>
+    <span class="c1">// var로 프로퍼티를 선언하고 초기화를 하지 않으면 initialize를 해야한다고 경고가 뜬다.</span>
+    <span class="k">var</span> <span class="nv">stack</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">"iOS Developer"</span>
+    <span class="k">var</span> <span class="nv">career</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">gaki</span><span class="p">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="kt">Developer</span><span class="p">()</span>
+<span class="k">var</span> <span class="nv">clone</span><span class="p">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="n">gaki</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">"gaki는 </span><span class="se">\(</span><span class="n">gaki</span><span class="o">.</span><span class="n">stack</span><span class="se">)</span><span class="s"> 입니다."</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"clone은 </span><span class="se">\(</span><span class="n">clone</span><span class="o">.</span><span class="n">stack</span><span class="se">)</span><span class="s"> 입니다."</span><span class="p">)</span>
+
+<span class="c1">// gaki는 iOS Developer 입니다.</span>
+<span class="c1">// clone은 iOS Developer 입니다.</span>
+
+<span class="n">clone</span><span class="o">.</span><span class="n">stack</span> <span class="o">=</span> <span class="s">"Android Developer"</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">"gaki는 </span><span class="se">\(</span><span class="n">gaki</span><span class="o">.</span><span class="n">stack</span><span class="se">)</span><span class="s"> 입니다."</span><span class="p">)</span>
+<span class="c1">// gaki는 Android Developer 입니다.</span>
+</code></pre>
+</div>
+
+<p>구조체에서는 함수에 구조체를 매개변수로 넘겼을 경우 값을 수정 할 수 없었습니다. 클래스에서는 이런 행위가 가능한데 아래 처럼 <code class="highlighter-rouge">growUpCareer</code>라는 경력을 1년 더 올려주는 함수를 선언하고 gaki를 매개변수로 넘겨보겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>
+<span class="kd">func</span> <span class="nf">growwUpCareer</span><span class="p">(</span><span class="n">_</span> <span class="nv">developer</span><span class="p">:</span> <span class="kt">Developer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">developer</span><span class="o">.</span><span class="n">career</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gaki</span><span class="o">.</span><span class="n">career</span><span class="p">)</span>  <span class="c1">// 1</span>
+
+<span class="nf">growwUpCareer</span><span class="p">(</span><span class="n">gaki</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">gaki</span><span class="o">.</span><span class="n">career</span><span class="p">)</span>	<span class="c1">// 2</span>
+</code></pre>
+</div>
+
+<p>gaki라는 클래스 인스턴스가 함수에서 호출이 되어 인스턴스의 프로퍼티의 값이 변경 되는 것을 확인할 수 있습니다. 이는 직접 gaki라는 인스턴스에 대한 참조가 일어나기 때문에 값이 변경한 다는 것을 알 수 있습니다. 즉 새로운 인스턴스가 넘겨지는 것이 아니라 기존의 인스턴스(gaki)의 참조를 전달하기 떄문입니다.</p>
+
+<p><br /></p>
+
+<h2 id="식별-연산자identity-operation">식별 연산자(Identity Operation)</h2>
+
+<p>클래스의 경우 인스턴스 끼리 참조가 같은지 확인할 때 <strong>식별 연산자</strong>를 사용하면 됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="nv">gaki</span><span class="p">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="kt">Developer</span><span class="p">()</span>
+<span class="k">var</span> <span class="nv">clone</span><span class="p">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="n">gaki</span>
+<span class="k">var</span> <span class="nv">friend</span><span class="p">:</span> <span class="kt">Developer</span> <span class="o">=</span> <span class="kt">Developer</span><span class="p">()</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">gaki</span> <span class="o">===</span> <span class="n">clone</span><span class="p">)</span> <span class="c1">// true</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gaki</span> <span class="o">===</span> <span class="n">friend</span><span class="p">)</span> <span class="c1">// false</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">gaki</span> <span class="o">!==</span> <span class="n">friend</span><span class="p">)</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<h2 id="swift의-기본-데이터-타입은-모두-구조체이다">Swift의 기본 데이터 타입은 모두 구조체이다.</h2>
+
+<p><strong>Int, Double, Float, String, Bool..</strong> 등 스위프트의 기본 데이터 타입은 모두 구조체 입니다. 함수에 이런 값 타입의 기본 데이터를 넘길 경우 모두 값이 복사되어 전달 될뿐 함수 내부에서 아무리 전달된 값을 변경 해도 기존의 변수나 상수에는 전혀 영향을 미치지 못합니다.</p>
+<blockquote>
+  <p>참고) inout 키워드를 사용하여 참조가 일어나게 할 수 있습니다!</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="적재적소에-struct-class-사용하기">적재적소에 struct, class 사용하기</h2>
+
+<p>애플 가이드라인에서 권장하는 사항은 다음과 같습니다.</p>
+
+<ul>
+  <li>연관된 간단한 값의 집합을 캡슐화하는 것만이 목적일때 구조체를 사용</li>
+  <li>캡슐화한 값을 참조하는 것보다 복사하는 것이 합당할 때 구조체를 사용</li>
+  <li>구조체에 저장된 프러파티가 값 타입이며 참조하는 것보다 복사하는 것이 합당할 때 구조체를 사용</li>
+  <li>다른 타입으로부터 상속받거나 모델의 사이즈가 그리 크지 않다면 구조체를 사용</li>
+  <li>해당 모델을 serialize 해서 전송하거나 파일로 저장할 경우가 발생하면 클래스 사용</li>
+  <li>해당 모델이 Objective-C에서도 사용되어야 한다면 클래스 사용</li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://docs.swift.org/swift-book/index.html">Siwft Programming Language Guide</a></li>
+  <li><a href="https://www.letmecompile.com/swift-struct-vs-class-차이점-비교-분석/">Swift struct vs class 차이점 비교 분석</a></li>
+  <li><a href="https://book.naver.com/bookdb/book_detail.nhn?bid=12571019">야곰의 스위프트 프로그래밍</a></li>
+</ul>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Swift struct, class 차이와 적재적소에 사용하기&amp;url=http://localhost:4000/swift/2019/10/03/Swift-Basic-05/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2019/10/03/Swift-Basic-05/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/19/Swift-OOP-LSP/" data-flip="title">
+    <span>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)</span>
+  </a>
+  <small><time datetime="2020-07-19T00:00:00+09:00">
+    19 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="Swift struct, class 차이와 적재적소에 사용하기",this.page.identifier="/swift/2019/10/03/Swift-Basic-05",this.page.url="http://localhost:4000/swift/2019/10/03/Swift-Basic-05/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

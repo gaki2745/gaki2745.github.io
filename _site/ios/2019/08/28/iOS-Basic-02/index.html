@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="iOS 비동기프로그래밍" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>iOS 비동기프로그래밍 &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="Grand Central Dispatch(GCD)
+
+"
+/>
+<meta
+  property="og:description"
+  content="Grand Central Dispatch(GCD)
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/ios/2019/08/28/iOS-Basic-02/" />
+<meta property="og:url" content="http://localhost:4000/ios/2019/08/28/iOS-Basic-02/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/ios/2019/08/24/iOS-UI%EB%94%94%EC%9E%90%EC%9D%B8-01/" />
+ 
+<link rel="next" href="http://localhost:4000/ios/2019/09/09/iOS-Basic-03/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-ios/2019/08/28/iOS-Basic-02" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        iOS 비동기프로그래밍
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-08-28T00:00:00+09:00">28 Aug 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/ios/" data-flip="title">iOS</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-basic/" data-flip="title">Basic</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h1 id="grand-central-dispatchgcd">Grand Central Dispatch(GCD)</h1>
+
+<h2 id="gcd란-무엇인가">GCD란 무엇인가?</h2>
+
+<p>멀티코어와 멀티 프로세싱 환경에서 최적화된 프로그래밍을 할 수 있도록 애플이 개발한 기술이다.</p>
+
+<h2 id="gcd를-사용하는-이유는-무엇인가">GCD를 사용하는 이유는 무엇인가?</h2>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/53392383-8c3e6b00-39dc-11e9-9c10-4b6435284fdb.png" alt="image" /></p>
+
+<ul>
+  <li>위의 구조를 보면 Main Thread 에서 User Inferface 에 관련 된 모든 코드를 실행한다. 만약 Data transform 이나 image Processing , Networking 등과 같은 작업을 Main Thread에서 모두 진행을 하게 되면 User Interface의 대응이 느려지거나 중지가 되는 일이 벌어진다.</li>
+</ul>
+
+<blockquote>
+  <p>해결: GCD 라는 Concurrency Library 를 사용하여 Main Thread의 일을 줄이자!</p>
+</blockquote>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/53394355-5dc38e80-39e2-11e9-9918-b00d436b5e8e.png" alt="image" /></p>
+
+<ul>
+  <li>GCD를 이해하기 위해서는 우선 <a href="https://developer.apple.com/documentation/dispatch"><code class="highlighter-rouge">DispatchQueue</code></a> 의 개념을 알아야 한다. 말그대로 Queue 의 기능을 수행하는것인데 프로그래머가 실행할 task(작업)들을 운영체제의 관리 하에 비동기적으로 수행한다.
+DispatchQueue에 수행할 작업 들을 추가하면 GCD는 task에 맞는 스레드를 자동으로 생성해서 실행하고 작업이 종료되면 해당 스레드를 제거하는 형식으로 수행이 된다.<br /> Queue 의 특성상 FIFO(first in first out) 구조로 제일먼저 들어온 task 부터 실행한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/53392301-58fbdc00-39dc-11e9-8925-ab66e3c82124.png" alt="image" /></p>
+
+<blockquote>
+  <p>Dispatch Queue 2가지 종류</p>
+</blockquote>
+
+<ul>
+  <li><strong>Serial Dispatch Queue</strong> : 한번에 하나의 작업만을 실행, 해당 작업이 대기열에서 완료후 제외되고 새로운 작업이 시작되기 전까지 기다린다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">serialQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.serial"</span><span class="p">)</span>
+<span class="n">serialQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">10</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍏"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">serialQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">100</span><span class="o">..&lt;</span><span class="mi">110</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍎"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">🍏</span> <span class="mi">0</span>
+<span class="n">🍏</span> <span class="mi">1</span>
+<span class="n">🍏</span> <span class="mi">2</span>
+<span class="n">🍏</span> <span class="mi">3</span>
+<span class="n">🍏</span> <span class="mi">4</span>
+<span class="n">🍏</span> <span class="mi">5</span>
+<span class="n">🍏</span> <span class="mi">6</span>
+<span class="n">🍏</span> <span class="mi">7</span>
+<span class="n">🍏</span> <span class="mi">8</span>
+<span class="n">🍏</span> <span class="mi">9</span>
+<span class="n">🍎</span> <span class="mi">100</span>
+<span class="n">🍎</span> <span class="mi">101</span>
+<span class="n">🍎</span> <span class="mi">102</span>
+<span class="n">🍎</span> <span class="mi">103</span>
+<span class="n">🍎</span> <span class="mi">104</span>
+<span class="n">🍎</span> <span class="mi">105</span>
+<span class="n">🍎</span> <span class="mi">106</span>
+<span class="n">🍎</span> <span class="mi">107</span>
+<span class="n">🍎</span> <span class="mi">108</span>
+<span class="n">🍎</span> <span class="mi">109</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>Concurrent Dispatch Queue</strong> : Serial 과 다르게 기다리지 않는다. 가능한 많은 작업을 말그대로 “Conccrently(동시에)”한다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">concurrentQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.concurrent"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+<span class="n">concurrentQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">10</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍏"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">concurrentQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">100</span><span class="o">..&lt;</span><span class="mi">110</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍎"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">🍏</span> <span class="mi">0</span>
+<span class="n">🍎</span> <span class="mi">100</span>
+<span class="n">🍏</span> <span class="mi">1</span>
+<span class="n">🍎</span> <span class="mi">101</span>
+<span class="n">🍏</span> <span class="mi">2</span>
+<span class="n">🍎</span> <span class="mi">102</span>
+<span class="n">🍏</span> <span class="mi">3</span>
+<span class="n">🍎</span> <span class="mi">103</span>
+<span class="n">🍏</span> <span class="mi">4</span>
+<span class="n">🍎</span> <span class="mi">104</span>
+<span class="n">🍏</span> <span class="mi">5</span>
+<span class="n">🍎</span> <span class="mi">105</span>
+<span class="n">🍏</span> <span class="mi">6</span>
+<span class="n">🍎</span> <span class="mi">106</span>
+<span class="n">🍎</span> <span class="mi">107</span>
+<span class="n">🍏</span> <span class="mi">7</span>
+<span class="n">🍎</span> <span class="mi">108</span>
+<span class="n">🍏</span> <span class="mi">8</span>
+<span class="n">🍎</span> <span class="mi">109</span>
+<span class="n">🍏</span> <span class="mi">9</span>
+</code></pre>
+</div>
+
+<p>위의 코드를 실행하면 Serial 과 Concurrent의 차이점을 알 수 있다. Conccurent의 경우에는 순서에 상관 이 없이 동시에  두 task 가 수행되는 것을 확인 할 수 있다.</p>
+
+<h2 id="기본적으로-제공하는-queue-와-custom-tpye">기본적으로 제공하는 Queue 와 custom tpye</h2>
+
+<p>앱 실행시에 시스템에서 기본적으로 2개의 Queue 를 제공한다.</p>
+
+<ul>
+  <li>
+    <p><strong>Main Queue</strong> : 메인 스레드(UI Thread) 에서 사용 되는 <strong>Serial Queue</strong> 이다. 높은 우선순위를 가지고 있다.</p>
+  </li>
+  <li>
+    <p><strong>Global Queue</strong> : 편의상 사용할수 있게만들어 놓은 Concurrent Queue 이다. 전체 시스템에서 공유가 이루어 지고 처리 우선순위를 위해<strong>qos(Quallity of Service)</strong> 매개변수를 제공한다. 병렬적으로 동시에 처리하기 떄문에 작업 완료의 순서는 정할 수 없지만 우선적으로 일을 처리하게 할 수 있다.</p>
+  </li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">globalQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="kt">DispatchQoS</span><span class="o">.</span><span class="kt">QoSClass</span><span class="o">.</span><span class="s">" "</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>qos 의 우선순위</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p><code class="highlighter-rouge">userInteractive</code> : UI 업데이트, 이벤트 처리 및 대기 시작이 적은 작업, Main Thread에서 실행 되어야 한다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">userInitiated</code> : 사용자가 즉각적인 결과를 기다리고 있고 UI 상호 작용을 계속하는데 필요한 작업에 사용.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">default</code></p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">utility</code> : 계산,I/O,네트워킹, 연속적인 데이터 피드 등 지속적인 작업이 필요한 경우에 사용.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">background</code> : 정해진 시간이 없는 작업들</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">unspecified</code></p>
+  </li>
+</ol>
+
+<ul>
+  <li>qos 우선순위에 따른 수행 결과</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">serialQueue1</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.serial1"</span><span class="p">,</span> <span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">userInteractive</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">serialQueue2</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.serial2"</span><span class="p">,</span> <span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">userInteractive</span><span class="p">)</span>
+<span class="n">serialQueue1</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">10</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍏"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">serialQueue2</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">100</span><span class="o">..&lt;</span><span class="mi">110</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍎"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">🍎</span> <span class="mi">100</span>
+<span class="n">🍏</span> <span class="mi">0</span>
+<span class="n">🍎</span> <span class="mi">101</span>
+<span class="n">🍏</span> <span class="mi">1</span>
+<span class="n">🍎</span> <span class="mi">102</span>
+<span class="n">🍏</span> <span class="mi">2</span>
+<span class="n">🍎</span> <span class="mi">103</span>
+<span class="n">🍏</span> <span class="mi">3</span>
+<span class="n">🍎</span> <span class="mi">104</span>
+<span class="n">🍏</span> <span class="mi">4</span>
+<span class="n">🍎</span> <span class="mi">105</span>
+<span class="n">🍏</span> <span class="mi">5</span>
+<span class="n">🍎</span> <span class="mi">106</span>
+<span class="n">🍏</span> <span class="mi">6</span>
+<span class="n">🍎</span> <span class="mi">107</span>
+<span class="n">🍏</span> <span class="mi">7</span>
+<span class="n">🍎</span> <span class="mi">108</span>
+<span class="n">🍏</span> <span class="mi">8</span>
+<span class="n">🍎</span> <span class="mi">109</span>
+<span class="n">🍏</span> <span class="mi">9</span>
+</code></pre>
+</div>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">//qos의 우선순위에 따라 출려되는 순서가 다르다.</span>
+<span class="k">let</span> <span class="nv">serialQueue1</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.serial1"</span><span class="p">,</span> <span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">serialQueue2</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.serial2"</span><span class="p">,</span> <span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">userInteractive</span><span class="p">)</span>
+<span class="n">serialQueue1</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">10</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍏"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">serialQueue2</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">100</span><span class="o">..&lt;</span><span class="mi">110</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍎"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">🍏</span> <span class="mi">0</span>
+<span class="n">🍎</span> <span class="mi">100</span>
+<span class="n">🍎</span> <span class="mi">101</span>
+<span class="n">🍎</span> <span class="mi">102</span>
+<span class="n">🍎</span> <span class="mi">103</span>
+<span class="n">🍎</span> <span class="mi">104</span>
+<span class="n">🍎</span> <span class="mi">105</span>
+<span class="n">🍎</span> <span class="mi">106</span>
+<span class="n">🍏</span> <span class="mi">1</span>
+<span class="n">🍎</span> <span class="mi">107</span>
+<span class="n">🍏</span> <span class="mi">2</span>
+<span class="n">🍎</span> <span class="mi">108</span>
+<span class="n">🍎</span> <span class="mi">109</span>
+<span class="n">🍏</span> <span class="mi">3</span>
+<span class="n">🍏</span> <span class="mi">4</span>
+<span class="n">🍏</span> <span class="mi">5</span>
+<span class="n">🍏</span> <span class="mi">6</span>
+<span class="n">🍏</span> <span class="mi">7</span>
+<span class="n">🍏</span> <span class="mi">8</span>
+<span class="n">🍏</span> <span class="mi">9</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>Custom Queue</strong> : Serial or Concurrent 중 하나의 Queue, Global Queue 중 하나에 의해 처리된다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">mainQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">mainQueue</span><span class="p">)</span>	<span class="c1">// Main Queue</span>
+
+<span class="k">let</span> <span class="nv">globalQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">globalQueue</span><span class="p">)</span>	<span class="c1">// Global Queue</span>
+</code></pre>
+</div>
+
+<h2 id="sync--async">Sync / Async</h2>
+
+<p>Dispatch Queue는 <strong>sync(동기)</strong> 와 <strong>asnyc(비동기)</strong> 메서드를 가지고 있다.</p>
+
+<blockquote>
+  <p><strong>Syncronous</strong> : 동기처리 메서드</p>
+</blockquote>
+
+<p>해당 작업을 처리하는 동안 다음으로 진행 되지 않고 계속 머물러 있다. Serial Dispatch Queue와 같은 결과가 나타난다.(하지만 다르다는 점 유의 아래에서 설명)</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"value: 1"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"value: 2"</span><span class="p">)</span>
+
+<span class="c1">// 결과</span>
+<span class="cm">/*
+  value: 1
+  value: 2
+*/</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>SubSystem 들을 직렬로 처리한다</p>
+  </li>
+  <li>
+    <p>안전하게 프로퍼티에 접근이 가능하다 . Mutual exclusion 이 지원된다 (mutex나 semaphore) 그렇지만 <strong>DeadLock</strong> 이 발생 할 수 있다.</p>
+  </li>
+</ul>
+
+<p><strong>중요: 앱의 모든 UI 작업이 Main queue에서 수행하기 때문에 동기적으로 main 큐에 접근하여 작업을 실행하려고 하면 교착상태(dead-lock)가 발생한다</strong></p>
+
+<p><img width="1061" alt="image" src="https://user-images.githubusercontent.com/33486820/53394465-bc890800-39e2-11e9-8aab-c7d7419163ed.png" /></p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">//deadlock 발생 예제</span>
+ <span class="k">override</span> <span class="kd">func</span> <span class="nf">viewDidLoad</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">super</span><span class="o">.</span><span class="nf">viewDidLoad</span><span class="p">()</span>
+
+
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Start"</span><span class="p">)</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"async"</span><span class="p">)</span>
+
+    <span class="p">}</span>
+    <span class="c1">//Main 에서 sync를 사용했기 때문에 DeadLock 발생!</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">sync</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"sync"</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Finish"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p><strong>Asyncronous</strong> : 비동기처리 메서드</p>
+</blockquote>
+
+<p>sync와 다리게 처리를 하라고 지시한 뒤 다음으로 넘어가 버리기 때문에 아래와 같은 결과가 나타난다</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">globalQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="nf">global</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">)</span>
+<span class="n">globalQueue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+  <span class="nf">print</span><span class="p">(</span><span class="s">"value: 1"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">"value: 2"</span><span class="p">)</span>
+
+<span class="c1">// 결과</span>
+<span class="cm">/*
+  value: 2
+  value: 1
+*/</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>주의! Serial/ Concurrent 와 Sync/ Async는 별개 이다. Serial 이면서 비동기 일수도 있고 Concurrent 이면서 Sync 일수도 있다. Serial 과 Concurrent 는 한번에 하나만 처리하느냐 동시에 여러개 처리하느냐고 Sync/ Async는 처리가 끝날때까지 기다리느냐 지시 후 다른 처리를 하느냐에 초점이 맞추면 된다.</p>
+</blockquote>
+
+<h2 id="dispatchworkitem">DispatchWorkItem</h2>
+
+<p>DispatchQueue에 삽입하는 작업을 캡슐화 한 것이다.</p>
+
+<p><img width="943" alt="image" src="https://user-images.githubusercontent.com/33486820/53412901-0a673580-3a0e-11e9-8be0-0fb675894a2a.png" /></p>
+
+<p>위와 같이 프로퍼티에 Closure형태로 DispatchWorkItem 을 이용해서 만든 후 아래 execute를 통해 실행을 제어 한다.</p>
+
+<ul>
+  <li>DispatchWorkItem 예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">serialQueue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"firstQueue"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">firstItem</span> <span class="o">=</span> <span class="kt">DispatchWorkItem</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">userInitiated</span><span class="p">)</span> <span class="p">{</span>
+
+	    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">..&lt;</span><span class="mi">10</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍏"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">secondItem</span> <span class="o">=</span> <span class="kt">DispatchWorkItem</span><span class="p">(</span><span class="nv">qos</span><span class="p">:</span> <span class="o">.</span><span class="n">background</span><span class="p">)</span> <span class="p">{</span>
+
+		    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">100</span><span class="o">..&lt;</span><span class="mi">110</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"🍎"</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span>
+
+<span class="c1">//위의 형식 처럼 작업을 클로져 형태로 캡슐화 한뒤 Dispatch Queue에 삽입한다.</span>
+
+<span class="n">serialQueue</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">execute</span><span class="p">:</span> <span class="n">secondItem</span><span class="p">)</span>
+
+<span class="n">serialQueue</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">execute</span><span class="p">:</span> <span class="n">firstItem</span><span class="p">)</span>
+
+<span class="c1">// secondItem 이 우선순위가 낮아 먼저 execute 되어도 대체적으로 ristItem 이 우선적으로 실행 되는 것을 확인 할 수 있다.</span>
+<span class="n">🍎</span> <span class="mi">100</span>
+<span class="n">🍏</span> <span class="mi">0</span>
+<span class="n">🍎</span> <span class="mi">101</span>
+<span class="n">🍏</span> <span class="mi">1</span>
+<span class="n">🍏</span> <span class="mi">2</span>
+<span class="n">🍎</span> <span class="mi">102</span>
+<span class="n">🍏</span> <span class="mi">3</span>
+<span class="n">🍏</span> <span class="mi">4</span>
+<span class="n">🍎</span> <span class="mi">103</span>
+<span class="n">🍏</span> <span class="mi">5</span>
+<span class="n">🍏</span> <span class="mi">6</span>
+<span class="n">🍎</span> <span class="mi">104</span>
+<span class="n">🍏</span> <span class="mi">7</span>
+<span class="n">🍏</span> <span class="mi">8</span>
+<span class="n">🍎</span> <span class="mi">105</span>
+<span class="n">🍏</span> <span class="mi">9</span>
+<span class="n">🍎</span> <span class="mi">106</span>
+<span class="n">🍎</span> <span class="mi">107</span>
+<span class="n">🍎</span> <span class="mi">108</span>
+<span class="n">🍎</span> <span class="mi">109</span>
+</code></pre>
+</div>
+
+<h2 id="grouping-vs-chaining">Grouping vs Chaining</h2>
+
+<p><img width="894" alt="image" src="https://user-images.githubusercontent.com/33486820/53417020-00e2cb00-3a18-11e9-9377-71ff4005f0b1.png" /></p>
+
+<ul>
+  <li><strong>Grouping</strong> : DispatchQueue 들이 각자의 동작을 수행후 종합해서 최종적으로 수행되는 형태</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">//그룹 생성</span>
+<span class="k">let</span> <span class="nv">queueGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
+
+<span class="k">let</span> <span class="nv">queue1</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"task1"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">queue2</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"task2"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">queue3</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"task3"</span><span class="p">,</span> <span class="nv">attributes</span><span class="p">:</span> <span class="o">.</span><span class="n">concurrent</span><span class="p">)</span>
+
+<span class="n">queue1</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="n">queueGroup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"task1"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">queue2</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="n">queueGroup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"task2"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">queue3</span><span class="o">.</span><span class="nf">async</span><span class="p">(</span><span class="nv">group</span><span class="p">:</span> <span class="n">queueGroup</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"task3"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">queueGroup</span><span class="o">.</span><span class="nf">notify</span><span class="p">(</span><span class="nv">queue</span><span class="p">:</span> <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">"group notify"</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="c1">//출력 결과</span>
+
+<span class="n">task1</span>
+<span class="n">task2</span>
+<span class="n">task3</span>
+<span class="n">group</span> <span class="n">notify</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>Chaining</strong></li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>
+<span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">DispatchQueue</span><span class="p">(</span><span class="nv">label</span><span class="p">:</span> <span class="s">"com.example.imageTransform"</span><span class="p">)</span>
+
+<span class="n">queue</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+	<span class="k">let</span> <span class="nv">transformImage</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="nf">resize</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">rect</span><span class="p">)</span>
+    <span class="c1">//UI 변화에 관련된 작업은 모두 Main Thread에서 진행 하면 된다.</span>
+    <span class="kt">DispatchQueue</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">async</span> <span class="p">{</span>
+    	<span class="n">imageView</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">transformImage</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/wwdc2016/">Apple WWDC 2016</a></li>
+  <li>https://magi82.github.io/gcd-01/</li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=iOS 비동기프로그래밍&amp;url=http://localhost:4000/ios/2019/08/28/iOS-Basic-02/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/ios/2019/08/28/iOS-Basic-02/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-xib%EC%82%AC%EC%9A%A9%EB%B2%95/" data-flip="title">
+    <span>xib를 통해 CustomView 만들기 & xib와 nib의 차이</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-maskToBounds&clipsToBounds/" data-flip="title">
+    <span>masksToBounds 와 clipsToBounds의 차이점</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/05/28/iOS-Basic-15/" data-flip="title">
+    <span>SwiftGen</span>
+  </a>
+  <small><time datetime="2020-05-28T00:00:00+09:00">
+    28 May 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="iOS 비동기프로그래밍",this.page.identifier="/ios/2019/08/28/iOS-Basic-02",this.page.url="http://localhost:4000/ios/2019/08/28/iOS-Basic-02/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

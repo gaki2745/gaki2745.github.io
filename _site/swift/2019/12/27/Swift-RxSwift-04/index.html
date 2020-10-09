@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="RxSwift Observable 합성" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>RxSwift Observable 합성 &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="Observable 합성
+
+"
+/>
+<meta
+  property="og:description"
+  content="Observable 합성
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/" />
+<meta property="og:url" content="http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/" />
+ 
+<link rel="next" href="http://localhost:4000/swift/2020/01/03/Swift-RxSwift-05/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2019/12/27/Swift-RxSwift-04" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        RxSwift Observable 합성
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-12-27T00:00:00+09:00">27 Dec 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-rxswift/" data-flip="title">RxSwift</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="observable-합성">Observable 합성</h2>
+
+<p>RxSwift에서 서로 연관된 이벤트 들을 같이 처리해야 할 때 가 있다.</p>
+
+<p>API를 호출할때 두개의 API를 동시에 호출할 수도 있고 사용자가 앱에 전근할때 몇가지 이벤트들을 복합적으로 처리해야하는 상황이 있다.</p>
+
+<p>그러므로 RxSwift에서는 Observable를 결합할수 있는 함수를 4개 제공한다.</p>
+
+<h3 id="1-combinelatest">1. combineLatest</h3>
+
+<p>두 Observable의 각각의 이벤트가 발생할 때 두  Observable의 마지막 이벤트 들을 묶어서 전달한다. 두개의 이벤트는 타입이 달라도 된다.</p>
+
+<p><img width="768" alt="image" src="https://user-images.githubusercontent.com/33486820/71503190-8e50af00-28b7-11ea-8fb4-ffcfda17036c.png" /></p>
+
+<p>위의 표를 보면 2의 이벤트 사이에 B, C, D이벤트가 들어와 차례대로 2B, 2C, 2D가 나오는 것을 볼 수 있다. 즉 바로 이전의 상대방의 최신이벤트와 결합되어 방출되는 효과를 볼 수 있다.</p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">korean</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">from</span><span class="p">([</span><span class="s">"가"</span><span class="p">,</span><span class="s">"나"</span><span class="p">,</span> <span class="s">"다"</span><span class="p">])</span>
+        <span class="k">let</span> <span class="nv">english</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">.</span><span class="nf">from</span><span class="p">([</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">])</span>
+        <span class="kt">Observable</span><span class="o">.</span><span class="nf">combineLatest</span><span class="p">(</span>
+            <span class="n">korean</span><span class="p">,</span>
+            <span class="n">english</span>
+        <span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="nv">$1</span><span class="p">)</span> <span class="p">}</span> <span class="c1">// -&gt; korean, english</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+next(("가", "A"))
+next(("나", "A"))
+next(("나", "B"))
+next(("다", "B"))
+next(("다", "C"))
+completed
+*/</span>
+
+</code></pre>
+</div>
+
+<h3 id="1-2-withlatestfrom">1-2. withLatestFrom</h3>
+
+<p>두개의 Observable을 합성하지만 한쪽 Observable의 이벤트가 발생할때마다 합성해주는 메서드다. 위의 combine과 반대로 한쪽 Observable의 이벤트가 기준이 된다. 만약 합성할 다른쪽 이벤트가 없으면 이벤트는 스킵이 된다.</p>
+
+<p><img width="733" alt="image" src="https://user-images.githubusercontent.com/33486820/71503605-3ca92400-28b9-11ea-9088-c6debcf03cef.png" /></p>
+
+<p>위의 예제에서 첫번째 Observable이 기준이 된다. 이벤트 1 이전의 두번째 Observable의 이벤가 없기 때문에 스킵이 되고 2 부터 A -&gt; 2A, 3은 최신인 D와 결합 -&gt; 3D, 4도 마찬가지로 4D, 5D… 이렇게 진행이 된다.</p>
+
+<h3 id="2-merge">2. merge</h3>
+
+<p><strong>같은 타입</strong>의 이벤트를 발생하는 Observable을 합성하는 함수이다. 각각의 이벤트 모두 수신이 가능하다.</p>
+
+<p><img width="779" alt="image" src="https://user-images.githubusercontent.com/33486820/71504463-e3db8a80-28bc-11ea-82a6-7aa9e02950be.png" /></p>
+
+<p>같은 타입의 두 이벤트를 말그대로 “병합”해서 수신한다. 만약 도중에 에러가 발생하게 되면 merge 작업은 중단 된다.</p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">obs1</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="s">"obs1: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span> <span class="p">}</span>
+        <span class="k">let</span> <span class="nv">obs2</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">map</span><span class="p">{</span> <span class="s">"obs2: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span> <span class="p">}</span>
+        
+        <span class="k">let</span> <span class="nv">startTime</span> <span class="o">=</span> <span class="kt">Date</span><span class="p">()</span><span class="o">.</span><span class="n">timeIntervalSince1970</span>
+        
+        <span class="kt">Observable</span>
+            <span class="o">.</span><span class="nf">of</span><span class="p">(</span><span class="n">obs1</span><span class="p">,</span> <span class="n">obs2</span><span class="p">)</span>
+            <span class="o">.</span><span class="nf">merge</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"</span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">: </span><span class="se">\(</span><span class="kt">Int</span><span class="p">(</span><span class="kt">Date</span><span class="p">()</span><span class="o">.</span><span class="n">timeIntervalSince1970</span> <span class="o">-</span> <span class="n">startTime</span><span class="p">)</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+</code></pre>
+</div>
+
+<h3 id="3-switchlatest">3. switchLatest</h3>
+
+<p>Observable을 Switch 할수 있는 Observable이다.</p>
+
+<p><img width="793" alt="image" src="https://user-images.githubusercontent.com/33486820/71505522-d58f6d80-28c0-11ea-9e83-edf8e31dd399.png" /></p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">subjectA</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">subjectB</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">switchTest</span> <span class="o">=</span> <span class="kt">BehaviorSubject</span><span class="o">&lt;</span><span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">subjectA</span><span class="p">)</span>
+        <span class="n">switchTest</span><span class="o">.</span><span class="nf">switchLatest</span><span class="p">()</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span><span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        <span class="n">subjectA</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"A-1"</span><span class="p">)</span>
+        <span class="n">switchTest</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="n">subjectB</span><span class="p">)</span>
+        <span class="n">subjectA</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"A-2"</span><span class="p">)</span>
+        <span class="n">subjectB</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"B-1"</span><span class="p">)</span>
+        <span class="n">subjectB</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"B-2"</span><span class="p">)</span>
+
+<span class="cm">/*
+next(A-1) -&gt; A-2 가 출력이 안된다.
+next(B-1)
+next(B-2)
+*/</span>
+</code></pre>
+</div>
+
+<p>두개의 Subject A,B가 있고 초기 switch는 SubjectA를 값으로 가지는 BehaviorSubject로 선언했다. 그리고 A Subject에 이벤트를 추가하다가 A-1 이벤트 다음 B로 switch 했다. 이때 다음으로 추가된 Subject A의 이벤트 A-2는 스킵이 된다. 그리고 Subject B의 이벤트 들이 수신 되는 것을 확인할 수 있다.</p>
+
+<h3 id="4-zip">4. zip</h3>
+
+<p>zip의 경우 두 Observable의 발생 순서가 같은 이벤트를 조합해서 이벤트를 발생시킨다.</p>
+
+<p><img width="781" alt="image" src="https://user-images.githubusercontent.com/33486820/71506316-cf4ec080-28c3-11ea-938e-85251a63ad51.png" /></p>
+
+<p>두개의 Observable에서 이벤트 순서가 동일한 거 끼리 짝지어서 발생시키는 것을 확인할 수 있다.</p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>				<span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">korean</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="nf">from</span><span class="p">([</span><span class="s">"가"</span><span class="p">,</span> <span class="s">"나"</span><span class="p">,</span> <span class="s">"다"</span><span class="p">,</span> <span class="s">"라"</span><span class="p">])</span>
+        <span class="k">let</span> <span class="nv">number</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">from</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        
+        <span class="kt">Observable</span>
+            <span class="o">.</span><span class="nf">zip</span><span class="p">(</span>
+                <span class="n">korean</span><span class="p">,</span>
+                <span class="n">number</span>
+        <span class="p">)</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+<span class="cm">/*
+next(("가", 1))
+next(("나", 2))
+next(("다", 3))
+completed
+*/</span>
+</code></pre>
+</div>
+
+<p>위의 예제에서 짝이 맞아야 이벤트가 방출되는 것을 확인할 수 있다 그렇기 때문에 절대적으로 이벤트 요소가 작은 Observable의 이벤트 요소 개수에 맞추어 진다. 그리고 두개의 타입은 상관이 없는 것을 확인할 수 있다.</p>
+
+<h3 id="5-concat">5. concat</h3>
+
+<p>concat은 두개 이상의 Observable을 하나로 연결해주는 함수이다. 하나의 Observable이 Complete 되어야 그 다음 Observable을 바로 뒤에 이어준다.</p>
+
+<p><img width="788" alt="image" src="https://user-images.githubusercontent.com/33486820/71507466-f7d8b980-28c7-11ea-8cef-4c2e58c1b854.png" /></p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">korean</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="nf">from</span><span class="p">([</span><span class="s">"가"</span><span class="p">,</span> <span class="s">"나"</span><span class="p">,</span> <span class="s">"다"</span><span class="p">,</span> <span class="s">"라"</span><span class="p">])</span>
+        <span class="k">let</span> <span class="nv">english</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="nf">from</span><span class="p">([</span><span class="s">"A"</span><span class="p">,</span><span class="s">"B"</span><span class="p">,</span><span class="s">"C"</span><span class="p">])</span>
+        
+        <span class="n">korean</span>
+            <span class="o">.</span><span class="nf">concat</span><span class="p">(</span><span class="n">english</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+<span class="cm">/*
+next(가)
+next(나)
+next(다)
+next(라)
+next(A)
+next(B)
+next(C)
+completed
+*/</span>
+</code></pre>
+</div>
+
+<p>Observable의 타입이 같아야한다. Subject에서도 테스트 해보자</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">subjectA</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">subjectB</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        
+        <span class="n">subjectA</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        <span class="n">subjectB</span><span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        
+        <span class="kt">Observable</span>
+            <span class="o">.</span><span class="nf">concat</span><span class="p">([</span><span class="n">subjectA</span><span class="p">,</span> <span class="n">subjectB</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"concat event: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        <span class="n">subjectA</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"A - event1"</span><span class="p">)</span>
+        <span class="n">subjectA</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"A - event2"</span><span class="p">)</span>
+        <span class="n">subjectA</span><span class="o">.</span><span class="nf">onCompleted</span><span class="p">()</span>
+        <span class="n">subjectB</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"B - evnet1"</span><span class="p">)</span>
+        <span class="n">subjectB</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"B - event2"</span><span class="p">)</span>
+      <span class="c1">// subjectB.onError(MyError.anError)</span>
+        <span class="n">subjectB</span><span class="o">.</span><span class="nf">onCompleted</span><span class="p">()</span>
+
+<span class="cm">/*
+next(A - event1)
+concat event: next(A - event1)
+next(A - event2)
+concat event: next(A - event2)
+completed
+next(B - evnet1)
+concat event: next(B - evnet1)
+next(B - event2)
+concat event: next(B - event2)
+completed
+concat event: completed
+*/</span>
+</code></pre>
+</div>
+
+<p>subject를 concat으로 이어서 구독을 해보았다. 이때 먼저 나온 subject가 completed가 되어야 다음 subject를 concat 할 수 있다.</p>
+
+<h3 id="6-amb">6. amb</h3>
+
+<p>가장 처음 발생한 Observable 이벤트만 사용하게 하는 함수이다.</p>
+
+<p><img width="775" alt="image" src="https://user-images.githubusercontent.com/33486820/71509835-0d51e180-28d0-11ea-8c66-31d47a62a9e7.png" /></p>
+
+<p>3개의 Observable이 있지만 두번째 Observable의 이벤트 1, 2, 3 이 수신 된 것을 확인할 수 있다.</p>
+
+<p>이처럼 가장 먼저 이벤트를 발생 시키는 Observable의 이벤트를 연결하는 함수이다.</p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">first</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+            <span class="s">"first: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span>
+        <span class="p">}</span>
+        <span class="k">let</span> <span class="nv">second</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+            <span class="s">"second: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span>
+        <span class="p">}</span>
+        <span class="k">let</span> <span class="nv">third</span> <span class="o">=</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Int</span><span class="o">&gt;.</span><span class="nf">interval</span><span class="p">(</span><span class="o">.</span><span class="nf">seconds</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="nv">scheduler</span><span class="p">:</span> <span class="kt">MainScheduler</span><span class="o">.</span><span class="n">instance</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span>
+            <span class="s">"third: </span><span class="se">\(</span><span class="nv">$0</span><span class="se">)</span><span class="s">"</span>
+        <span class="p">}</span>
+        
+        <span class="n">first</span><span class="o">.</span><span class="nf">amb</span><span class="p">(</span><span class="n">second</span><span class="p">)</span><span class="o">.</span><span class="nf">amb</span><span class="p">(</span><span class="n">third</span><span class="p">)</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="n">e</span> <span class="k">in</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="p">})</span>
+            <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+second: 0
+second: 1
+second: 2
+...
+*/</span>
+</code></pre>
+</div>
+
+<h3 id="7-startwith">7. startWith</h3>
+
+<p>기존의 Observable에 초기 이벤트를 지정 해줄 수 있다.</p>
+
+<p><img width="776" alt="image" src="https://user-images.githubusercontent.com/33486820/71510692-0b3d5200-28d3-11ea-9459-402f476d016a.png" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://brunch.co.kr/@tilltue/6">https://brunch.co.kr/@tilltue/6</a></li>
+  <li><a href="https://medium.com/@trilliwon/rxswift-기본-익히기-1-d4d77ce63ca8?">RxSwift 기본익히기</a></li>
+</ul>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=RxSwift Observable 합성&amp;url=http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/19/Swift-OOP-LSP/" data-flip="title">
+    <span>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)</span>
+  </a>
+  <small><time datetime="2020-07-19T00:00:00+09:00">
+    19 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="RxSwift Observable 합성",this.page.identifier="/swift/2019/12/27/Swift-RxSwift-04",this.page.url="http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

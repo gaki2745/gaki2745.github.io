@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle) &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="LSP - 리스코프 치환원칙(Liskov Substitution Principle)
+
+"
+/>
+<meta
+  property="og:description"
+  content="LSP - 리스코프 치환원칙(Liskov Substitution Principle)
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2020/07/19/Swift-OOP-LSP/" />
+<meta property="og:url" content="http://localhost:4000/swift/2020/07/19/Swift-OOP-LSP/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/ios/2020/06/29/iOS-Basic-xib%EC%82%AC%EC%9A%A9%EB%B2%95/" />
+ 
+<link rel="next" href="http://localhost:4000/swift/2020/07/20/Swift-OOP-ISP/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2020/07/19/Swift-OOP-LSP" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-07-19T00:00:00+09:00">19 Jul 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-oop/" data-flip="title">OOP</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="lsp---리스코프-치환원칙liskov-substitution-principle">LSP - 리스코프 치환원칙(Liskov Substitution Principle)</h2>
+
+<p>오늘은 LSP 리스코프 치환원칙에 대해서 정리해보도록 하겠습니다. 리스코프란 사람이 정의한것으로 뭔가 굉장히 어려운 말같지만 정의는 매우 간단합니다.</p>
+
+<blockquote>
+  <p>“자식클래스는 부모클래스의 역할을 완벽히 수행할 수 있어야한다”</p>
+</blockquote>
+
+<p>즉, ‘자동차’의 기능을 상속받은 ‘스포츠카’는 자동차의 역할을 모두 수행할 수 있어야 한다는 말 입니다.</p>
+
+<blockquote>
+  <p>“객체는 프로그램의 정확성을 깨뜨리지 않으면서 <strong>하위타입의 인스턴스로 치환할 수 있어야 한다</strong>”</p>
+</blockquote>
+
+<p>LSP원칙은 상속에 있어서 가장 중요한 기본원칙을 제시하고 있습니다. 그리고 앞에서 살펴본 추상화개념이 들어간 <a href="https://gaki2745.github.io/swift/2020/06/27/Swift-OOP-OCP/">OCP</a> 또한 가능하게 해주는 원칙이 됩니다.</p>
+
+<p>결국 LSP는 상속함에 있어서 문제가 있어서 나온 원칙인데.. 과연 어떤 문제들이 발생되며 또 잘못된 상속은 어떤것인지 알아보겠습니다.</p>
+
+<h3 id="잘못된-상속이란">잘못된 상속이란?</h3>
+
+<p>상속할때 해서는 안되는 행위는 <strong>부모의 행위를 자식이 거부</strong> 할때 발생하는 문제입니다. 간단한 예를 통해 알아볼까요?</p>
+
+<h5 id="직사각형과-정사각형">직사각형과 정사각형</h5>
+
+<ul>
+  <li>직사각형: 네 각이 모두 직각인 사각형</li>
+  <li>정사각형: 네각이 모두 직각인 사각형 + 네 변의 길이가 모두 같은 사각형</li>
+</ul>
+
+<p>수학적인 개념으로 정사각형이 직사각형에 포함되는 개념입니다. 모든 정사각형은 직사각형이 될 수 있지만 반대로 모든 직사각형은 정사각형이 될 수 없기 때문입니다.</p>
+
+<p>언뜻 보기에는 직사각형이 넓은 범주로서 부모클래스, 정사각형이 자식클래스 일 것 같지만 두개를 클래스화 해보면 다르다는 것을 알 수 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="n">직사각형</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">넓이</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span>
+    
+    <span class="kd">func</span> <span class="nf">가로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span>
+    <span class="kd">func</span> <span class="nf">세로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="n">정사각형</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">넓이</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span>
+    
+    <span class="kd">func</span> <span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>이제 앞에서 언급한것 처럼 직사각형이 넓은 범주이기에 부모클래스가 되면 어떻게 될까요?</p>
+
+<h5 id="부모-직사각형-자식-정사각형">부모-직사각형, 자식-정사각형</h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="n">직사각형</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span>
+    <span class="k">var</span> <span class="nv">넓이</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">return</span> <span class="n">가로</span> <span class="o">*</span> <span class="n">세로</span> <span class="p">}</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">가로</span> <span class="o">=</span> <span class="n">가로</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">세로</span> <span class="o">=</span> <span class="n">세로</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">가로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">가로</span> <span class="o">=</span> <span class="n">가로</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">세로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">세로</span> <span class="o">=</span> <span class="n">세로</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nv">정사각형</span><span class="p">:</span> <span class="n">직사각형</span> <span class="p">{</span>
+    
+    <span class="k">override</span> <span class="nf">init</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="o">.</span><span class="nf">init</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="n">가로</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="n">세로</span><span class="p">)</span>
+        
+    <span class="p">}</span>
+    
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">가로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">가로</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="k">override</span> <span class="kd">func</span> <span class="nf">세로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">세로</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">가로설정</span><span class="p">(</span><span class="n">한변의길이</span><span class="p">)</span>
+        <span class="k">self</span><span class="o">.</span><span class="nf">세로설정</span><span class="p">(</span><span class="n">한변의길이</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>정사각형의 경우 한변의 길이만 필요하게 되어서 위와 같이 가로 세로 설정을 하기위에 <code class="highlighter-rouge">한변의길이설정</code> 이라는 함수를 추가하였습니다. 그럼 어떤 문제가 발생할까요?</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">_</span> <span class="nv">직사각형</span><span class="p">:</span> <span class="n">직사각형</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">직사각형</span><span class="o">.</span><span class="nf">가로설정</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">직사각형</span><span class="o">.</span><span class="nf">세로설정</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">직사각형</span><span class="o">.</span><span class="n">넓이</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>사각형의 넓이를 100으로 만드는 <code class="highlighter-rouge">사각형넓이변경</code> 함수를 만들었습니다. 이제 이것을 사용할때 매개변수로 <code class="highlighter-rouge">직사각형</code> 과 <code class="highlighter-rouge">정사각형</code> 을 넘겼을때 문제가 아래처럼 발생하게됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// 직사각형을 넘겨줄때</span>
+<span class="k">var</span> <span class="nv">사각형</span> <span class="o">=</span> <span class="nf">직사각형</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span> <span class="c1">// 100이 출력된다.</span>
+
+<span class="c1">// 정사각형을 넘겨줄때</span>
+<span class="k">var</span> <span class="nv">사각형</span> <span class="o">=</span> <span class="nf">정사각형</span><span class="p">(</span><span class="nv">가로</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">세로</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span> <span class="c1">// 16이 나온다.</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">직사각형</code> 의 인스턴스를 만들어 넘겼을때는 정상적으로 넓이가 100이 되어 출력이 됩니다. 하지만 정사각형을 넘겨 줄때는 넓이가 16이 나오게 됩니다. 그 이유는 정사각형은 네개의 변의길이가 모두 동일한 것을 유지해야하기 때문에 정사각형의 가로, 세로 설정함수가 모두 <code class="highlighter-rouge">한변의길이설정</code> 함수를 호출 하게 되어 결국엔 마지막에 호출되는 길이설정함수에 의해 넓이가 16이 나오게 됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">// 정사각형의 길이 설정 함수</span>
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">가로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">가로</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="k">override</span> <span class="kd">func</span> <span class="nf">세로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">세로</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">self</span><span class="o">.</span><span class="nf">가로설정</span><span class="p">(</span><span class="n">한변의길이</span><span class="p">)</span>
+    <span class="k">self</span><span class="o">.</span><span class="nf">세로설정</span><span class="p">(</span><span class="n">한변의길이</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h5 id="우선-문제부터-해결해보자">우선 문제부터 해결해보자</h5>
+
+<ol>
+  <li>If-else로 부모자식 대응하자</li>
+</ol>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="n">사각형</span> <span class="k">is</span> <span class="n">직사각형</span> <span class="p">{</span>
+    <span class="nf">직사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">정사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>위와 같이 사각형이 직사각형인지 정사각형인지 일일이 브랜치로 체크해서 거기에 맞는 함수를 또 작성하기도 했습니다. 그러면 상속의 구조를 만든 의미가 무색해지게 됩니다.</p>
+
+<ol>
+  <li>함수를 부모자식에 변경하자</li>
+</ol>
+
+<p>부모인 직사각형을 매개변수로 넘겨줘도 넓이가 100, 자식인 정사각형을 넘겨줘도 100이 나오게 할려면 어떤 수정이 필요할까요?</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">_</span> <span class="nv">직사각형</span><span class="p">:</span> <span class="n">직사각형</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">직사각형</span><span class="o">.</span><span class="nf">가로설정</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">직사각형</span><span class="o">.</span><span class="nf">세로설정</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">직사각형</span><span class="o">.</span><span class="n">넓이</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>정사각형을 위해 가로, 세로 설정을 각각 10으로 변경했습니다. 이렇게 하면 우선 정상적으로 기능은 하겠죠.. 하지만 이게 옳은 방법일까요? 부모 클래스인 직사각형 뿐만 아니라 자식클래스인 직사각형의 동작까지 생각하면서 기능함수를 작성해야합니다.</p>
+
+<p>물론 정사각형만 있다는 보장도 없습니다. 마름모나 사다리꼴 .. 등 앞으로 더 복잡해질 상속구조를 위해 모든 것을 고려해서 함수를 작성한다는 것은 불가능에 가깝습니다.</p>
+
+<p>이제 잘못된 상속,즉 LSP를 위반했을시에 어떤 문제가 발생하는지 예제를 통해 알아보았습니다. LSP의 정의 즉 <strong>“자식은 부모의 역할을 완벽하게 수행할 수 있어야한다”</strong> 를 지키지 않았기 때문에 발생한 문제입니다.</p>
+
+<h3 id="올바른-상속">올바른 상속</h3>
+
+<p>올바르게 상속을 바로잡으려면 정사각형을 부모 클래스로 직사각형을 자식으로 변경해야합니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="n">정사각형</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span>
+    <span class="k">var</span> <span class="nv">넓이</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="p">{</span> <span class="k">return</span> <span class="n">가로</span> <span class="o">*</span> <span class="n">세로</span> <span class="p">}</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">가로</span> <span class="o">=</span> <span class="n">한변의길이</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">세로</span> <span class="o">=</span> <span class="n">한변의길이</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">한변의길이설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">한변의길이</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">가로</span> <span class="o">=</span> <span class="n">한변의길이</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">세로</span> <span class="o">=</span> <span class="n">한변의길이</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nv">직사각형</span><span class="p">:</span> <span class="n">정사각형</span> <span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">가로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">가로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">가로</span> <span class="o">=</span> <span class="n">가로</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">세로설정</span><span class="p">(</span><span class="n">_</span> <span class="nv">세로</span><span class="p">:</span> <span class="kt">CGFloat</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">세로</span> <span class="o">=</span> <span class="n">세로</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>정사각형이 부모클래스로서 직사각형의 기능 까지 포함할 수 있게 구현이 되어있습니다.</p>
+
+<p>그리고 앞에서의 넓이를 100으로 만드는 함수에서 더이상 변경 없이 부모클래스의 속성인 <code class="highlighter-rouge">정사각형</code> 을 바탕으로 구현했고</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">_</span> <span class="nv">정사각형</span><span class="p">:</span> <span class="n">정사각형</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">정사각형</span><span class="o">.</span><span class="nf">한변의길이설정</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">정사각형</span><span class="o">.</span><span class="n">넓이</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 직사각형을 넘겨줄때</span>
+<span class="k">var</span> <span class="nv">사각형</span> <span class="o">=</span> <span class="nf">직사각형</span><span class="p">(</span><span class="nv">한변의길이</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span> <span class="c1">// 100이 출력된다.</span>
+
+<span class="c1">// 정사각형을 넘겨줄때</span>
+<span class="k">var</span> <span class="nv">사각형</span> <span class="o">=</span> <span class="nf">정사각형</span><span class="p">(</span><span class="nv">한변의길이</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nf">사각형넓이변경</span><span class="p">(</span><span class="n">사각형</span><span class="p">)</span> <span class="c1">// 100이 출력된다.</span>
+</code></pre>
+</div>
+
+<p>이처럼 부모클래스의 속성만을 믿고 코드를 짤 경우 직사각형인 자식 클래스에서도 <code class="highlighter-rouge">사각형넓이변경</code> 함수가 정상적으로 작동되는 것을 확인할 수 있습니다.</p>
+
+<h3 id="일반적인-개념과-상속은-별개">일반적인 개념과 상속은 별개</h3>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/87867952-b119f080-c9cc-11ea-8e33-95e2fb9b6f21.png" alt="image" /></p>
+
+<p>앞에서 예제를 통해서 보았듯이 일반적인 관념 상 정사각형은 직사각형의 한 종류입니다. 따라서 넓은 범주인 직사각형이 부모클래스가 되야하는게 어떻게 보면 당연해 보입니다. 하지만 직사각형은 가로,세로 두개의 변을 반면에 정사각형은 한변의 길이만 값에 영향을 받기 때문에 <code class="highlighter-rouge">직사각형(부모)-정사각형(자식)</code> 의 구조는 부모의 정합성을 깨뜨리게 됩니다.</p>
+
+<p>이와 비슷한 예로 상위레벨의 클래스에 보다 복잡한 기능이나 특징들을 넣게 되면 이를 상속 받은 하위클래스에는 지대한 영향을 미쳐 그 기능을 퇴화 시키는 등의 방법 밖에는 없습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/87868234-eb848d00-c9ce-11ea-87d7-56b205ddfe62.png" alt="image" /></p>
+
+<ul>
+  <li>돌고래: <code class="highlighter-rouge">헤엄치기</code></li>
+  <li>개: <code class="highlighter-rouge">걷기</code>, <code class="highlighter-rouge">뛰기</code>, <code class="highlighter-rouge">헤엄치기</code></li>
+</ul>
+
+<p>예를들어 개, 고양이 등의 <code class="highlighter-rouge">육지동물</code> 클래스에  <code class="highlighter-rouge">걷기</code>,<code class="highlighter-rouge">뛰기</code>,<code class="highlighter-rouge">헤엄치기</code> 등의 행위를 <code class="highlighter-rouge">동물</code> 클래스의 상위 레벨의 클래스로 올리게 될 경우 물고기나 돌고래등의 <code class="highlighter-rouge">바다동물</code> 클래스는 <code class="highlighter-rouge">걷기</code>,<code class="highlighter-rouge">뛰기</code> 의 행위를 할 수 없기 때문에 <strong>이 기능을 퇴화</strong> 시킬 수 밖에 없습니다.</p>
+
+<p>그렇기 때문에  <code class="highlighter-rouge">걷기</code>, <code class="highlighter-rouge">뛰기</code>, <code class="highlighter-rouge">헤엄치기</code> 등의 행위는 동물클래스의 <strong>상속과는 별도로 존재</strong> 해야합니다.</p>
+
+<h3 id="ios에서-lsp-위반-사례는">iOS에서 LSP 위반 사례는?</h3>
+
+<p><a href="https://www.youtube.com/watch?v=UOo5Jl8Kk0o">베어코드-[Swift OOP]LSP(리스코프치환원칙)</a> 의 내용을 정리해보았습니다.</p>
+
+<p>iOS의 UIKit의 경우 UIView아래 다양한 뷰들이 상속되어 구현이 되어져 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">label</span><span class="p">:</span> <span class="kt">UILabel</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">UIButton</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">segmentedControl</span><span class="p">:</span> <span class="kt">UISegmentedControl</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">textField</span><span class="p">:</span> <span class="kt">UITextField</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">slider</span><span class="p">:</span> <span class="kt">UISlider</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">switchButton</span><span class="p">:</span> <span class="kt">UISwitch</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">activityIndicator</span><span class="p">:</span> <span class="kt">UIActivityIndicatorView</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">progressView</span><span class="p">:</span> <span class="kt">UIProgressView</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">stepper</span><span class="p">:</span> <span class="kt">UIStepper</span><span class="p">?</span>
+    <span class="kd">@IBOutlet</span> <span class="k">var</span> <span class="nv">imageView</span><span class="p">:</span> <span class="kt">UIImageView</span><span class="p">?</span>
+</code></pre>
+</div>
+
+<p>영상에서 한가지 테스트를 해보는데 UIKit을 상속받은 다양한 IBOutlet들을 생성하고 이들을 배열에 넣어서 색상을 변경하고 <code class="highlighter-rouge">height</code> 값을 변경하여 최종적으로 모든 view의 height를 더해서 정상적으로 나오는지 확인하고 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">views</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIView</span><span class="p">]</span> <span class="o">=</span> <span class="k">self</span><span class="o">.</span><span class="n">view</span><span class="o">.</span><span class="n">subviews</span>
+        
+        <span class="k">for</span> <span class="nv">view</span><span class="p">:</span> <span class="kt">UIView</span> <span class="k">in</span> <span class="n">views</span> <span class="p">{</span>
+            <span class="n">view</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">origin</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        
+        <span class="k">for</span> <span class="nv">view</span><span class="p">:</span> <span class="kt">UIView</span> <span class="k">in</span> <span class="n">views</span> <span class="p">{</span>
+            <span class="n">view</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="n">borderColor</span> <span class="o">=</span> <span class="kt">UIColor</span><span class="o">.</span><span class="n">red</span><span class="o">.</span><span class="n">cgColor</span>
+            <span class="n">view</span><span class="o">.</span><span class="n">layer</span><span class="o">.</span><span class="n">borderWidth</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="p">}</span>
+        
+        <span class="k">for</span> <span class="nv">view</span><span class="p">:</span> <span class="kt">UIView</span> <span class="k">in</span> <span class="n">views</span> <span class="p">{</span>
+            <span class="n">view</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">30</span>
+        <span class="p">}</span>
+        
+        <span class="k">let</span> <span class="nv">sumOfHeight</span><span class="p">:</span> <span class="kt">CGFloat</span> <span class="o">=</span> <span class="n">views</span><span class="o">.</span><span class="nf">reduce</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$0</span> <span class="o">+</span> <span class="nv">$1</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">height</span> <span class="p">}</span>
+        <span class="kt">NSLog</span><span class="p">(</span><span class="s">"sumOfHeight = </span><span class="se">\(</span><span class="n">sumOfHeight</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+
+<span class="c1">// 기대: 10개의 IBOutlet이므로 300</span>
+<span class="c1">// 실제: 275</span>
+</code></pre>
+</div>
+
+<p>하지만 기대한 300이 나오지 않고 275가 나오는걸 확인 할 수 있었습니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">UISwitcher</code></li>
+  <li><code class="highlighter-rouge">UIProgressView</code></li>
+  <li><code class="highlighter-rouge">UIStepper</code></li>
+</ul>
+
+<p>이 3가지 컨트롤러가 고정된 height 값을 가지고 있기 때문에 예상했던 결과 값이랑 다르게 나오게 된 것입니다. 위 3가지의 컨트롤러는 고정된 <code class="highlighter-rouge">height</code> 값을 가지게 되고 결국 높이값 30을 대입하는 과정을 무시하게 된것입니다.</p>
+
+<p>이것은 <code class="highlighter-rouge">UIKit</code>에서도 LSP를 위반하는 경우를 보여주는 대표적인 예라고 할 수 있습니다. 하지만 LSP를 위반하는 것은 맞지만 이것이 <code class="highlighter-rouge">UIKit</code>을 사용하는데 있어서 큰 불편함을 주지 않을 뿐더러 개발자는 이미 경험을 통해 알고 있기 때문에 LSP를 위반하지만 치명적인 문제가 되지는 않습니다.</p>
+
+<p>하지만 <code class="highlighter-rouge">UIKit</code>과 같이 적은 수의 경우는 별 문제가 되지 않지만 그 수가 많아지게 될 경우 상속의 모든 관계를 숙지한다는게 힘들기 때문에 결국 문제가 됩니다.</p>
+
+<h3 id="lsp를-위반하게-되면">LSP를 위반하게 되면</h3>
+
+<p>앞에서 예제를 통해 살펴 봤듯이 잘못된 상속으로써 발생되는 문제가 결국 LSP위반의 문제점이 될 수 있습니다.</p>
+
+<ul>
+  <li>모든 클래스에서 하위 클래스를 명시적으로 지정해서 코딩
+    <ul>
+      <li>ex) 다양한 <code class="highlighter-rouge">UIKit</code> 하위클래스 아래 고정된 <code class="highlighter-rouge">height</code> 값을 가지는 <code class="highlighter-rouge">subview</code> 를 접근할때 하나하나 고려해서 작업해야함</li>
+    </ul>
+  </li>
+  <li>OCP를 사용할 수 없게 됨
+    <ul>
+      <li>전적으로 부모를 믿고 자식 클래스를 작업하지만 위와 같이 퇴화되는 기능에 대해서는 OCP가 의미가 없어진다.</li>
+    </ul>
+  </li>
+  <li>코드의 복잡도를 높임</li>
+  <li>부모 클래스가 자식 클래스를 알아야하는 경우도 발생
+    <ul>
+      <li>불필요한 <code class="highlighter-rouge">if-else</code> 구문이 추가가 되거나 인스턴스를 접근하는 행위에 대해 모든 하위클래스를 고려해서 작업을 해야하는 경우가 발생 이는 상속구조가 무의미 하게 된다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="lsp는-믿음">LSP는 믿음</h3>
+
+<p>자바의 컬랙션프레임워크나 swift의 복잡한 상속관계의 프레임워크를 사용하면서도 별 문제없이 사용할 수 있었던 것은 LSP를 잘지켜 주고 있기 때문에 가능한 일입니다.</p>
+
+<p>다양한 하위클래스를 사용할때도 상위클래스의 행위에 대해 전적으로 작동된다는 보장이 되어있기 때문에 가능한 것이고 결국 LSP를 준수하는것이 이것들을 만들어 준다고 할 수 있습니다.</p>
+
+<p>구리고 추상화된 인터페이스 하나로 공통의 코드를 작성할 수 있게 됩니다. 공통된 행위를 swift에서 프로토콜로 정의해서 그것들을 채택하여 다른 코드에 영향을 주지않고 작업을 할 수 있게 됩니다. 그리고 swift에서는  <code class="highlighter-rouge">Protocol extension</code> 이 가능하기 때문에 다양한 extesion을 통해 원하는 동작을하는 함수를 추가하여 작업을 할 수 있게 된 것도 LSP를 준수하기 때문에 가능한 것입니다.</p>
+
+<h3 id="현실적인-이야기">현실적인 이야기</h3>
+
+<p>현실적으로는 모든 코드에서는 LSP를 지키기는 어렵다고 합니다. 당장에는 허용할 만한 선에서 타협을 하지만 추후에 복잡한 상속 구조를 가지게 되면 문제가 발생할 수 있다는 것을 염두해두고 작업을 해야합니다.</p>
+
+<p>더 나아가 LSP를 충분히 이해하고 준수하고자 하면 결국 깊게 보았을 때는 상속과 swift protocol  등의 <strong>설계</strong> 부분에 대해 많은 영향을 끼치기 때문에 LSP는 곧 설계에 직접적인 영향을 미치게 됩니다. 앞에서 보았던 잘못된 상속의 문제점, LSP의 위반시 발생한 문제들을 설계 부분에서 사전에 방지할 수 있게하고 무엇보다 <strong>올바른 상속 구조</strong> 를 설계하는데 도움을 주게 됩니다.</p>
+
+<h3 id="reference">Reference</h3>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=UOo5Jl8Kk0o">베어코드-[Swift OOP]LSP(리스코프치환원칙)</a></li>
+  <li><a href="https://o-o-wl.tistory.com/29?category=329365">LSP - 리스코프 치환 원칙 (<strong>Liskov substitution principle</strong>)</a></li>
+  <li><a href="https://wlaxhrl.tistory.com/80">찜토끼- SOLID원칙을 swift코드로 이해해보기</a></li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)&amp;url=http://localhost:4000/swift/2020/07/19/Swift-OOP-LSP/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2020/07/19/Swift-OOP-LSP/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+          
+          
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/06/27/Swift-OOP-OCP/" data-flip="title">
+    <span>Swift OOP) OCP - 개방폐쇄원칙(Open Close Principle)</span>
+  </a>
+  <small><time datetime="2020-06-27T00:00:00+09:00">
+    27 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)",this.page.identifier="/swift/2020/07/19/Swift-OOP-LSP",this.page.url="http://localhost:4000/swift/2020/07/19/Swift-OOP-LSP/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

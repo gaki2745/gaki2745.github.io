@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="RxSwift Subject, RxCocoa Relay" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>RxSwift Subject, RxCocoa Relay &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="RxSwift Subject
+
+"
+/>
+<meta
+  property="og:description"
+  content="RxSwift Subject
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/" />
+<meta property="og:url" content="http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/ios/2019/12/14/iOS-DesignPattern-02/" />
+ 
+<link rel="next" href="http://localhost:4000/swift/2019/12/27/Swift-RxSwift-04/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2019/12/23/Swift-RxSwift-03" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        RxSwift Subject, RxCocoa Relay
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-12-23T00:00:00+09:00">23 Dec 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-rxswift/" data-flip="title">RxSwift</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="rxswift-subject">RxSwift Subject</h2>
+
+<p>기본적으로 RxSwift를 실제로 적용시킬때는 크게 <strong>실시간으로 Observable에 새로운 값을 수동으로 추가하고 Subscriber에게 방출하는 것</strong> 이다. 즉 <strong>Observable</strong>과 <strong>Observer</strong> 이 둘 모두 동작할 수 있는 것이 필요하다.</p>
+
+<p>이를 Subject가 관리한다. 데이터를 추가(emit) 할 수도 있고, 방출(Subscribe)할수도 있다.</p>
+
+<p><br /></p>
+
+<h4 id="subject-example">Subject Example</h4>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="c1">// 1 </span>
+        <span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="c1">// 2</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"데이터 받을 준비 되어있음?"</span><span class="p">)</span>	<span class="c1">// Print 되지 않음</span>
+        <span class="c1">// 3</span>
+        <span class="k">let</span> <span class="nv">subscriptionOne</span> <span class="o">=</span> <span class="n">subject</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="k">in</span>
+                <span class="nf">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>									 <span class="c1">// Print 되지 않음</span>
+            <span class="p">})</span>
+        <span class="c1">// 4</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="s">"1"</span><span class="p">))</span>      <span class="c1">// Print 1</span>
+        <span class="c1">// 4와 동일 </span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>					<span class="c1">// Print 2</span>
+</code></pre>
+</div>
+
+<ol>
+  <li><code class="highlighter-rouge">PublishSubject</code> 생성
+    <ul>
+      <li>추가된 정보를 수정한 다음에 Subscriber에게 배포한다.</li>
+      <li>데이터의 타입은 사용자가 정의한 것을 기반으로 하는데, 여기서는 String 타입이다. 따라서 받는정보, 배포하는 정보 모두 String 타입이다.</li>
+    </ul>
+  </li>
+  <li>Subject에 추가를 해도 일단은 아무것도 출력 되지 않는다.</li>
+  <li>Subject를 <code class="highlighter-rouge">subscribe</code> 해도 출력 되지 않는다.
+    <ul>
+      <li><code class="highlighter-rouge">PublishSubject</code>는 현재의 subcriber에만 이벤트를 방출한다. 따라서 어떤 정보가 추가 되었을때 구독 하지 않았다면 그 값을 얻을 수 없다.</li>
+    </ul>
+  </li>
+  <li>subject가 구독이 바로 이전에 ‘3’에서 되었기 때문에 이제부터 출력이 된다.
+    <ul>
+      <li><code class="highlighter-rouge">subscriber</code>연산자와 비슷하게, <code class="highlighter-rouge">.on(.next(_:))</code>는 새로운 <code class="highlighter-rouge">.next</code> 이벤트를 subject에 삽입하고, 이벤트 내의 값들을 파라미터로 통과시킨다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>위의 예제는 4가지 Subject중 하나인 <code class="highlighter-rouge">PublishSubject</code>에 대해서 간단하게 다루어 보았다. Subject의 역할을 분명히 해야할 필요가 있다.</p>
+
+<p>ReactiveX Observable에는 “Hot Observable” 과 “Cold Observable”의 개념이 존재한다. <strong>Subject는 Cold Observable을 Hot 하게 변형하는 효과를 얻을 수 있다.</strong> 우선 Hot 과 Cold 의개념을 간단하게 집고 넘어가보자</p>
+
+<blockquote>
+  <p>출처 : https://brunch.co.kr/@tilltue/18</p>
+
+  <p>정말 좋은 비유로 설명이 잘되어있다..</p>
+</blockquote>
+
+<p><br /></p>
+
+<h5 id="hot-observable">Hot Observable</h5>
+
+<p>생성과 동시에 이벤트를 방출하기 시작한다. 구독(<code class="highlighter-rouge">subscribe</code> )시점과 상관 없이 Observer 들에게 이벤트를 중간부터 전송해준다. 같은말로 Connectable Observable 이라고도 한다.</p>
+
+<h5 id="cold-observable">Cold Observable</h5>
+
+<p>Observer가  구독(<code class="highlighter-rouge">subscribe</code> ) 되는 시점부터 이벤트를 생성하여 방출하기 시작한다. Hot Observable로 생성 되지 않은 것들은 모두 여기에 속한다.</p>
+
+<blockquote>
+  <p>유튜브 시청을 예로 들면 <strong>Hot Observer</strong> 실시간 방송은 시청자(Observer)가 어느 시점에서 방송을 청취하던, 방송은 일정 시간동안만 방송이 된다. 즉 시청자(Observer)는 방송을 시청(Subscribe) 하는 시점 부터(middle emit event) 방송을 볼 수 있다.(이벤트를 받을 수 있다) -&gt; 구독하는 시점과는 상관없어서 이벤트 방출의 시점이 보장 되지 않는다.</p>
+
+  <p><strong>Cold Observer</strong>의 경우 일반 VOD와 같다. 시청자(Observer)가 시청을 시작하면(Subscribe) 처음부터 방송이 시작된다.(emit 1, 2, 3 … ) -&gt; 구독하는 시점부터 이벤트가 순차적으로 방출되므로 보장이 된다.</p>
+</blockquote>
+
+<p>다시 정리를 해보자면 Subject는 구독의 시점부터 순차적으로 이벤트를 발행하던 것(Cold Observable)을 구독 시점에 관계 없이 이벤트를 발행(Hot Observable)할 수 있다는 것이다.</p>
+
+<p><br /></p>
+
+<h3 id="subject의-4가지-종류">Subject의 4가지 종류</h3>
+
+<p><br /></p>
+
+<h2 id="1-publishsubject">1. PublishSubject</h2>
+
+<p><br /></p>
+
+<ul>
+  <li>구독(<code class="highlighter-rouge">subscribe</code>)된 순간 새로운 이벤트 수신을 알리고 싶을때 사용한다.</li>
+  <li>구독 되는 시점에서 구독을 멈추거나, <code class="highlighter-rouge">.completed</code>, <code class="highlighter-rouge">.error</code> 이벤트를 통해 subject가 완전 종료 될 때까지 계속 지속된다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/71338901-e70d0880-2594-11ea-861d-72cba396f5bf.png" alt="image" /></p>
+
+<p>Subscriber들이 새로운이 벤트 2, 3을 수신 하기 위해 이벤트 전에 구독(<code class="highlighter-rouge">subscribe</code>)을 통해 이벤트를 수신하고 이는 원래의 subject가 완전히 종료가 되거나 에러가 발생할 때까지 subscriber 들은 계속해서 구독한 시점부터 후의 이벤트를 수신한다.</p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="c1">// 아직 구독 되지 않았기 떄문에 출력 x</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"Is anyone listening?"</span><span class="p">)</span>
+        <span class="c1">// 첫번째 subscriber가 구독을 실시함 -&gt; 이때 부터 이벤트 발행 가능</span>
+        <span class="k">let</span> <span class="nv">subscriptionOne</span> <span class="o">=</span> <span class="n">subject</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="nv">onNext</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="k">in</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"1)"</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+            <span class="p">})</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">on</span><span class="p">(</span><span class="o">.</span><span class="nf">next</span><span class="p">(</span><span class="s">"1"</span><span class="p">))</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>
+
+        <span class="c1">// 1: 두번째 Subscriber가 구독함</span>
+        <span class="k">let</span> <span class="nv">subscriptionTwo</span> <span class="o">=</span> <span class="n">subject</span>
+            <span class="o">.</span><span class="nf">subscribe</span><span class="p">({</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="k">in</span>
+                <span class="c1">// 출력될 이벤트에 2)를 붙여서 출력함</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"2)"</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="n">event</span><span class="p">)</span>
+            <span class="p">})</span>
+
+        <span class="c1">// 2: 이벤트 3을 subject에 추가</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"3"</span><span class="p">)</span>
+
+        <span class="c1">// 3: subscriber 1 dispose호출로 방출 -&gt; 구독 취소로 종료</span>
+        <span class="n">subscriptionOne</span><span class="o">.</span><span class="nf">dispose</span><span class="p">()</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"4"</span><span class="p">)</span>
+
+        <span class="c1">// 4: subject complete로 종료</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onCompleted</span><span class="p">()</span>
+
+        <span class="c1">// 5: 기존의 subject를 완전 종료를 시킨다</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"5"</span><span class="p">)</span>
+
+        <span class="c1">// 6: 두번째 구독자도 완전 종료를 시킨다.</span>
+        <span class="n">subscriptionTwo</span><span class="o">.</span><span class="nf">dispose</span><span class="p">()</span>
+
+        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+
+        <span class="c1">// 7: subject가 완전 종료 된 후에 구독해봤자 생명을 불어 넣을 순 없다! 하지만 complete 이벤트는 방출한다.</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"3)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+            <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"?"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>좋은 예시로 시간에 민감한 서비스를 개발할때 사용할 수 있을거 같다.</p>
+
+  <p>시간에 따라 사용자에게 알림을 해야할 경우를 생각해보자. 경매 이벤트 앱에서 10시에 에어팟 프로를 10만원에 판매하는 이벤트를 진행한다. 10시 5분 전부터 접속한 사용자에게 1분 간격으로 남은 시간을 알림으로 띄워주는 기능을 만들려고 할때 사용자는 5분전에 와서 대기하여 모든 알림 이벤트를 확인할 수 있겠지만. 3분전, 2분전, 30초전에 들어올 경우 위와 같은 이벤트가 모두 수신 될 필요가 없다. 즉 subject는 모든 이벤트를 가지고 있고 구독하는 시점에 따라 이벤트를 보내야할 경우에 대해서 설계할때 유용할것 같다.</p>
+</blockquote>
+
+<h2 id="2-behaviorsubject">2. BehaviorSubject</h2>
+
+<p><br /></p>
+
+<ul>
+  <li><code class="highlighter-rouge">PublisherSubject</code> 과 차이점은 구독 시점 바로 이전의 <code class="highlighter-rouge">.next</code> 이벤트를 반복한다는 점 그 외에는 모두 동일하다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/71341049-0eb39f00-259c-11ea-9867-1bfc6c00aefa.png" alt="image" /></p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="c1">// 1: BehaviorSubject는 초기 값이 있어야한다. -&gt; 항상 이전의 최신값을 방출 하기 때문에 반드시 초기값이 있어야한다.</span>
+				<span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">BehaviorSubject</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="s">"Initial Value"</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        
+        <span class="c1">// 2</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span><span class="p">{</span>
+                <span class="c1">// 이전의 "Initial Value" 초기값있기 떄문에 해당 이벤트를 먼저 수신한다.</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"1)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        <span class="c1">// 3: 다시 최신값은 "Initial Value"에서 "서버에 데이터 요청" 이벤트로 변경이 된다.</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"서버에 데이터 요청"</span><span class="p">)</span>
+
+        <span class="c1">// 4: Subject에 에러가 발생하게 되면 구독하던 다른 Subscriber들에 대한 error 이벤트를 찍게 되므로 아래와 같이 두번 찍히게 된다.</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onError</span><span class="p">(</span><span class="kt">NetworkingError</span><span class="o">.</span><span class="n">requestError</span><span class="p">)</span>
+
+        <span class="c1">// 5</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"2)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/* 출력
+1) Initial value
+1) 서버에 데이터 요청
+// 1, 2에대해 에러가 두번 찍히게 됨 
+1) Reuqest Error!
+2) Request Error!
+*/</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>BehaviorSubject의 경우 구독자(Subscriber)가 항상 Subject 이벤트의 최신을 가지고 있다는 점이 특징이다. 고로 이 점은 View를 가장 최신의 데이터로 미리 채우기 위한 경우 용이하다. 예를 들어 유튜브 같은 동영상 서비스에서 서버에 대용량 데이터를 요청했을때 사용자는 하얀 바탕에 네트워크 인디 케이터가 돌아가는것만 보면서 기다리기 보다는 먼저 가져온 데이터를 미리 세팅하여 UI를 가장 이전의 최신으로 세팅해놓고 보여주는 방식이면 효과적일 것이다.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="3-replaysubject">3. ReplaySubject</h2>
+
+<p><br /></p>
+
+<ul>
+  <li><code class="highlighter-rouge">ReplaySubject</code> 는 생성시 선택한 특정 크기까지, 방출하는 최신 요소를 일시적으로 <strong>캐시나 버퍼</strong> 한다. 그리고 저장된 이 요소들을 새 Subscriber에게 방출한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/71343224-7d93f680-25a2-11ea-8771-9f5703ed1d15.png" alt="image" /></p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>       <span class="c1">// 1: 미리 버퍼 사이즈를 지정한다 -&gt; 2</span>
+        <span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">ReplaySubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;.</span><span class="nf">create</span><span class="p">(</span><span class="nv">bufferSize</span><span class="p">:</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        
+        <span class="c1">// 2</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"3"</span><span class="p">)</span>
+        
+        <span class="c1">// 3</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"1)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"2)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+1) 2
+1) 3
+2) 2
+2) 3
+*/</span>
+</code></pre>
+</div>
+
+<ol>
+  <li><code class="highlighter-rouge">.create(bufferSize:)</code> 를 사용하여 버퍼 사이즈가 2인 <code class="highlighter-rouge">ReplaySubject</code> 우선 만든다.
+    <ul>
+      <li>참고 : <code class="highlighter-rouge">.createUnbounded()</code> 는 모든 이벤트 저장 -&gt; 메모리에 유의</li>
+    </ul>
+  </li>
+  <li>3개의 이벤트 요소를 Subject에 추가한다.</li>
+  <li>Subscriber 1 이 Subject에 요소 3이 추가된 시점에서 구독한다. 이제 위의 2개와 비교해보자
+    <ul>
+      <li>PublishSubject: 없음</li>
+      <li>BehaviorSubject: 3</li>
+      <li>ReplaySubject: 2, 3 -&gt; 버퍼가 2이기때문에 최신의 2개가 구독자에게 보여진다.</li>
+      <li>마찬가지로 Subscriber 2도 똑같이 buffer에 2, 3이 저장되어있기 때문에 보여진다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>여기서 Subject에 요소 4를 하나 더 추가하고 구독자를 추가해보자</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="c1">// 4. 요소 4 추가 -&gt; 버퍼에는 3, 4</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"4"</span><span class="p">)</span>
+        <span class="c1">// 5. Subscriber 3 추가</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"3)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+1) 4
+2) 4
+3) 3
+3) 4
+*/</span>
+</code></pre>
+</div>
+
+<ol>
+  <li>요소 4를 추가했기 때문에 버퍼에는 <code class="highlighter-rouge">subject</code> 의 최신 요소 3, 4가 저장되어있다.</li>
+  <li>하지만 이때 앞의 Subject 종류들과 동일하게 <code class="highlighter-rouge">subject</code> 에 요소가 추가 되었기 때문에 구독자 1, 2에게도 요소 4가 추가된다.
+    <ul>
+      <li>구독자 3의 경우 3, 4가 추가되어 아래와 같이 출력이 된다.</li>
+    </ul>
+  </li>
+</ol>
+
+<p>이때 <code class="highlighter-rouge">subject</code>에 에러를 발생시켜 보자.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="c1">// 4</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"4"</span><span class="p">)</span>
+				<span class="c1">// 에러 발생!</span>
+				<span class="n">subject</span><span class="o">.</span><span class="nf">onError</span><span class="p">(</span><span class="kt">NetworkingError</span><span class="o">.</span><span class="n">requestError</span><span class="p">)</span>
+        <span class="c1">// 5</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"3)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+1) 4
+2) 4
+1) anError
+2) anError
+3) 3
+3) 4
+3) anError
+*/</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">subject</code>에 에러가 발생하여 완전히 종료가 되었음에도 불구하고 바로 아래 구독자 3에게 버퍼에 저장이 되어있던 요소 3, 4가 전달이 되어 아래와 같이 출력이 되는 것을 볼 수 있다.</li>
+  <li>구독자의 경우 <code class="highlighter-rouge">subect</code> 가 종료가 되면 바로 종료가 되게 구현을 해야하고 불필요한 재방출을 방지하여야한다. 우린 이미 수동적으로 요소를 방출시키는 법을 알고 있다. 바로 <code class="highlighter-rouge">dispose()</code> 를 이용하면 된다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="c1">// 4</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"4"</span><span class="p">)</span>
+				<span class="c1">// 에러 발생!</span>
+				<span class="n">subject</span><span class="o">.</span><span class="nf">onError</span><span class="p">(</span><span class="kt">NetworkingError</span><span class="o">.</span><span class="n">requestError</span><span class="p">)</span>
+				<span class="c1">// dispose를 통해 subject의 요소 방출</span>
+				<span class="n">subject</span><span class="o">.</span><span class="nf">dispose</span><span class="p">()</span>
+        <span class="c1">// 5</span>
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"3)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+
+<span class="cm">/*
+1) 4
+2) 4
+1) error(anError)
+2) error(anError)
+3) error(Object `RxSwift.(unknown context at $106525000).ReplayMany&lt;Swift.String&gt;` was already disposed.)
+*/</span>
+
+</code></pre>
+</div>
+
+<ul>
+  <li>위와 같이 <code class="highlighter-rouge">dispose</code>를 통해 버퍼에 들어있던 요소를 강제로 방출 시키고 나면 각 구독자들은 버퍼에 저장되어있는 요소값, 특히 구독자 3의 경우 어떠한 이벤트 요소도 수신할 수 었이 error 이벤트만 받는 것을 확인할 수 있다.</li>
+  <li>하지만 <code class="highlighter-rouge">ReplaySubject</code> 에 명시적으로 <code class="highlighter-rouge">dispose()</code>를 호출하는 것은 지양해야한다. 만약에 <code class="highlighter-rouge">subject</code>의 구독을 disposeBag에 모두 추가하고, 가령 ViewController나 ViewModel과 같이 <code class="highlighter-rouge">subject</code>의 소유자가 dealloc이 되면 위와 같이 모든 것을 강제로 dispose 해버리면 안되기 때문에 유념해야한다.</li>
+</ul>
+
+<blockquote>
+  <p>ReplaySubject는 다양하게 사용되어 사용자의 편의를 제공할 기능에 추가될 수 있다.</p>
+
+  <p>예를들어 사용자의 특정 이벤트를 알고있어야할때 이것을 쓰면 된다. 검색이나, 최근 항목, 최근 행한 이벤트 등을 버퍼에 저장하여 구독하는 즉시 그 이벤트 들을 처리 할 수 있을 것이다.</p>
+</blockquote>
+
+<p><br /></p>
+
+<h2 id="4-asyncsubject">4. AsyncSubject</h2>
+
+<p><br /></p>
+
+<ul>
+  <li>구독의 시점과 상관 없이 Subject가 Complete 이벤트를 방출하여 정상 종료가 될때 구독자는 마지막 요소를  발생하고 종료를 한다.</li>
+</ul>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/71347162-0a43b200-25ad-11ea-812e-a975340bd749.png" alt="image" /></p>
+
+<ul>
+  <li>예제</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>        <span class="k">let</span> <span class="nv">subject</span> <span class="o">=</span> <span class="kt">AsyncSubject</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">()</span>
+        <span class="k">let</span> <span class="nv">disposeBag</span> <span class="o">=</span> <span class="kt">DisposeBag</span><span class="p">()</span>
+        
+        <span class="n">subject</span>
+            <span class="o">.</span><span class="n">subscribe</span> <span class="p">{</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"1)"</span><span class="p">,</span> <span class="nv">$0</span><span class="o">.</span><span class="n">element</span> <span class="p">??</span> <span class="nv">$0</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="o">.</span><span class="nf">disposed</span><span class="p">(</span><span class="nv">by</span><span class="p">:</span> <span class="n">disposeBag</span><span class="p">)</span>
+        
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"1"</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"2"</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="s">"3"</span><span class="p">)</span>
+        <span class="n">subject</span><span class="o">.</span><span class="nf">onCompleted</span><span class="p">()</span>
+<span class="cm">/*
+1) 3
+1) completed
+*/</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>마지막 요소를 구독자가 수신하고 구독자도 정상 종료가 되는 것을 확인 할 수 있다.</li>
+</ul>
+
+<p>만약 도중에 에러가 발생하면 구독자도 에러이벤트를 처리하고 종료가 된다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/71347314-6c041c00-25ad-11ea-8b03-8f4910fab24e.png" alt="image" /></p>
+
+<p><br /></p>
+
+<h2 id="rxcocoa-relay">RxCocoa Relay</h2>
+
+<p><br /></p>
+
+<p>Relay Class는 RxCocoa의 RxRelay에 구현이 되어 있다. 두가지의 클래스가 존재한다</p>
+
+<ul>
+  <li><code class="highlighter-rouge">PublishRelay</code></li>
+  <li><code class="highlighter-rouge">BehaviorRelay</code></li>
+</ul>
+
+<p><br /></p>
+
+<p>RxSwift의 Subject와 어떤 차이점이 있고 언제 사용하는지는 다음과 같다.</p>
+
+<ul>
+  <li>RxSwift의 Subject의 경우 <code class="highlighter-rouge">onNexct</code> 로 이벤트를 처리하는데 Relay는 <code class="highlighter-rouge">accept</code> 로 처리한다.</li>
+  <li>error와 complete를 내보낼 수 없다. 즉 오직 <code class="highlighter-rouge">accept</code> 만 내보낼 수 있다. 이는 도중에 에러가 발생하거나, 완료가 되면 무시를한다.</li>
+  <li>에러로 인한 종료, 완료로 인한 종료가 되지 않는다 이는 스트림이 죽지않는 다는 것을 의미하고 UI와 같은 경우 에러가 나거나 완료가 났다고 종료가 되면 안되기 때문에 <strong>UI 전용으로 사용</strong> 하는 것이 주 목적이다.</li>
+</ul>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<h3 id="publish-relay">Publish Relay</h3>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">PublishRelay</code>는 <code class="highlighter-rouge">PublishSubject</code>의 <code class="highlighter-rouge">Wrapper 클래스</code> 이다.</p>
+
+<p><code class="highlighter-rouge">PublishSubject</code> 처럼 구독 이후의 발생하는 이벤트 들만 알 수 있다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">/// PublishRelay is a wrapper for `PublishSubject`.</span>
+<span class="c1">///</span>
+<span class="c1">/// Unlike `PublishSubject` it can't terminate with error or completed.</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">PublishRelay</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">ObservableType</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">E</span> <span class="o">=</span> <span class="kt">Element</span>
+
+    <span class="kd">private</span> <span class="k">let</span> <span class="nv">_subject</span><span class="p">:</span> <span class="kt">PublishSubject</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span>
+    
+    <span class="c1">// Accepts `event` and emits it to subscribers</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">accept</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1">/// Initializes with internal empty subject.</span>
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_subject</span> <span class="o">=</span> <span class="kt">PublishSubject</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Subscribes observer</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">O</span><span class="p">:</span> <span class="kt">ObserverType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Disposable</span> <span class="k">where</span> <span class="kt">O</span><span class="o">.</span><span class="kt">E</span> <span class="o">==</span> <span class="kt">E</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+    <span class="p">}</span>
+    
+    <span class="c1">/// - returns: Canonical interface for push style sequence</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">asObservable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">asObservable</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><br /></p>
+
+<h3 id="behavior-relay">Behavior Relay</h3>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">BehaviorRelay</code> 는  <code class="highlighter-rouge">BehaviorSubject</code>의 <code class="highlighter-rouge">Wrapper 클래스</code> 이다.</p>
+
+<p>마찬가지로 <code class="highlighter-rouge">BehaviorSubject</code> 와 동일하게 이전의 최신 이벤트값을 가져 올 수 있다. 고로 초기 값이 있어야한다</p>
+
+<p>값은 <code class="highlighter-rouge">.value</code>를 통해서 현재의 값을 가져 올 수 있다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="c1">/// BehaviorRelay is a wrapper for `BehaviorSubject`.</span>
+<span class="c1">///</span>
+<span class="c1">/// Unlike `BehaviorSubject` it can't terminate with error or completed.</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="kt">BehaviorRelay</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span><span class="p">:</span> <span class="kt">ObservableType</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">E</span> <span class="o">=</span> <span class="kt">Element</span>
+
+    <span class="kd">private</span> <span class="k">let</span> <span class="nv">_subject</span><span class="p">:</span> <span class="kt">BehaviorSubject</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span>
+
+    <span class="c1">/// Accepts `event` and emits it to subscribers</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">accept</span><span class="p">(</span><span class="n">_</span> <span class="nv">event</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">onNext</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Current value of behavior subject</span>
+    <span class="kd">public</span> <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">Element</span> <span class="p">{</span>
+        <span class="c1">// this try! is ok because subject can't error out or be disposed</span>
+        <span class="k">return</span> <span class="k">try!</span> <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">value</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Initializes behavior relay with initial value.</span>
+    <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="kt">Element</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">_subject</span> <span class="o">=</span> <span class="kt">BehaviorSubject</span><span class="p">(</span><span class="nv">value</span><span class="p">:</span> <span class="n">value</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// Subscribes observer</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="n">subscribe</span><span class="o">&lt;</span><span class="kt">O</span><span class="p">:</span> <span class="kt">ObserverType</span><span class="o">&gt;</span><span class="p">(</span><span class="n">_</span> <span class="nv">observer</span><span class="p">:</span> <span class="kt">O</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Disposable</span> <span class="k">where</span> <span class="kt">O</span><span class="o">.</span><span class="kt">E</span> <span class="o">==</span> <span class="kt">E</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">subscribe</span><span class="p">(</span><span class="n">observer</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">/// - returns: Canonical interface for push style sequence</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">asObservable</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Observable</span><span class="o">&lt;</span><span class="kt">Element</span><span class="o">&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">self</span><span class="o">.</span><span class="n">_subject</span><span class="o">.</span><span class="nf">asObservable</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li>https://brunch.co.kr/@tilltue/4</li>
+  <li><a href="https://github.com/fimuxd/RxSwift/blob/master/Lectures/03_Subjects/Ch3.%20Subjects.md#c-publishsubjects로-작업하기">RxSwift-fimuxd</a></li>
+  <li><a href="http://reactivex.io/intro.html">RxSwift Documents</a></li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=RxSwift Subject, RxCocoa Relay&amp;url=http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/19/Swift-OOP-LSP/" data-flip="title">
+    <span>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)</span>
+  </a>
+  <small><time datetime="2020-07-19T00:00:00+09:00">
+    19 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="RxSwift Subject, RxCocoa Relay",this.page.identifier="/swift/2019/12/23/Swift-RxSwift-03",this.page.url="http://localhost:4000/swift/2019/12/23/Swift-RxSwift-03/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Swift의 캐싱 NSCache" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Swift의 캐싱 NSCache &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="Swift의 캐싱 - NSCache
+
+"
+/>
+<meta
+  property="og:description"
+  content="Swift의 캐싱 - NSCache
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/swift/2019/10/10/Swift-Basic-08/" />
+<meta property="og:url" content="http://localhost:4000/swift/2019/10/10/Swift-Basic-08/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/swift/2019/10/08/Swift-Basic-07/" />
+ 
+<link rel="next" href="http://localhost:4000/ios/2019/10/11/iOS-Basic-10/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-swift/2019/10/10/Swift-Basic-08" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Swift의 캐싱 NSCache
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-10-10T00:00:00+09:00">10 Oct 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/swift/" data-flip="title">Swift</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/swift-basic/" data-flip="title">Basic</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h1 id="swift의-캐싱---nscache">Swift의 캐싱 - NSCache</h1>
+
+<p>Swift에서도 제공하고있는 NSCache를 이용하여 image등의 다량의 데이터를 훨씬 효율적으로 처리할 수 있는 방법에 대해 정리하겠습니다.</p>
+
+<h2 id="caching캐싱-이란">Caching(캐싱) 이란?</h2>
+
+<p>컴퓨터 아키텍쳐와, 운영체제에서 이론적인 부분을 많이 다뤘을 것이다. 흔히 컴퓨팅에서 캐시는 일반적으로 일시적인 특징이 있는 데이터 하위 집합을 저장하는 <strong>고속 스토리지 계층</strong> 이다.  즉 저장 공간이라는 말이다. 캐시를 사용하면 <strong>자주 접근 하는 객체를 계산하는 데 비용이이 많이 드는 일 시적인 데이터를 저장</strong> 한다. 그렇기 때문에 이런 객체를 사용하면 값을 다시 계산 할 필요가 없기 때문에 성능에 상당히 많은 이점이 있다.</p>
+
+<p>캐시에서의 이슈인 어떻게 객체와 같은 데이터를 효율적으로 접근하게 하는지? 그리고 자주 사용한다는 것에 대해 LRU 나 FIFO, LFU 등의 페이지 교체 알고리즘 이슈가 상당히 많지만 지금은 간단하게 다루고 나중에 CS기초공부할 때 다루도록 하겠습니다.</p>
+
+<h2 id="nscache">NSCache</h2>
+
+<p>Cocoa는 메모리 관리 문제를 해결하는 동시에 캐시할 항목을 위한 편리한 저장 컨테이너로 <code class="highlighter-rouge">NSCache</code>를 제공한다.</p>
+
+<p><code class="highlighter-rouge">NSCache</code> 클래스는 <code class="highlighter-rouge">NSDictionary</code> 클래스와 매우 유사하며 둘 다 <code class="highlighter-rouge">key-value</code> 쌍을 보유한다.  그러나 <code class="highlighter-rouge">NSCache</code> 객체는 “Reactive Cache(반응 캐시)” 이다. 즉, 메모리를 사용할 수 있을때 주어진 데이터를 적극적으로 캐시하고 만약 메모리가 부족하다면 , 다른 애플리케이션을 위한 메모리를 확보하기 위해 일부 요소를 자동으로 삭제한다. 삭제된 항목은 필요할 경우 다시 계산해야하는 추가적인 컴퓨팅 타임이 걸린다.</p>
+
+<p><code class="highlighter-rouge">NSCache</code>는 캐시된 요소의 수를 제한하고 캐시에 있는 모든 요소의 총 비용을 제한하는 두가지 유용한 <strong>제한 기능</strong>을 제공한다.</p>
+
+<ol>
+  <li><strong>countLimit</strong>: 캐시된 요소 수 제한</li>
+  <li><strong>totalCostLimit</strong>:캐시에 있는 모든 요소의 총 비용 제한</li>
+</ol>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">cache</span><span class="p">:</span> <span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">NSString</span><span class="p">,</span> <span class="kt">UIImage</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kt">NSCache</span><span class="p">()</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">countLimit</span> <span class="o">=</span> <span class="c1">// 허용하는 key의 개수</span>
+<span class="n">cache</span><span class="o">.</span><span class="n">totalCostLimit</span> <span class="o">=</span> <span class="c1">// cost 합계의 최댓값</span>
+</code></pre>
+</div>
+
+<p><strong>countLimit</strong> 이 10으로 설정된 캐시에 11번째 항목을 추가하려고 하면 캐시가 자동으로 요소 중 하나를 삭제할 수 있다.</p>
+
+<p>캐시에 항목을 추가할 때 각 key-value와 연관 시킬 비용(cost)를 지정할 수 있다. 캐시된 모든 객체 비용이 <strong>totalCostLimit</strong>를 넘어가면 캐시는 일부 객체를 자동으로 삭제할 수 있다. 캐시된 모든 개체의 cost에 대한 최대 값을 설정하려면 <code class="highlighter-rouge">setTotalCostLimit</code> 메서드를 호출 하면된다. 따라서 totalCost를 totalCostLimit 값 이상으로 객체가 추가될 때 캐시는 임계값 이하로 돌아가기 위해 해당 객체의 일부를 자동으로 제거할 수 있다.</p>
+
+<p>임계값을 맞추기 위해 삭제하는 이 과정은 보장되지 않으므로 특정 행동을 달성하기 위해 비용 값을 임의조작하는 것은 캐시의 성능에 악영향을 미친다. 그때 쓸만한 값이 없으면 0을 입력하거나, 비용을 전달하지 않아도 되는 <code class="highlighter-rouge">setObject:forKey</code> 메서드를 호출하면 된다.</p>
+
+<h2 id="nscache의-메모리-관리-방법">NSCache의 메모리 관리 방법</h2>
+
+<p>위에서 언급했듯이 캐시를 사용할 때 아무래도 메모리가 한정적이다 보니깐 “어떤 데이터를 버려야할 지”하는 선택의 상황이 온다. 가장 오래된 데이터를 버리면 되는지 아니면 또 어떤 규칙으로 데이터를 버려야 하는지를 알고리즘으로 구현 한 것이 있다.</p>
+
+<p>일반적으로 메모리 관리기법에는 <strong>페이지 교체 알고리즘</strong>을 사용한다.</p>
+
+<h3 id="페이지-교체란">페이지 교체란?</h3>
+
+<p>메모리를 관리하는 운영체제에서 , 페이지 부재가 발생하여 새로운 페이지를 할당하기 위해 새로운 메모리를 할당해주어야한다. 하지만 물리적 메모리에 빈 프레임이 존재하지 않는 경우 할당된 페이지 중 하나를 교체해야하는데 이를 선택하는 작업을 뜻한다.</p>
+
+<p>그리고 어떤 프레임에 있는 페이지(구)를  새롭게 들어오는 페이지(신) 과 교체할 지를 결정하는 방법이 몇가지 알고리즘으로 제공된다.</p>
+
+<ul>
+  <li>FIFO(First-In-First-Out): 큐의 구조와 동일한것으로 메모리에 가장 먼저 올라온 페이지를 우선적으로 선택한다.</li>
+  <li>LRU(Least Recently Used): 가장 오래 전에 참조가 이루어진 페이지를 선택한다. 즉 가장 오랫동안 사용되지않은 페이지를 뜻한다.</li>
+  <li>LFU(Least Frequently Used): 각 페이지들이 얼마나 많이 사용되었는지 가중치를 확인하고 가장 많이 호출된 횟수가 적은 페이지를 선택하여 교체된다.</li>
+  <li>Random: 어느 페이지도 교체될수 있게 랜덤하게 선택한다. 최악의 경우 추가되고 바로 뒤에 호출될 페이지 까지 교체 될 수 있다.</li>
+</ul>
+
+<p>하지만 <code class="highlighter-rouge">NSCache</code> 는 기존에 제공하는 페이지 교체 알고리즘을 사용하지 않고 메모리 관리에 <strong>자동 축출 정책(Auto-Eviction Policies)</strong> 캐싱 메커니즘을 사용한다.</p>
+
+<h2 id="nscache-구현">NSCache 구현</h2>
+
+<p><code class="highlighter-rouge">NSCache</code> 는 기본적으로 연결리스트로 데이터를 캐싱한다. 이에 대한 명확한 설명인 기재 되어있지 않지만 아마도 연결리스트의 장점인 재정렬과 추가 삭제의 이점 때문이 아닐까 생각이 든다. 캐시를 배열로 구현할 경우 데이터가 캐시 도중에 삽입 되거나 삭제될때 뒷 부분을 전체적으로 옮겨야하는 추가적인 작업이 발생하므로 연결리스트로 구현한거 같다.</p>
+
+<p>그리고 <code class="highlighter-rouge">NSCache</code>는 별도로 Dictionary를 두어 데이터의 접근도 해쉬의 기법처럼 <code class="highlighter-rouge">O(1)</code>에 수행할 수 있도록 제공한다. 연결리스트로 구현했을때의 가장 큰 단점은 탐색이기 때문에 이를 보완하기 위해 이렇게 key-value 형태의 Dictionary를 제공하는듯 하다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span> <span class="k">where</span> <span class="kt">KeyType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">ObjectType</span> <span class="p">:</span> <span class="kt">AnyObject</span> <span class="p">{</span>
+  
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+  
+    <span class="kd">unowned(unsafe)</span> <span class="n">open</span> <span class="k">var</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kt">NSCacheDelegate</span><span class="p">?</span>
+    
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">totalCostLimit</span><span class="p">:</span> <span class="kt">Int</span> <span class="c1">// limits are imprecise/not strict</span>
+
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">countLimit</span><span class="p">:</span> <span class="kt">Int</span> <span class="c1">// limits are imprecise/not strict</span>
+
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">evictsObjectsWithDiscardedContent</span><span class="p">:</span> <span class="kt">Bool</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>구현의 참고는 <a href="https://github.com/apple/swift-corelibs-foundation/blob/bfe81824d9b8a98b84dcc5c022c5a9d567dbc224/Foundation/NSCache.swift">swift-corelibs-foundation</a> 를 참고하여 작성하였습니다.</p>
+
+<h5 id="nscacheentry">NSCacheEntry</h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">class</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">ObjectType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyType</span>
+    <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ObjectType</span>
+    <span class="k">var</span> <span class="nv">cost</span><span class="p">:</span> <span class="kt">Int</span>
+    <span class="k">var</span> <span class="nv">prevByCost</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="p">?</span>
+    <span class="k">var</span> <span class="nv">nextByCost</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="p">?</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">KeyType</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">ObjectType</span><span class="p">,</span> <span class="nv">cost</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="n">cost</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">NSCache</code> 클래스에 저장되는 실제 엔트리다. 구현을 위에서 언급했듯이 Dicationaty 형태와 동일하게 프로퍼티로 <code class="highlighter-rouge">key-value</code> 를 갖고 <code class="highlighter-rouge">cost</code> 값이 있고 각 엔트리 들을 연결리스트로 참조하기 위해 <code class="highlighter-rouge">prevByCost</code>(이전), <code class="highlighter-rouge">nextByCost</code> (다음) 으로 이중 연결리스트로 연결 될 수 있게 프로퍼티를 선언했다.</p>
+
+<h5 id="nscache-1">NSCache</h5>
+
+<p>각 주요 프로퍼티에 대해서 분석해보자</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">open</span> <span class="kd">class</span> <span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">KeyType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">ObjectType</span> <span class="p">:</span> <span class="kt">AnyObject</span><span class="o">&gt;</span> <span class="p">:</span> <span class="kt">NSObject</span> <span class="p">{</span>
+    
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_entries</span> <span class="o">=</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">NSCacheKey</span><span class="p">,</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;&gt;</span><span class="p">()</span>
+    <span class="kd">private</span> <span class="k">let</span> <span class="nv">_lock</span> <span class="o">=</span> <span class="kt">NSLock</span><span class="p">()</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_totalCost</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">_head</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span><span class="p">?</span>
+    
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">totalCostLimit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// limits are imprecise/not strict</span>
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">countLimit</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">// limits are imprecise/not strict</span>
+    <span class="n">open</span> <span class="k">var</span> <span class="nv">evictsObjectsWithDiscardedContent</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">false</span>
+		<span class="o">...</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">_entries</code> : <code class="highlighter-rouge">NSCacheKey</code> 와 <code class="highlighter-rouge">NSCacheEntry</code> 의 <code class="highlighter-rouge">key-value</code> 쌍으로 이루어진 Dicationary이다. 딕셔너리 타입이 기 때문에 앞에서 언급했듯이 <code class="highlighter-rouge">O(1)</code> 타임만에 탐색이 가능하다.</li>
+  <li><code class="highlighter-rouge">_lock</code> : <code class="highlighter-rouge">_entries</code> 에 접근할때마다 이 프로퍼티를 사용하여 동시에 접근 할 수 없도록 잠그고, 관련 작업이 끝난 후에 잠금을 해제한다. 마치 뮤텍스(mutex) 의 lock 과 동일하게 작동 되며 이는 동시에 같은 엔트리에 접근하여 값을 변경 시켜 버리면 안되기 때문이다.(<a href="https://github.com/gaki2745/GAKI-CS-Study/tree/master/OS#프로세스-동기화">Gaki-운영체제: 프로세스 동기화</a>)</li>
+  <li><code class="highlighter-rouge">_totalCost</code> : 모든 엔트리의 cost 총합이다. 새로운 객체가 추가될 때마다 갱신이 되고 <code class="highlighter-rouge">totalCostLimit</code>를 초과하는지 확인하는데 사용된다.</li>
+  <li><code class="highlighter-rouge">name</code>: NSCache를 식별하는데 사용할 String</li>
+  <li><code class="highlighter-rouge">countLimit</code>: 캐시된 요소 수 제한</li>
+  <li><code class="highlighter-rouge">totalCostLimit</code>:캐시에 있는 모든 요소의 총 비용 제한</li>
+  <li><code class="highlighter-rouge">evictsObjectsWithDiscardedContent</code> :  <code class="highlighter-rouge">NSCache</code>는 시스템에서 메모리를 너무 많이 사용하지 않도록 디자인 되어있다. 그래서 캐싱된 데이터를 자동으로 지우는 다양한 정책을 사용하고 있고, 캐싱된 데이터가 너무 많은 메모리를 사용하면 시스탬은 캐싵된 데이터를 삭제한다.</li>
+</ul>
+
+<p>기본적으로 <code class="highlighter-rouge">NSCache</code> 의 기능은 <strong>삽입, 삭제, 설정</strong> 으로 크게 3가지로 분류되어 구현이 되어있다.</p>
+
+<h5 id="삽입--insert_">삽입 : <code class="highlighter-rouge">Insert(_:)</code></h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">private</span> <span class="kd">func</span> <span class="nf">insert</span><span class="p">(</span><span class="n">_</span> <span class="nv">newEntry</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 1. _head 가 비어있다면 맨앞에 새로 추가된 entry 삽입</span>
+        <span class="k">guard</span> <span class="k">var</span> <span class="nv">currentElement</span> <span class="o">=</span> <span class="n">_head</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// The cache is empty</span>
+            <span class="n">newEntry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+            <span class="n">newEntry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+            
+            <span class="n">_head</span> <span class="o">=</span> <span class="n">newEntry</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="c1">// 2. _head보다 cost가 작거나 같은 것이 들어올 경우 _head 앞에 삽입</span>
+        <span class="k">guard</span> <span class="n">newEntry</span><span class="o">.</span><span class="n">cost</span> <span class="o">&gt;</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">cost</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="c1">// Insert entry at the head</span>
+            <span class="n">newEntry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="kc">nil</span>
+            <span class="n">newEntry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">currentElement</span>
+            <span class="n">currentElement</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">newEntry</span>
+            
+            <span class="n">_head</span> <span class="o">=</span> <span class="n">newEntry</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+        <span class="c1">// 3. 순회를 통해 삽입 될 곳의 위치를 찾는다.</span>
+        <span class="k">while</span> <span class="k">let</span> <span class="nv">nextByCost</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span><span class="p">,</span> <span class="n">nextByCost</span><span class="o">.</span><span class="n">cost</span> <span class="o">&lt;</span> <span class="n">newEntry</span><span class="o">.</span><span class="n">cost</span> <span class="p">{</span>
+            <span class="n">currentElement</span> <span class="o">=</span> <span class="n">nextByCost</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// Insert entry between currentElement and nextElement</span>
+  			<span class="c1">// 순서가 중요</span>
+        <span class="k">let</span> <span class="nv">nextElement</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span>
+        
+        <span class="n">currentElement</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">newEntry</span>
+        <span class="n">newEntry</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">currentElement</span>
+        
+        <span class="n">newEntry</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">nextElement</span>
+        <span class="n">nextElement</span><span class="p">?</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">newEntry</span>
+    <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>삽입은 크게 3가지 단계로 구분해서 나눌수 있다. 연결리스트의 삽입 과 동일하게 코드를 작성 해주면 된다</p>
+
+<ol>
+  <li><code class="highlighter-rouge">_head</code> 가 비어있다면 맨앞에 새로 추가된 <code class="highlighter-rouge">newEntry</code> 삽입</li>
+  <li><code class="highlighter-rouge">_head</code> 보다 cost가 작거나 같은 것이 들어올 경우 _head 앞에 삽입, 즉 cost의 오름차순으로 유지하며 삽입</li>
+  <li>순회 도중에 삽입 되는 경우, 해당 위치를 찾고 newEntry를 삽입 한다.</li>
+</ol>
+
+<h5 id="삽입-과정-수기-정리">삽입 과정 수기 정리</h5>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/66492053-bddcf000-eaee-11e9-8034-944a07a809cf.png" alt="image" /></p>
+
+<h5 id="삭제-remove_">삭제: <code class="highlighter-rouge">remove(_:)</code></h5>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>    <span class="kd">private</span> <span class="kd">func</span> <span class="nf">remove</span><span class="p">(</span><span class="n">_</span> <span class="nv">removeEntry</span><span class="p">:</span> <span class="kt">NSCacheEntry</span><span class="o">&lt;</span><span class="kt">KeyType</span><span class="p">,</span> <span class="kt">ObjectType</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">oldPrev</span> <span class="o">=</span> <span class="n">removeEntry</span><span class="o">.</span><span class="n">prevByCost</span>
+        <span class="k">let</span> <span class="nv">oldNext</span> <span class="o">=</span> <span class="n">removeEntry</span><span class="o">.</span><span class="n">nextByCost</span>
+        
+        <span class="n">oldPrev</span><span class="p">?</span><span class="o">.</span><span class="n">nextByCost</span> <span class="o">=</span> <span class="n">oldNext</span>
+        <span class="n">oldNext</span><span class="p">?</span><span class="o">.</span><span class="n">prevByCost</span> <span class="o">=</span> <span class="n">oldPrev</span>
+        <span class="c1">// 삭제할 entry가 head 인 경우 next의 값을 연결 시킨다.</span>
+        <span class="k">if</span> <span class="n">removeEntry</span> <span class="o">===</span> <span class="n">_head</span> <span class="p">{</span>
+            <span class="n">_head</span> <span class="o">=</span> <span class="n">oldNext</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>삭제의 경우 삭제하고 싶은 엔트리 <code class="highlighter-rouge">removeEntry</code>를 인자로 받아 단순하게 이전과 다음 엔트리를 연결 시키면된다. 이때 removeEntry의 경우 ARC가 참조가 더이상 일어 나지 않으므로 메모리에서 해제 하기 때문에 free에 관한 이슈는 생각할 필요없다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/66493428-02698b00-eaf1-11e9-9e92-1798a84d7dcd.png" alt="image" /></p>
+
+<h5 id="설정-setobject_">설정: <code class="highlighter-rouge">setObject(_:)</code></h5>
+
+<p>새롭게 객체를 추가할때, totalCost 또는 countLimit를 초과했다면 특정 엔트리를 축출한 후 추가 작업을 수행하도록 구현이 되어있다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="n">open</span> <span class="kd">func</span> <span class="nf">setObject</span><span class="p">(</span><span class="n">_</span> <span class="nv">obj</span><span class="p">:</span> <span class="kt">ObjectType</span><span class="p">,</span> <span class="n">forKey</span> <span class="nv">key</span><span class="p">:</span> <span class="kt">KeyType</span><span class="p">,</span> <span class="n">cost</span> <span class="nv">g</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">g</span> <span class="o">=</span> <span class="nf">max</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">let</span> <span class="nv">keyRef</span> <span class="o">=</span> <span class="kt">NSCacheKey</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        
+        <span class="n">_lock</span><span class="o">.</span><span class="nf">lock</span><span class="p">()</span>
+        
+        <span class="k">let</span> <span class="nv">costDiff</span><span class="p">:</span> <span class="kt">Int</span>
+        <span class="c1">// 추가된 객체와 같은 키를 갖는 엔트리를 찾는다.</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="n">_entries</span><span class="p">[</span><span class="n">keyRef</span><span class="p">]</span> <span class="p">{</span>
+          <span class="c1">// 같은 엔트리를 우선 찾고 cost의 차이를 계산</span>
+            <span class="n">costDiff</span> <span class="o">=</span> <span class="n">g</span> <span class="o">-</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+          <span class="c1">// 추가된 객체의 cost로 업데이트</span>
+            <span class="n">entry</span><span class="o">.</span><span class="n">cost</span> <span class="o">=</span> <span class="n">g</span>
+            <span class="c1">// 추가된 객체로 업데이트</span>
+            <span class="n">entry</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">obj</span>
+            <span class="c1">// 만약 cost의 차이가 있다면(같지 않다면) cost가 변경된 기존의 entry를 삭제하고</span>
+            <span class="c1">// 올바른 위치로 갈수 있게 재 삽입</span>
+            <span class="k">if</span> <span class="n">costDiff</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">{</span>
+                <span class="nf">remove</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+                <span class="nf">insert</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="c1">// 기존에 같은 키를 갖는 엔트리가 없는 경우 새롭게 NSCacheEntry 생성 후 삽입</span>
+            <span class="k">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="kt">NSCacheEntry</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="n">obj</span><span class="p">,</span> <span class="nv">cost</span><span class="p">:</span> <span class="n">g</span><span class="p">)</span>
+            <span class="n">_entries</span><span class="p">[</span><span class="n">keyRef</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span>
+            <span class="nf">insert</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+            
+            <span class="n">costDiff</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="p">}</span>
+        
+        <span class="n">_totalCost</span> <span class="o">+=</span> <span class="n">costDiff</span>
+       <span class="c1">// cost 제한이 있다면, 새로 추가된 엔트리의 cost를 포함한 totalCost에서 totalLimitCost를 뺀 			// 값을 purgeAmount에 할당한다. 제한이 없다면 0을 할당한다.</span>
+        <span class="k">var</span> <span class="nv">purgeAmount</span> <span class="o">=</span> <span class="p">(</span><span class="n">totalCostLimit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">?</span> <span class="p">(</span><span class="n">_totalCost</span> <span class="o">-</span> <span class="n">totalCostLimit</span><span class="p">)</span> <span class="p">:</span> <span class="mi">0</span>
+  		<span class="c1">// totalCost ≤ totalLimitCost 일때 까지 </span>
+        <span class="k">while</span> <span class="n">purgeAmount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+          <span class="c1">// 엔트리 축출 작업은 _head 엔트리 부터 제거한다.</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="n">_head</span> <span class="p">{</span>
+                <span class="n">delegate</span><span class="p">?</span><span class="o">.</span><span class="nf">cache</span><span class="p">(</span><span class="nf">unsafeDowncast</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span><span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">AnyObject</span><span class="o">&gt;.</span><span class="k">self</span><span class="p">),</span> <span class="nv">willEvictObject</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                
+                <span class="n">_totalCost</span> <span class="o">-=</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+                <span class="n">purgeAmount</span> <span class="o">-=</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+                
+                <span class="nf">remove</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="c1">// _head will be changed to next entry in remove(_:)</span>
+                <span class="n">_entries</span><span class="p">[</span><span class="kt">NSCacheKey</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">nil</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// countLimit 에도 동일한 작업을 수행</span>
+        <span class="k">var</span> <span class="nv">purgeCount</span> <span class="o">=</span> <span class="p">(</span><span class="n">countLimit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">?</span> <span class="p">(</span><span class="n">_entries</span><span class="o">.</span><span class="n">count</span> <span class="o">-</span> <span class="n">countLimit</span><span class="p">)</span> <span class="p">:</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">purgeCount</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="k">let</span> <span class="nv">entry</span> <span class="o">=</span> <span class="n">_head</span> <span class="p">{</span>
+                <span class="n">delegate</span><span class="p">?</span><span class="o">.</span><span class="nf">cache</span><span class="p">(</span><span class="nf">unsafeDowncast</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nv">to</span><span class="p">:</span><span class="kt">NSCache</span><span class="o">&lt;</span><span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">AnyObject</span><span class="o">&gt;.</span><span class="k">self</span><span class="p">),</span> <span class="nv">willEvictObject</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                
+                <span class="n">_totalCost</span> <span class="o">-=</span> <span class="n">entry</span><span class="o">.</span><span class="n">cost</span>
+                <span class="n">purgeCount</span> <span class="o">-=</span> <span class="mi">1</span>
+                
+                <span class="nf">remove</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span> <span class="c1">// _head will be changed to next entry in remove(_:)</span>
+                <span class="n">_entries</span><span class="p">[</span><span class="kt">NSCacheKey</span><span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">key</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">nil</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">break</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="n">_lock</span><span class="o">.</span><span class="nf">unlock</span><span class="p">()</span>
+    <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>설정의 핵심은 전체 비용(<code class="highlighter-rouge">totalCost</code>) 에 대한 <code class="highlighter-rouge">totalCost</code> ≤ <code class="highlighter-rouge">totalLimitCost</code> 인 상황 까지 While문을 돌게 된다 즉 임계치가 해당 범위안에 도달할 때까지 반복적으로 수행하고 축출 즉 제거는 cost가 가장 낮은 순위인  <code class="highlighter-rouge">_head</code> 부터 수행한다. 마찬가지로 <code class="highlighter-rouge">countLimit</code> 에도 똑같이 수행하여 임계치에 도달하도록 한다.</p>
+
+<hr />
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://github.com/apple/swift-corelibs-foundation/blob/bfe81824d9b8a98b84dcc5c022c5a9d567dbc224/Foundation/NSCache.swift">swift-corelibs-foundation</a></li>
+  <li>https://hcn1519.github.io/articles/2018-08/nscache</li>
+  <li>[Apple Documents: Caching and Purgeable Memory](</li>
+</ul>
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Swift의 캐싱 NSCache&amp;url=http://localhost:4000/swift/2019/10/10/Swift-Basic-08/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/swift/2019/10/10/Swift-Basic-08/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/10/10/Swift-OOP-DIP/" data-flip="title">
+    <span>Swift OOP) DIP - 의존관계역전원칙(Dependency Inversion Principle)</span>
+  </a>
+  <small><time datetime="2020-10-10T00:00:00+09:00">
+    10 Oct 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/20/Swift-OOP-ISP/" data-flip="title">
+    <span>Swift OOP) ISP - 인터페이스 분리원칙(Interface Segregation Principle)</span>
+  </a>
+  <small><time datetime="2020-07-20T00:00:00+09:00">
+    20 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/swift/2020/07/19/Swift-OOP-LSP/" data-flip="title">
+    <span>Swift OOP) LSP - 리스코프 치환원칙(Liskov Substitution Principle)</span>
+  </a>
+  <small><time datetime="2020-07-19T00:00:00+09:00">
+    19 Jul 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="Swift의 캐싱 NSCache",this.page.identifier="/swift/2019/10/10/Swift-Basic-08",this.page.url="http://localhost:4000/swift/2019/10/10/Swift-Basic-08/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="Factory Pattern" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>Factory Pattern &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="Factory Pattern(팩토리 패턴)
+
+"
+/>
+<meta
+  property="og:description"
+  content="Factory Pattern(팩토리 패턴)
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/ios/2020/04/12/iOS-DesignPattern-05/" />
+<meta property="og:url" content="http://localhost:4000/ios/2020/04/12/iOS-DesignPattern-05/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/ios/2020/04/07/iOS-DesignPattern-04/" />
+ 
+<link rel="next" href="http://localhost:4000/swiftui/2020/04/24/SwiftUI-Combine-01/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-ios/2020/04/12/iOS-DesignPattern-05" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        Factory Pattern
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-04-12T00:00:00+09:00">12 Apr 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/ios/" data-flip="title">iOS</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/" data-flip="title">디자인패턴</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="factory-pattern팩토리-패턴">Factory Pattern(팩토리 패턴)</h2>
+
+<p>객체지향 디자인에서 <strong>느슨한 결합(Loose Coupling)</strong> 의 개념은 중요하고 여겨지고 있습니다.</p>
+
+<p>예를 들어 객체의 인스턴스르 만드는 작업이 항상 공개되어있으면 안되고 오히려 공개되어있을 경우 결합에 관련된 문제가 발생할 수 있다는 것 입니다.</p>
+
+<p>이를 팩토리 패턴을 통해 해결할 수 있다고 합니다. 오늘은 거기에 대해서 한번 자세하게 공부해보겠습니다.</p>
+
+<p>자 우리는 Swift 이전에 Java에서는 인스턴스를 생성할때 어떻게 했는지 생각해보고 가겠습니다.</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Person</span> <span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GoodPerson</span><span class="o">();</span>
+</code></pre>
+</div>
+
+<p>우리는 <code class="highlighter-rouge">new</code> 를 사용하여 구상 클래스의 인스턴스를 생성합니다.</p>
+
+<p><code class="highlighter-rouge">Person</code> 이라는 인터페이스 아래 <code class="highlighter-rouge">GoodPerson</code> 이라는 구상 클래스가 있고 이 클래스의 인스턴스를 생성하는 코드였습니다.</p>
+
+<p>하지만 구상클래스가 여러개가 존재한다면 어떻게 될까요?</p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Person</span> <span class="n">person</span><span class="o">;</span>
+
+<span class="k">if</span> <span class="o">(</span><span class="n">isKind</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">GoodPerson</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">isBully</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">BadPerson</span><span class="o">();</span>
+<span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+  	<span class="n">person</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NormalPerson</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>위와 같이 구상클래스가 3개 혹은 그 이상이 존재할 수 있고 만들어지는 인스턴스의 형식은 실행시에 조건에 따라 결정됩니다.</p>
+
+<p>이런코드는 무언가를 변경하거나 확장해야 할 떄 코드를 다시 확인하고 추가 또는 제거해야한다는 것을 뜻합니다.</p>
+
+<p>그렇게 되면 코드의 관리 및 갱신이 어려워지고 그에따라 오류도 자주 발생할 수 있게됩니다.</p>
+
+<p>사실 <code class="highlighter-rouge">new</code> 자체에 문제가 있는건 아니지만 이런 <strong>변화</strong> 가 발생할 때 문제가 되는것입니다.</p>
+
+<p>이런 변화를 감당할려면 우리는 인터페이스(프로토콜)를 사용하면 변화를 이겨낼 수 있습니다. 인터페이스는 다형성 덕분에 어떤 클래스든 특정 인터페이스만 구현하면 사용할 수 있기 때문입니다.</p>
+
+<blockquote>
+  <p>“변화에 닫힌 코드를 피하기 위해 인터페이스를 사용하자”</p>
+
+  <p>“바뀔수 있는 부분을 찾아내서 바뀌지 않는 부분하고 분리시켜야한다”</p>
+</blockquote>
+
+<h3 id="팩토리-패턴의-세가지">팩토리 패턴의 세가지</h3>
+
+<ol>
+  <li>팩토리 패턴: 사용자에게 인스턴스 생성 로직을 노출하지 않은채 객체를 생성한다.</li>
+  <li>팩토리 메소드 패턴: 객체 생성을 위한 인터페이스를 정의하지만 이를 구현한 객체가 어떤 클래스를 생설할지 결정한다. 구상 클래스에게 객체의 생성을 위힘한다.</li>
+  <li>추상 팩토리 패턴: 연관된 혹은 의존성이 있는 객체의 그룹을 구체적인 클래스를 지정하지 않고 생성하기 위해 인터페이스를 제공한다.</li>
+</ol>
+
+<h3 id="팩토리-패턴과-팩토리-메서드-패턴">팩토리 패턴과 팩토리 메서드 패턴</h3>
+
+<p>팩토리 패턴의 경우 생성로직을 숨긴다에 의미를 크게 두고 있습니다. 예를 들어 피자공장의 로직을 구현해야한다고 가정해보겠습니다.</p>
+
+<p>개발자인 저는 피자만들기의 자동화를 위해 아래와 같이 코드를 구현했습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">orderPizza</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">pizza</span> <span class="o">=</span> <span class="kt">Pizza</span><span class="p">()</span>
+    
+    <span class="k">switch</span> <span class="n">type</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s">"cheese"</span><span class="p">:</span>
+        <span class="n">pizza</span> <span class="o">=</span> <span class="kt">CheesePizza</span><span class="p">()</span>
+    <span class="k">case</span> <span class="s">"Peperoni"</span><span class="p">:</span>
+        <span class="n">pizza</span> <span class="o">=</span> <span class="kt">PepperoniPizza</span><span class="p">()</span>
+    <span class="k">case</span> <span class="s">"Clam"</span><span class="p">:</span>
+        <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ClamPizza</span><span class="p">()</span>
+    <span class="k">case</span> <span class="s">"Veggie"</span><span class="p">:</span>
+        <span class="n">pizza</span> <span class="o">=</span> <span class="kt">VeggiePizza</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="n">pizza</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+    <span class="n">pizza</span><span class="o">.</span><span class="nf">bake</span><span class="p">()</span>
+    <span class="n">pizza</span><span class="o">.</span><span class="nf">cut</span><span class="p">()</span>
+    <span class="n">pizza</span><span class="o">.</span><span class="nf">box</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pizza</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>피자의 종류를 type 매개변수로 받아와 요청에 맞는 피자를 만들어야 하기 때문에 구상클래스가 총 4개가 존재합니다.</p>
+
+<p>하지만여기서 메뉴를 변경한다고 또는 추가가 된다면 <code class="highlighter-rouge">orderPizza</code> 메서드를 전체적으로 갈아엎어야하는 상황이 발생합니다.</p>
+
+<p>여기서 우리는 피자의 구상객체 즉 상황에 맞는 객체를 생성해서 반환해주는 팩터리 메서드를 추가해보도록 합시다!</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SimplePizzaFactory</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">func</span> <span class="nf">createPizza</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">pizza</span><span class="p">:</span> <span class="kt">Pizza</span><span class="p">?</span>
+        <span class="k">switch</span> <span class="n">type</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">"cheese"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">CheesePizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Peperoni"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">PepperoniPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Clam"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ClamPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Veggie"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">VeggiePizza</span><span class="p">()</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">SimplePizzaFactory</code> 는 말그대로 상황에 맞는 피자를 생성해주는 팩토리 클래스라고 생각하면 됩니다.</p>
+
+<p>이럴경우 어떤 이점이 있을까요?</p>
+
+<p>“상황에 맞는 피자객체를 반환한다”의 경우가 과연 피자를 주문할때만 사용될까요? 온라인 피자주문 이라던지 앱으로 피자를 찜할 수 있는 메서드 <code class="highlighter-rouge">dibsOnPizza</code> 에서 사용할 수도있기때문에 따로 클래스에 캡슐화 시켜 놓으면 구현을 변경해야하는 경우 여기저기에서 고칠 필요가 없다는 장점이 있습니다.</p>
+
+<p>이제 피자를 생성해서 반환해줄 팩터리가 있으니 <code class="highlighter-rouge">PizzaStore</code> 에서 어떻게 사용하는지 보겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="kt">PizzaStore</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">factory</span><span class="p">:</span> <span class="kt">SimplePizzaFactory</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">factory</span><span class="p">:</span> <span class="kt">SimplePizzaFactory</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">factory</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">orderPizza</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span><span class="p">?</span> <span class="p">{</span>
+        
+        <span class="c1">// 팩토리 객체에 있는 create 메서드를 사용하여 객체 생성</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">pizza</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="nf">createPizza</span><span class="p">(</span><span class="n">type</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+        
+        <span class="n">pizza</span><span class="o">.</span><span class="nf">prepare</span><span class="p">()</span>
+        <span class="n">pizza</span><span class="o">.</span><span class="nf">bake</span><span class="p">()</span>
+        <span class="n">pizza</span><span class="o">.</span><span class="nf">cut</span><span class="p">()</span>
+        <span class="n">pizza</span><span class="o">.</span><span class="nf">box</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">pizza</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>인스턴스 생성 자체를 팩토리 객체를 통해 완벽하게 숨긴것을 볼 수 있습니다.</p>
+
+<p>위의 <code class="highlighter-rouge">if-else</code> / <code class="highlighter-rouge">switch</code> 문 과 같은 조건문을 사용해서 분기로 객체를 생성하는 것은 피할 수가 없습니다. 모델링한 객체의 수가 늘어나고 구상 클래스가 추가됨에 따라 이런 조건문은 늘어나기 마련입니다. 그리고 함수 내부에 조건문이 존재한다는 것은 하나의 함수가 여러가지 일을 할 수 있다는 것을 의미하게 됩니다. <strong>이는 SRP(Single Responsibliity Principle)를 위반하게 됩니다.</strong> 또는 조건 혹은 케이삭 추가될때 코드를 재차 수정해야 하기 때문에 <strong>OCP(Open Closed Principle)의 원칙도 위반하게 됩니다.</strong></p>
+
+<p>그렇기 때문에 같은 조건문이 반복된다면 이는 팩토리 메소드 패턴으로 조건문을 숨기고 조건문을 한곳에만 위치시키는 것이 가능합니다.</p>
+
+<h3 id="추상-팩토리-메서드">추상 팩토리 메서드</h3>
+
+<p>다시예제로 돌아와서 위의 PizzaStore로 예를 들어보겠습니다.</p>
+
+<p>우리는 피자종류가 Newyork 과 Chicago 두가지 스타일이 더 있다고 가정하겠습니다(이것보다 더 많지만..)</p>
+
+<p>피자의 종류는 다르지만 기본적으로 아래 3개의 메서드는 겹쳐진다고 할 수 있겠습니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">createPizza()</code> : 피자를 만들고</li>
+  <li><code class="highlighter-rouge">orderPizza()</code> : 피자를 주문받고</li>
+  <li><code class="highlighter-rouge">deliveryPizza()</code> : 피자를 배달하고</li>
+</ul>
+
+<p>피자를 만드는 방식 그리고 주문방식(?) 배달방식등 지역마다 다 다르게 존재합니다. 그럼 이같은 중복되는 기능에 대해 역시 추상화를 진행할 수 있습니다.</p>
+
+<p>기본적으로 피자를 만들고 주문받고 배달하는 기능이야 동일하게 이루어 지니깐요</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">PizzaStore</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">createPizza</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span><span class="p">?</span>
+    <span class="kd">func</span> <span class="nf">orderPizza</span><span class="p">()</span>
+    <span class="kd">func</span> <span class="nf">deliveryPizza</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">NewyorkPizzaStore</span><span class="p">:</span> <span class="kt">PizzaStore</span> <span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">createPizza</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">pizza</span><span class="p">:</span> <span class="kt">Pizza</span>
+        <span class="k">switch</span> <span class="n">type</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">"cheese"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">NewyorkCheesePizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Peperoni"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">NewyorkPepperoniPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Clam"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">NewyorkClamPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Veggie"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">NewyorkVeggiePizza</span><span class="p">()</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">orderPizza</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="kd">func</span> <span class="nf">deliveryPizza</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">ChicagoPizzaStore</span><span class="p">:</span> <span class="kt">PizzaStore</span> <span class="p">{</span>
+    
+    <span class="kd">func</span> <span class="nf">createPizza</span><span class="p">(</span><span class="n">_</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Pizza</span><span class="p">?</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">pizza</span><span class="p">:</span> <span class="kt">Pizza</span>
+        <span class="k">switch</span> <span class="n">type</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">"cheese"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ChicagoCheesePizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Peperoni"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ChicagoPepperoniPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Clam"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ChicagoClamPizza</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"Veggie"</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kt">ChicagoVeggiePizza</span><span class="p">()</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="n">pizza</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">pizza</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">orderPizza</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="kd">func</span> <span class="nf">deliveryPizza</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>공통적으로 <code class="highlighter-rouge">createPizza</code> 를 통해 객체를 생성하는 부분은 뉴욕이나 시카고 두 구상 클래스가 수행하는 작업입니다. 하지만 두개의 클래스가 반환 즉 생성하는 객체는 다르므로 이를 공통의 프로토콜 <code class="highlighter-rouge">PizzaStore</code> 를 통해 <code class="highlighter-rouge">createPizza()</code> 를 추상화 해서 사용하는 것입니다.</p>
+
+<p>어디까지나 뉴욕피자와 시카고 피자는 공통의 생산품(객체) 가 <code class="highlighter-rouge">Pizza</code> 임에 가능한 것입니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/79069649-d5e63400-7d0a-11ea-95ad-734445470c01.png" alt="image" /></p>
+
+<p>더 나아가 뉴욕과 시카고 피자가게가 생성하는 제품(피자 객체)를 추상화 해서 아래와 같이 모델링을 추가할 수도 있습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Pizza</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">dough</span><span class="p">:</span> <span class="kt">Daugh</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">sause</span><span class="p">:</span> <span class="kt">Sause</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">veggies</span><span class="p">:</span> <span class="p">[</span><span class="kt">Veggies</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">cheese</span><span class="p">:</span> <span class="kt">Chesse</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">pepproni</span><span class="p">:</span> <span class="kt">Pepperoni</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="nv">clam</span><span class="p">:</span> <span class="kt">Clam</span><span class="p">?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">bake</span><span class="p">()</span>
+    <span class="kd">func</span> <span class="nf">cut</span><span class="p">()</span>
+    <span class="kd">func</span> <span class="nf">box</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="한번더-예제를-통해-이해시켜보자">한번더 예제를 통해 이해시켜보자</h3>
+
+<p>추상 팩토리 패턴에 대해서 조금 더 명확한 예제가 있어서 정리해볼려고 합니다.</p>
+
+<p>두 회사 Google과 Apple이 Button과 Label을 만들어서 제공합니다.</p>
+
+<p>기본적으로 아래와 같이 프로토콜을 통해 두가지를 정의할 수 있습니다.</p>
+
+<p>Button과 Label에 각각 제목을 지정할 수 있고 보여주는 기능까지 있다고 가정하겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Button</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">Label</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>자 이제 Google와 Apple이 각각 Button과 Label 생성할 수 있도록 프로토콜을 상속하여 구현하게 됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">AppleButton</span><span class="p">:</span> <span class="kt">Button</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Apple 스타일 버튼 보여주기: [Title: </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">title</span><span class="o">!</span><span class="se">)</span><span class="s">]"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">AppleLabel</span> <span class="p">:</span> <span class="kt">Label</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Apple 스타일 레이블 보여주기: [Title: </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">title</span><span class="o">!</span><span class="se">)</span><span class="s">]"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">GoogleButton</span> <span class="p">:</span> <span class="kt">Button</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Google 스타일 버튼 보여주기: [Title: </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">title</span><span class="o">!</span><span class="se">)</span><span class="s">]"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">GoogleLabel</span> <span class="p">:</span> <span class="kt">Label</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span>
+    
+    <span class="kd">func</span> <span class="nf">setTitle</span><span class="p">(</span><span class="n">_</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">show</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Google 스타일 레이블 보여주기: [Title: </span><span class="se">\(</span><span class="k">self</span><span class="o">.</span><span class="n">title</span><span class="o">!</span><span class="se">)</span><span class="s">]"</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>그렇게 되면 아래와 같이 Button 과 Label에 대한 클래스를 각각 만들어 주어야하고 추후에 버튼, Label 뿐만 아니라 더 추가가 되게 된다면 클래스가 더 늘어 난다고 볼 수 있습니다.</p>
+
+<p>이것을 이제 추상 팩토리 패턴으로 변경해보겠습니다.</p>
+
+<h4 id="추상팩토리-프로토콜">추상팩토리 프로토콜</h4>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">AbstractGUIFactory</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">createButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Button</span>
+    <span class="kd">func</span> <span class="nf">createLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Label</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">AppleFactory</span> <span class="p">:</span> <span class="kt">AbstractGUIFactory</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">createButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Button</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">AppleButton</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">createLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Label</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">AppleLabel</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">GoogleFactory</span> <span class="p">:</span> <span class="kt">AbstractGUIFactory</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">createButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Button</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">GoogleButton</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">createLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Label</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kt">GoogleLabel</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Apple과 Google의 공통 프로토콜인 <code class="highlighter-rouge">AbstractGUIFactory</code> 를 선언해서 겹치는 메서드를 정의했고 각 구상클래스가 이를 채택하여 구체화 하였습니다.</p>
+
+<p>차이가 보이시나요? 위의 코드에서는 각 클래스를 Button,Label마다 하나씩 만들어 주었는데 보다 명확하게 클래스의 수가 줄었습니다. 가령 <code class="highlighter-rouge">View</code> 객체를 생성해야하는 경우가 생길경우 아래와 같이 추상 팩토리 프로토콜에 클래스만 추가 해주면 됩니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">AbstractGUIFactory</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">createButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Button</span>
+    <span class="kd">func</span> <span class="nf">createLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Label</span>
+		<span class="kd">func</span> <span class="nf">createView</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">View</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="client">Client</h4>
+
+<p>자 이제 Client에서 이를 활용해야겠죠?</p>
+
+<p><code class="highlighter-rouge">GUIBuilder</code> 라는 클래스를 통해 우리가 원하는 두가지 플랫폼 Apple 또는 Google 에 해당하는 객체를 생성하고 또 내부 함수까지 사용할 수 있게 하도록 작성해보겠습니다.</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">GUIBuilder</span> <span class="p">{</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">platform</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="kd">private</span> <span class="k">var</span> <span class="nv">guiFactory</span><span class="p">:</span> <span class="kt">AbstractGUIFactory</span><span class="p">?</span>
+    
+    <span class="nf">init</span><span class="p">(</span><span class="nv">platform</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">platform</span> <span class="o">=</span> <span class="n">platform</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">initGuiFactory</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="n">guiFactory</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+        <span class="k">switch</span> <span class="n">platform</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s">"apple"</span><span class="p">:</span>
+            <span class="n">guiFactory</span> <span class="o">=</span> <span class="kt">AppleFactory</span><span class="p">()</span>
+        <span class="k">case</span> <span class="s">"google"</span><span class="p">:</span>
+            <span class="n">guiFactory</span> <span class="o">=</span> <span class="kt">GoogleFactory</span><span class="p">()</span>
+        <span class="k">default</span><span class="p">:</span>
+            <span class="n">guiFactory</span> <span class="o">=</span> <span class="kc">nil</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">buildButton</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Button</span> <span class="p">{</span>
+        <span class="nf">initGuiFactory</span><span class="p">()</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">button</span> <span class="o">=</span> <span class="n">guiFactory</span><span class="o">.</span><span class="nf">createButton</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">button</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Button</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    
+    <span class="kd">func</span> <span class="nf">buildLabel</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Label</span> <span class="p">{</span>
+        <span class="nf">initGuiFactory</span><span class="p">()</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">label</span> <span class="o">=</span> <span class="n">guiFactory</span><span class="o">.</span><span class="nf">createLabel</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Label</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kt">Label</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="guibuilder를-사용해보자">GUIBuilder를 사용해보자</h4>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">guiBuilder</span><span class="p">:</span> <span class="kt">GUIBuilder</span> <span class="o">=</span> <span class="kt">GUIBuilder</span><span class="p">(</span><span class="nv">platform</span><span class="p">:</span> <span class="s">"Apple"</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">Label</span><span class="p">:</span> <span class="kt">Label</span> <span class="o">=</span> <span class="n">guiBuilder</span><span class="o">.</span><span class="nf">buildLabel</span><span class="p">()</span>
+<span class="n">label</span><span class="o">.</span><span class="nf">setTitle</span><span class="p">(</span><span class="s">"Gaki"</span><span class="p">)</span>
+<span class="n">label</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+
+<span class="k">let</span> <span class="nv">button</span><span class="p">:</span> <span class="kt">Button</span> <span class="o">=</span> <span class="n">guiBuilder</span><span class="o">.</span><span class="nf">buildButton</span><span class="p">()</span>
+<span class="n">button</span><span class="o">.</span><span class="nf">setTitle</span><span class="p">(</span><span class="s">"Connect"</span><span class="p">)</span>
+<span class="n">button</span><span class="o">.</span><span class="nf">show</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>마지막으로 정리를 한번 하고 끝내도록 하겠습니다.</p>
+
+<ul>
+  <li>추상팩토리 패턴 - 서로 연관된, 또는 의존적인 객체들로 이루어진 제품군을 생성하기 위한 인터페이스(프로토콜)을 제공. 구상 클래스는 서브클래스에 의해 만들어진다</li>
+  <li>팩토리 메소드 패턴 - 객체를 생성하기 위한 인터페이스를 만든다. 어떤 클래스의 인스턴스를 만들지는 서브클래스에서 결정하도록한다. 팩토리 메소드를 이용하면 인스턴스를 ㅁ나드는 일을 서브클래스로 미룰 수 있다.</li>
+</ul>
+
+<p>이 처럼 객체생성을 캡슐화 해주고 구상 클래스에 대한 의존성을 줄여 줌으로서 궁극적으로 추구하고 하는 느슨한 결합을 도와주도록 하게됩니다.</p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://medium.com/@iamcrypticcoder/abstract-factory-pattern-in-swift-4-83abb273c977">Abstract Factory Pattern in Swift 4</a></li>
+  <li><a href="https://medium.com/swiftworld/swift-world-design-patterns-abstract-factory-86f39dc7b63f">Swift World: Design Patterns — Abstract Factory</a></li>
+  <li><a href="https://gmlwjd9405.github.io/2018/08/08/abstract-factory-pattern.html">[Design Pattern] 추상 팩토리 패턴이란</a></li>
+  <li><a href="http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&amp;ejkGb=KOR&amp;barcode=9788968480911&amp;orderClick=JAj">JAVA 객체지향 디자인 패턴, 한빛미디어</a></li>
+  <li><a href="https://m.search.naver.com/search.naver?sm=mtp_hty.top&amp;where=m&amp;query=헤드+퍼스트+디자인+패턴#api=%3F_lp_type%3Dcm%26col_prs%3Dcsa%26format%3Dtext%26nqx_theme%3D%257B%2B%2522theme%2522%253A%257B%2522main%2522%253A%257B%2522name%2522%253A%2522book_info%2522%252C%2522os%2522%253A1882446%252C%2522pkid%2522%253A20000%257D%257D%2B%257D%26query%3D%2525ED%252597%2525A4%2525EB%252593%25259C%252B%2525ED%25258D%2525BC%2525EC%25258A%2525A4%2525ED%25258A%2525B8%252B%2525EB%252594%252594%2525EC%25259E%252590%2525EC%25259D%2525B8%252B%2525ED%25258C%2525A8%2525ED%252584%2525B4%26sm%3Digr_brg%26tab%3Dinfo%26tab_prs%3Dcsa%26where%3Dbridge&amp;_lp_type=cm">Head First Design Pattern</a></li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=Factory Pattern&amp;url=http://localhost:4000/ios/2020/04/12/iOS-DesignPattern-05/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/ios/2020/04/12/iOS-DesignPattern-05/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-xib%EC%82%AC%EC%9A%A9%EB%B2%95/" data-flip="title">
+    <span>xib를 통해 CustomView 만들기 & xib와 nib의 차이</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-maskToBounds&clipsToBounds/" data-flip="title">
+    <span>masksToBounds 와 clipsToBounds의 차이점</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/05/28/iOS-Basic-15/" data-flip="title">
+    <span>SwiftGen</span>
+  </a>
+  <small><time datetime="2020-05-28T00:00:00+09:00">
+    28 May 2020
+  </time></small>
+</li>
+
+        
+      
+        
+          
+          
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="Factory Pattern",this.page.identifier="/ios/2020/04/12/iOS-DesignPattern-05",this.page.url="http://localhost:4000/ios/2020/04/12/iOS-DesignPattern-05/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

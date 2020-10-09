@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="SwiftUI Essentials(1)" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>SwiftUI Essentials(1) &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="2019 WWDC - SwiftUI Essentials(1)
+
+"
+/>
+<meta
+  property="og:description"
+  content="2019 WWDC - SwiftUI Essentials(1)
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/wwdc/2020/05/20/WWDC-2019-01/" />
+<meta property="og:url" content="http://localhost:4000/wwdc/2020/05/20/WWDC-2019-01/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/swiftui/2020/05/11/SwiftUI-Combine-03/" />
+ 
+<link rel="next" href="http://localhost:4000/ios/2020/05/28/iOS-Basic-15/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-wwdc/2020/05/20/WWDC-2019-01" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        SwiftUI Essentials(1)
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2020-05-20T00:00:00+09:00">20 May 2020</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/wwdc/" data-flip="title">WWDC</a>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h2 id="2019-wwdc---swiftui-essentials1">2019 WWDC - SwiftUI Essentials(1)</h2>
+
+<p>SwiftUI기반의 프로젝트를 진행하면서 여전히 UIKit를 사용해야할 상황이 많았습니다.. 우선 ARKit를 사용해야했고 추후에 ARKit를 어떻게 SwiftUI에서 사용하는지도 다루어 보겠습니다.</p>
+
+<p>오늘은 SwiftUI에서 어떻게 UIKit를 통합해서 사용하는지? 그리고 화면 전환은 어떻게 이루어 지는지 또 2019 WWDC에서 발표한 <a href="https://developer.apple.com/videos/play/wwdc2019/216/">SwiftUI Essentials</a> 를 보고 정리를 해볼까 합니다.</p>
+
+<h3 id="swiftui의-목적">SwiftUI의 목적</h3>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82335329-247ea080-9a24-11ea-910a-b0fa4abfc623.png" alt="image" /></p>
+
+<p>SwiftUI에서 추구하는 것은 간단합니다. 기본적인 피쳐보다는 우리 개발자들만의 개성을 살릴수 있게 개발하는 것이 목적이라고 합니다.</p>
+
+<h1 id="views-and-modifiers">Views and Modifiers</h1>
+
+<h3 id="swiftui의-구조">SwiftUI의 구조</h3>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82335788-c3a39800-9a24-11ea-9243-cbd699c5242e.png" alt="image" /></p>
+
+<p>SwiftUI에서는 코드에서 조금 차별화를 둡니다. 아래와 같이 위의 구조를 코드로 구현할 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82336060-141af580-9a25-11ea-98e8-256aa7324dc4.png" alt="image" /></p>
+
+<h3 id="declarative한-swiftui">Declarative한 SwiftUI</h3>
+
+<p>SwiftUI에서는 위와 같이 얼마나 Declarative(선언형)으로 코드를 작성할 수 있는지 보여줍니다.  아보카도 토스트를 만드는 앱을 예시를 들면서 만약 코드가 Imperative(명령형)으로 작성이 되어 진다면 아래와 같이 복잡하고 많은 시퀀스를 따라야 한다는 것입니다.</p>
+
+<p>사실 함수형 프로그래밍 패러다임을 공부하면서 선언형과 명령형 프로그래밍기법에 대해서 익히 잘 알 고 있습니다. Declarative의 특징을 잘 엿볼 수 있는 SwiftUI의 구조를 통해 많은 장점들을 얻을 수 있다고 합니다.</p>
+
+<p>SwiftUI는 데이터 주도 방식으로 앱 개발을 강조하고 있습니다. User Interface 내의 뷰들은 기본 데이터의 변경에 따른 처리 코드를 작성하지 않아도 뷰가 업데이트 되도록 말입니다. 이런 Binding을 통해 Publisher와 Subscriber 사이의 데이터 흐름을 UI와 가능하게끔 구축을 할 수 있습니다.</p>
+
+<p>예시에서 위의 $표시를 통해 각 UI들의 value를 가져오고 있는 것을 확인 할 수 있습니다. 이처럼 데이터의 Binding의 syntax 또한 SwiftUI에서는 조금 달라진 모습을 볼 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82340561-5430a700-9a2a-11ea-8193-d75647a560d6.png" alt="image" /></p>
+
+<p>SwiftUI에서는 <strong>상태 프로퍼티(state property)</strong> 를 제공하고 있습니다. $표시를 통해 설계한 <code class="highlighter-rouge">Order</code> 구조체의 <code class="highlighter-rouge">quantity</code> 에 대해 Stepper에 객체의 상수값을 Binding을 하고있습니다.</p>
+
+<h3 id="modifier를-통해-조금더-명확하게">Modifier를 통해 조금더 명확하게</h3>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82341240-20a24c80-9a2b-11ea-8e34-50b1c7c28c1d.png" alt="image" /></p>
+
+<p><code class="highlighter-rouge">font</code> 나 <code class="highlighter-rouge">foregroundColor</code> 등 UI의 프로퍼티등을 변경하는 것도 modifier를 통해 조금더 명확하게 할 수 있습니다. (어떻게 보면 HTML 태그문 같기도 합니다)</p>
+
+<p>이런 modifier를 Chaining하는 것에는 몇가지 이점이 있다고 소개합니다. 아래의 경우 modifier의 위치만 변경했을 뿐인데 보여지는 UI의 결과 값은 전혀 다르게 나오게 됩니다. Text저체의 background Color를 우선적으로 설정하고 난 다음 padding을 늘릴 경우에는 배경 색 적용이 text에 국한되게 됩니다. 하지만 padding을 우선 늘리고 배경색을 적용한다면? 전체 padding에 대한 색상이 변경 되는 것을 확인 할 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82341709-bb9b2680-9a2b-11ea-9f90-0d704040b3bd.png" alt="image" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82342172-45e38a80-9a2c-11ea-9a22-ce9ec235a24b.png" alt="image" /></p>
+
+<p>이는 우리가 원하는 커스텀에 대한 가능성을 조금 더 열어두는것에 이점이 있다고 설명하고 있습니다.</p>
+
+<p>또 한가지 이점에는 아래와 같이 공통이 되는 <code class="highlighter-rouge">opacity</code> modifier에 대해 전체 VStack에다 줌으로써 중복을 줄이고 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82342628-cdc99480-9a2c-11ea-97b9-80339fbab0a2.png" alt="image" /></p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82342632-cefac180-9a2c-11ea-823c-fa7a340b5dc3.png" alt="image" /></p>
+
+<p>이로써 얻게 되는 장점은 중복을 줄이는 것은 물론이고 각각의 UI가 자기자신만의 값에 대해 조금더 포커싱할 수 있다고 설명할 수 있습니다.</p>
+
+<h1 id="building-custom-views">Building custom views</h1>
+
+<p>SwiftUI에서 custom view를 구성할때 UIKit이나 AppKit과는 어떤 차이점이 있는지에 대해서 설명하고있습니다.</p>
+
+<p>우선 아래의 예시를 보면 List를 구성하고 있는 <code class="highlighter-rouge">OrderHistory</code> 구조체는 View라는 프로토콜을 상속하고 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82343863-5268e280-9a2e-11ea-81a9-06afd7e640a3.png" alt="image" /></p>
+
+<h3 id="uikit-vs-swiftui">UIKit vs SwiftUI</h3>
+
+<p>UIKit 에서는 위와 동일하게 만들려면 어떻게 해야할까요? 우선 Super class 의 <code class="highlighter-rouge">UIView</code> 를 상속해야합니다. 그 안에는 UIView를 구성하고 있는 <code class="highlighter-rouge">alpha</code> 나 <code class="highlighter-rouge">backgroundColor</code> 등을 지정할 수 있는 프로퍼티들이 존재하고 있고 거기다가 우리가 만들 <code class="highlighter-rouge">OrderHistory</code> 는 UIView를 상속하고 커스텀 프로피터를 계속해서 추가할 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82343764-349b7d80-9a2e-11ea-958c-7c92f0384a3b.png" alt="image" /></p>
+
+<p>그럼 SwiftUI에서는 어떻게 다를까요?</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82344762-6bbe5e80-9a2f-11ea-99e2-c5866fedc757.png" alt="image" /></p>
+
+<p>SwiftUI에서는 기본적으로 Modifer를 통해 추가를 했던 <code class="highlighter-rouge">opacity</code> 나 <code class="highlighter-rouge">background</code> 등 뿐만아니라 <code class="highlighter-rouge">OrderHistory</code> 모두 개개인의 View를 상속하고 있습니다. <code class="highlighter-rouge">View</code> 프로토콜 상속함으로써 더이상 common storage template를 view에게서 제공할 필요가 없게 됩니다.</p>
+
+<h3 id="swiftui-view-protocol-과-primitive-view">SwiftUI View Protocol 과 Primitive View</h3>
+
+<p>View Protocol 의 경우 body 프로퍼티를 통해 view의 content나 behavior등을 정의할 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82345320-19317200-9a30-11ea-9ae7-eab4b4b2a5ed.png" alt="image" /></p>
+
+<p>SwiftUI에서 제공하는 Primitive View들입니다. view들의 그 끝에는 아래의 원자적인 가장 작은 단위의 view들이 존재하게 됩니다. 모든 view의 구성들이 말이죠</p>
+
+<p><img src="/Users/youngjungoo/Library/Application Support/typora-user-images/image-20200520002652926.png" alt="image-20200520002652926" /></p>
+
+<h3 id="swiftui-data-biding">SwiftUI Data biding</h3>
+
+<p>다시 예제로 돌아와서 <code class="highlighter-rouge">OrderHistory</code> view 구조체 내부에는 <code class="highlighter-rouge">previousOrders</code> 라는 프로퍼티가 존재합니다. 이것은 List에 담을 객체데이터의 배열 형태로 보관하고 있습니다. SwiftUI에서 View는 선언적으로 input을 function의 형태로 선언하게 됩니다. 만약 이 input이 값이 업데이트 될때 <strong>SwiftUI는 Fetch된 새로운 body 프로퍼티를 call하게 됩니다</strong> .</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82352479-053e3e00-9a39-11ea-9fb7-a05ea795f0ad.png" alt="image" /></p>
+
+<p>만약 Cloud에 위에 리스트에 보여진 데이터들이 저장되어있다고 생각해봅시다. 이는 다른 디바이스와 연동이 되어있어서 삭제되고 추가될 수 있습니다. SwiftUI에서는 서버와 연결이 되어있고 이런 데이터들을 요청하여 가져올때 값이 이전과 비교하여 업데이트 되어있으면 앞에서 말했듯이 UI를 자동적으로 fetch된 즉 변경된 데이터들을 반영하여 automatically 하게 변하게 됩니다.</p>
+
+<p>친절하게도 어떤 추가 코드 없이 변경될때의 List가 변경될때의 default한 animation은 탑재가 되어있습니다</p>
+
+<p>결과적으로 SwiftUI에서 이런 persistant render state 와 같이 값이 변경 하는 것에 대해 생각할 필요 없이 그저 현재의 데이터 기반의 코드를 body 안에 추가를 하면 됩니다.</p>
+
+<p>이 모든게 선언적 코드의 장점이 됩니다.</p>
+
+<p>그리고 Modifier를 최대한 활용하여 SwiftUI에서 지향하는 코드의 모습또한 볼 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82455640-20b75080-9aee-11ea-825a-2dff857006f9.png" alt="image" /></p>
+
+<p>우선 위의 작업은 AppIcon을 180도 로테이션 하는 구문을 작성했습니다. if-else로 분기를 나누어 <code class="highlighter-rouge">.degrees</code> 를 통해 rotate상태를 확인하고 <code class="highlighter-rouge">.rotationEffect</code> 라는 SwiftUI 에서 default 로 제공하는 animation modifier를 호출하는 모습입니다.</p>
+
+<p>SwiftUI에서 지향하는 것은 아래와 같이 Modifier에 최대한 condition을 주는 것이고, SwiftUI가 자동으로 변화를 감지 하게 됩니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82456152-d08cbe00-9aee-11ea-92e1-335373d09d43.png" alt="image" /></p>
+
+<p>그리고 앞에서 List에 Custom Cell을 추가하는 코드를 설명하고 있습니다. 기존의 UIKit에서 작업하는 것과 형식이 상당히 다릅니다. Xib 로 Cell 을 Custom해서 불러오는 과정 또한 없고 단순하게 또다른 Cell View를 만든다음 List에서 데이터를 하나씩 넘겨주어서 Cell을 생성하여 보여지게 됩니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82457330-3d548800-9af0-11ea-8369-70a12919c4cc.png" alt="image" /></p>
+
+<p>상당히 코드가 간결한 것을 볼 수 있습니다. 기존의 tableView작업과 비교해보시면 말입니다. 우리는 tableView에 관련된 protocol을 채택하고 성능을 위해 dequeuereusable등을 생각해야 하는 등의 작업이 SwiftUI에서는 존재하지 않습니다.</p>
+
+<p>SwiftUI가 뒤에서 이런 view code의 앱 최적화와 관련된 작업을 개발자가 알게모르게 해줄 것이며 이것은 SwiftUI의 declaratively code의 장점이고 더이상 우리는 최적화된 작업을 추가적으로 해줄 필요가 없게되었습니다!</p>
+
+<h3 id="swiftui의-automatically-data-handling---foreach">SwiftUI의 automatically data handling - ForEach</h3>
+
+<p>앞에서의 예제에서 List가 데이터를 하나씩 넘기고 Cell을 호출하는 것을 볼 수 있습니다. 그 Cell은 넘겨받은 <code class="highlighter-rouge">order</code> 데이터를 통해 body를 생성하고 변경된 List의 Cell을 확인 할 수 있었습니다. 그 Cell에서 넘겨받은 <code class="highlighter-rouge">order</code> 객체에서 소금이 포함되어있는지?(<code class="highlighter-rouge">includeSalt</code>) 고춧가루가 포함되어있는지?(<code class="highlighter-rouge">includeRedPepperFlakes</code>) 를 하나씩 체크하면서 Cell에 우측에 Icon을 삽입하고 있는 작업입니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82459556-0e8be100-9af3-11ea-9a61-7f9d9426ba24.png" alt="image" /></p>
+
+<p>하지만 이러한 작업은 결국 객체 자체에 bool 타입의 프로퍼티만 늘릴뿐이고..(왜이렇게 한지는 모르겠습니다.. 극단적인 방법을 보여주는걸까요) 이를 해결하기 위해 SwiftUI에서는 <code class="highlighter-rouge">ForEach</code> 를 통해 <code class="highlighter-rouge">toppings</code> 라는 배열에 소금, 고춧가루, 후추, 계란 등등의 시퀀스를 담고있는 정보를 하나씩 체크하여 토핑아이콘을 추가하는 것을 볼 수 있습니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82458683-f6679200-9af1-11ea-88ad-e7b223762d4b.png" alt="image" /></p>
+
+<p>여기서 중요한것은 SwiftUI는 automatically 하게 data chainging을 감지하고 이를 default animation 등으로 대응을하기 때문에 추가적인 코드를 필요로 하지 않는다는 것이 SwiftUI의 장점이라 할 수 있습니다. 아래와 같이 List에 아이콘을 추가하는 것 뿐만 아니라 다크모드에 대한 때응 까지 말입니다.</p>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/82460645-6545ea80-9af4-11ea-8e6c-87b52496f906.png" alt="image" /></p>
+
+<h2 id="reference">Reference</h2>
+
+<ul>
+  <li><a href="https://developer.apple.com/videos/play/wwdc2019/216/">WWDC2019 - SwiftUI Essentials</a></li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=SwiftUI Essentials(1)&amp;url=http://localhost:4000/wwdc/2020/05/20/WWDC-2019-01/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/wwdc/2020/05/20/WWDC-2019-01/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/wwdc/2020/06/23/WWDC-2020-01/" data-flip="title">
+    <span>All About WWDC 2020</span>
+  </a>
+  <small><time datetime="2020-06-23T00:00:00+09:00">
+    23 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+          
+          
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="SwiftUI Essentials(1)",this.page.identifier="/wwdc/2020/05/20/WWDC-2019-01",this.page.url="http://localhost:4000/wwdc/2020/05/20/WWDC-2019-01/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>

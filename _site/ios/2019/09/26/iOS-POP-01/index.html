@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en"><!--
+ __  __                __                                     __
+/\ \/\ \              /\ \             __                    /\ \
+\ \ \_\ \   __  __    \_\ \      __   /\_\      __       ___ \ \ \/'\
+ \ \  _  \ /\ \/\ \   /'_` \   /'__`\ \/\ \   /'__`\    /'___\\ \ , <
+  \ \ \ \ \\ \ \_\ \ /\ \L\ \ /\  __/  \ \ \ /\ \L\.\_ /\ \__/ \ \ \\`\
+   \ \_\ \_\\/`____ \\ \___,_\\ \____\ _\ \ \\ \__/.\_\\ \____\ \ \_\ \_\
+    \/_/\/_/ `/___/> \\/__,_ / \/____//\ \_\ \\/__/\/_/ \/____/  \/_/\/_/
+                /\___/                \ \____/
+                \/__/                  \/___/
+
+Powered by Hydejack v6.4.0 (https://qwtel.com/hydejack/)
+-->
+
+
+
+
+
+
+
+
+
+<head>
+  <!-- =============== -->
+<!-- META            -->
+<!-- =============== -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<meta
+  name="naver-site-verification"
+  content="22c5b4ef3bfda7fc6100671413989219de7a4ac8"
+/>
+<meta property="og:title" content="iOS Protocol Basic & Protocol Oriented Programming" />
+<meta property="og:type" content="article" />
+
+<!-- =============== -->
+<!-- Google AdSense  -->
+<!-- =============== -->
+<script
+  data-ad-client="ca-pub-8247516864622650"
+  async
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+></script>
+
+ 
+<meta property="og:image" content="http://localhost:4000/assets/img/logo.png" />
+
+
+<meta property="og:image:width" content="640" />
+<meta property="og:image:height" content="360" />
+ 
+<title>iOS Protocol Basic & Protocol Oriented Programming &middot; Gaki</title>
+ 
+<meta
+  name="description"
+  content="About Protocol &amp; POP (Protocol Oriented Programming)
+
+"
+/>
+<meta
+  property="og:description"
+  content="About Protocol &amp; POP (Protocol Oriented Programming)
+
+"
+/>
+
+
+
+<!-- =============== -->
+<!-- LINKS           -->
+<!-- =============== -->
+<link rel="canonical" href="http://localhost:4000/ios/2019/09/26/iOS-POP-01/" />
+<meta property="og:url" content="http://localhost:4000/ios/2019/09/26/iOS-POP-01/" />
+
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="Gaki Feed"
+  href="http://localhost:4000/feed.xml"
+/>
+
+
+<link rel="prev" href="http://localhost:4000/ios/2019/09/21/iOS-Basic-04/" />
+ 
+<link rel="next" href="http://localhost:4000/swift/2019/09/27/Swift-Basic-02/" />
+
+
+<link
+  rel="apple-touch-icon"
+  href="http://localhost:4000/apple-touch-icon.png"
+/>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?" />
+<!-- Place favicon.ico in the root directory -->
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+<script>
+  !function(n,e){function t(n,e){n.onload=function(){this.onerror=this.onload=null,e(null,n)},n.onerror=function(){this.onerror=this.onload=null,e(new Error("Failed to load "+this.src),n)}}function o(n,e){n.onreadystatechange=function(){"complete"!=this.readyState&&"loaded"!=this.readyState||(this.onreadystatechange=null,e(null,n))}}n._loaded=!1,n.loadJSDeferred=function(a,d){function r(){n._loaded=!0;var r=e.createElement("script");r.src=a,d&&(("onload"in r?t:o)(r,d),r.onload||t(r,d));var l=e.getElementsByTagName("script")[0];l.parentNode.insertBefore(r,l)}n._loaded?r():n.addEventListener?n.addEventListener("load",r,!1):n.attachEvent?n.attachEvent("onload",r):n.onload=r}}(window,document);
+
+  !function(e){"use strict";var n=function(n,t,o){function i(e){if(a.body)return e();setTimeout(function(){i(e)})}function r(){l.addEventListener&&l.removeEventListener("load",r),l.media=o||"all"}var d,a=e.document,l=a.createElement("link");if(t)d=t;else{var f=(a.body||a.getElementsByTagName("head")[0]).childNodes;d=f[f.length-1]}var s=a.styleSheets;l.rel="stylesheet",l.href=n,l.media="only x",i(function(){d.parentNode.insertBefore(l,t?d:d.nextSibling)});var u=function(e){for(var n=l.href,t=s.length;t--;)if(s[t].href===n)return e();setTimeout(function(){u(e)})};return l.addEventListener&&l.addEventListener("load",r),l.onloadcssdefined=u,u(r),l};"undefined"!=typeof exports?exports.loadCSS=n:e.loadCSS=n}("undefined"!=typeof global?global:this);
+
+  !function(t){if(t.loadCSS){var e=loadCSS.relpreload={};if(e.support=function(){try{return t.document.createElement("link").relList.supports("preload")}catch(t){return!1}},e.poly=function(){for(var e=t.document.getElementsByTagName("link"),r=0;r<e.length;r++){var n=e[r];"preload"===n.rel&&"style"===n.getAttribute("as")&&(t.loadCSS(n.href,n,n.getAttribute("media")),n.rel=null)}},!e.support()){e.poly();var r=t.setInterval(e.poly,300);t.addEventListener&&t.addEventListener("load",function(){e.poly(),t.clearInterval(r)}),t.attachEvent&&t.attachEvent("onload",function(){t.clearInterval(r)})}}}(this);
+
+  window.disablePushState = false;
+  window.disableDrawer = false;
+</script>
+
+<!--[if lt IE 9]>
+  <script src="https://unpkg.com/html5shiv/dist/html5shiv.min.js"></script>
+<![endif]-->
+
+<!-- =============== -->
+<!-- STYLES          -->
+<!-- =============== -->
+<!--[if gt IE 8]><!---->
+<style>
+  
+  article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}mark{background:#FF0;color:#000}*{box-sizing:border-box}html,body{margin:0;padding:0}html{font-size:16px;line-height:1.75}body{color:#333;background-color:#fff;overflow-y:scroll}a{text-decoration:none}.lead{margin-left:-1rem;margin-right:-1rem}img,.img{display:block;max-width:100%;margin-bottom:1rem;border:none}img.lead,.img.lead{max-width:calc(100% + 2rem);width:calc(100% + 2rem)}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-weight:bold;text-rendering:optimizeLegibility}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{margin:1.6rem 0 1rem;line-height:1.6}h1,.h1{font-size:2rem;line-height:1.25}h2,.h2{font-size:1.5rem}h3,.h3{font-size:1.17em}p{margin-top:0;margin-bottom:1rem}p.lead{font-size:1.25rem;font-weight:300;padding:0 1rem}ul,ol,dl{margin-top:0;margin-bottom:1rem}ul,ol{padding-left:1.25rem}hr{position:relative;margin:1.5rem 0;border:0;border-top:1px solid #eee}.hr{padding-bottom:.5rem;border-bottom:1px solid #eee;margin-bottom:1.5rem}h4,h5,h6,.h4,.h5,.h6{margin-bottom:0.5rem;font-size:1rem}table{margin-bottom:1rem;width:100%;width:calc(100% + 2rem);margin-left:-1rem;border:1px solid #e5e5e5;border-collapse:collapse;border-spacing:0}td,th{padding:.25rem .5rem;border:1px solid #e5e5e5}td:first-child,th:first-child{padding-left:1rem}td:last-child,th:last-child{padding-right:1rem}thead+tbody,tbody+tbody,tfoot{border-top:3px double #e5e5e5}tbody tr:nth-child(odd) td,tbody tr:nth-child(odd) th{background-color:#f9f9f9}footer{margin-bottom:2rem}.page,.post{margin-bottom:3em}.page li+li,.post li+li{margin-top:.25rem}.page>header,.post>header{margin-bottom:2rem}.page-title,.post-title{margin-top:0}.post-date{display:block;margin-top:-0.5rem;margin-bottom:1rem;color:#9a9a9a}.related-posts{padding-left:0;list-style:none}.related-posts>li,.related-posts>li+li{margin-top:1rem}.related-posts>li>small,.related-posts>li+li>small{font-size:75%;color:#9a9a9a}.message{margin-bottom:1rem;padding:1rem;color:#787878;background-color:#f9f9f9;margin-left:-1rem;margin-right:-1rem}body,main{position:relative;overflow-x:hidden}@media screen{body::before{content:'';background:#e5e5e5;position:absolute;left:0;top:0;bottom:0}}@media screen and (min-width: 40em){html{font-size:17px}}@media screen and (min-width: 54em){html{font-size:16px}}@media screen and (min-width: 88em){html{font-size:17px}}@media screen and (min-width: 125em){html{font-size:18px}}.sr-only{display:none}.clearfix,.sidebar-social::after,.clearafter::after{content:"";display:table;clear:both}a,.a{position:relative;padding-bottom:.15rem;border-style:hidden}.img{overflow:hidden;background-color:#f9f9f9}.img>img{margin:0;width:100%;height:100%}.sixteen-nine{position:relative}.sixteen-nine::before{display:block;content:"";width:100%;padding-top:56.25%}.sixteen-nine>*{position:absolute;top:0;left:0;right:0;bottom:0}h1+hr,h2+hr,h3+hr,h4+hr,h5+hr,h6+hr{margin-top:0}.fade-in{animation-duration:500ms;animation-name:fade-in;animation-fill-mode:forwards}@keyframes fade-in{from{transform:translateY(-2rem);opacity:0}50%{transform:translateY(-2rem);opacity:0}to{transform:translateY(0);opacity:1}}.mb6{margin-bottom:10rem}.sidebar{color:rgba(255,255,255,0.75);text-align:left}.sidebar::before{content:"";position:absolute;z-index:2;top:0;left:0;bottom:0;right:0;background:linear-gradient(to bottom, rgba(32,32,32,0) 0%, rgba(32,32,32,0.5) 100%)}.sidebar a{color:#fff;border-bottom-color:rgba(255,255,255,0.2)}.right-side{width:100%;margin-left:auto;margin-right:auto}.right-side .ad-first{text-align:center}@media screen{.right-side{max-width:38rem;min-height:100vh}.right-side .ad-second{display:none}}@media screen and (min-width: 54em){.right-side{margin-left:20rem;margin-right:1rem;padding:4rem 1rem 12rem}.right-side .ad-second{text-align:center;display:block}}@media screen and (min-width: 72em){.right-side{margin-left:22rem;max-width:42rem}}@media screen and (min-width: 88em){.right-side{width:162px;margin-left:0rem;margin-right:0rem;padding:0rem;margin-top:10rem;display:block;float:left}}@media screen and (min-width: 96em){.right-side{width:300px;margin-right:0rem}}#_yDrawer{position:relative}@media screen{#_yDrawer{min-height:640px;min-height:100vh}}@media screen and (min-width: 54em){#_yDrawer{width:18rem;margin-left:0}}.sidebar-bg{position:absolute;height:100%;overflow:hidden;top:0;right:0;bottom:0;left:0;background:#202020 center / cover}.sidebar-box{display:flex;justify-content:center}.sidebar-sticky{position:relative;z-index:3}@media screen{.sidebar-sticky{-ms-overflow-style:none;overflow:-moz-scrollbars-none;height:100%;overflow:auto;position:absolute;padding:3rem 0rem;right:2.5rem;left:2.5rem}}.sidebar-sticky::-webkit-scrollbar{display:none}.sidebar-about>h1{color:#fff;font-size:2rem}.sidebar-nav>ul{list-style:none;padding-left:0;margin-bottom:.5rem}a.sidebar-nav-item{width:100%;font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}a.sidebar-nav-subitem{font-weight:normal;display:block;line-height:1.75;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,0.2)}@media screen{.y-drawer-scrim{z-index:2}.y-drawer-content{width:18rem;left:-18rem;z-index:3}}.sidebar-social{margin-bottom:.5rem}.sidebar-social>ul{list-style:none;padding-left:0;margin:0 -.25rem}.sidebar-social>ul>li{float:left}.sidebar-social>ul>li>a{display:inline-block;text-align:center;font-size:1.6rem;line-height:3rem;width:3.1249rem;height:4rem;padding:.5rem 0}.sidebar-social>ul li+li{margin-top:0}.fixed-top{position:fixed;top:0;left:0;width:100%;z-index:1}.navbar>.content{padding-top:0;padding-bottom:0;min-height:0;height:0}.menu{display:inline-block;padding:1.75rem 1.5rem;border-bottom:none;margin-left:-1.5rem;color:#9a9a9a !important}.menu::after{content:"\2630"}@media screen and (min-width: 54em){.menu{padding:1.25rem 1.5rem;position:absolute;left:-9999px}.menu:focus{position:static}}.animation-main{pointer-events:none}.loading{display:none}@media print{.menu{display:none}}.animation-main{opacity:0;will-change:opacity}.loading{position:absolute;top:0;right:0;padding:5.25rem 4.5rem;transform-origin:top right;transform:scale(0.33)}.content{position:relative;margin-left:auto;margin-right:auto;padding:5rem 1rem 12rem}@media screen{.content{min-height:100vh}}@media screen and (min-width: 54em){.content{padding:4rem 1rem 12rem;margin-left:19rem;margin-right:3rem}}@media screen and (min-width: 72em){.content{max-width:42rem;margin-left:21rem}}@media screen and (min-width: 88em){.content{float:left;width:100%;margin-left:22rem;margin-right:5rem}}@media screen and (min-width: 96em){.content{max-width:44rem}}@media screen and (min-width: 102em){.content{margin-left:25rem;margin-right:8rem}}.me{width:6.5rem;height:6.5rem;align-self:center;margin-right:20px;border-radius:100%;position:relative}@media screen and (min-width: 40em){.me{width:7rem;height:7rem}}@media screen and (min-width: 54em){.me{width:6.5rem;height:6.5rem}}@media screen and (min-width: 72em){.me{width:7rem;height:7rem}}main>footer{width:100%;position:absolute;bottom:0;left:0;right:0;padding:0 1rem;color:#9a9a9a;font-size:smaller;text-align:center}main>footer>p{margin-bottom:0}html{font-family:'Sans-serif'}h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6,.heading{font-family:'Sans-serif'}
+
+</style>
+
+
+<link
+  rel="preload"
+  href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0"
+  as="style"
+  onload="this.rel='stylesheet'"
+/>
+
+<style id="_pageStyle">
+
+.content a{color:#4f86aa;border-color:rgba(79,134,170,0.2)}.content a:hover{border-color:#4f86aa}:focus{outline-color:#4f86aa}::selection{color:#fff;background:#4f86aa}::-moz-selection{color:#fff;background:#4f86aa}
+
+</style>
+
+
+<noscript>
+  <link rel="stylesheet" href="http://localhost:4000/assets/css/hydejack.css?v=6.4.0" />
+    
+  
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Lato"
+  />
+  <style>
+    html { font-family: 'Lato', 'Sans-serif' }
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .heading { font-family: 'Lato', 'Sans-serif' }
+  </style>
+   
+  <link rel="stylesheet" href="http://localhost:4000/assets/icomoon/style.css" />
+</noscript>
+<!--<![endif]-->
+
+</head>
+
+<body>
+  <!-- =============== -->
+<!-- MENU            -->
+<!-- =============== -->
+<div class="navbar fixed-top">
+  <div class="content">
+    <span class="sr-only">Jump to:</span>
+    <a id="_menu" class="menu no-hover" href="#_title">
+      <span class="sr-only">Menu</span>
+    </a>
+  </div>
+</div>
+
+<!-- =============== -->
+<!-- CONTENT         -->
+<!-- =============== -->
+<div id="_yPushState">
+  <div class="fade-in">
+    <main id="_main" class="content" role="main" data-color="#4f86aa" data-image="/assets/img/kumo.jpg">
+      
+
+<article id="post-ios/2019/09/26/iOS-POP-01" class="post" role="article">
+  <header>
+    <h1 class="post-title">
+      
+        iOS Protocol Basic & Protocol Oriented Programming
+        
+    </h1>
+
+    <p class="post-date heading">
+      <time datetime="2019-09-26T00:00:00+09:00">26 Sep 2019</time>
+      
+
+
+
+
+
+
+
+
+
+in <a href="/category/ios/" data-flip="title">iOS</a>
+
+      
+
+
+
+
+
+
+
+
+
+on <a href="/tag/ios-pop/" data-flip="title">POP</a>
+
+    </p>
+
+    
+  <div class="hr" style="padding-bottom:0"></div>
+
+
+  </header>
+  
+
+
+  
+  <div class="markdown-body">
+
+    <!--  -->
+    <style>
+      .myAd1190 {
+        width: 48%;
+        height: 280px;
+      }
+
+      .myAd1290 {
+        width: 48%;
+        height: 280px;
+      }
+
+      @media(max-width: 800px) {
+        .myAd1190 {
+          display: none;
+        }
+
+        .myAd1290 {
+          width: 98%;
+        }
+      }
+
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 300px;
+      }
+
+      .row-center {
+        display: flex;
+        justify-content: center;
+        height: 258px;
+      }
+    </style>
+   
+    <!--<br />-->
+    <h1 id="about-protocol--pop-protocol-oriented-programming">About Protocol &amp; POP (Protocol Oriented Programming)</h1>
+
+<blockquote>
+  <p>기본을 충실하게!</p>
+</blockquote>
+
+<h2 id="프로토콜protocol-이란">프로토콜(Protocol) 이란?</h2>
+
+<ul>
+  <li>작업에 필요한 메서드,프로퍼티 및 요구사항을 정의하는 일종의 <strong>약속, 계약</strong> 의 역할을 한다. 그후 프로토콜 클래스, 구조체, 열거형에서 채택(adoption)하여 이러한 요구 사항을 자세하게 실제 구현할 수 있다.</li>
+</ul>
+
+<h2 id="property-requirements-프로퍼티-요구사항">Property Requirements( 프로퍼티 요구사항)</h2>
+
+<h3 id="프로토콜-내의-프로퍼티-선언">프로토콜 내의 프로퍼티 선언</h3>
+
+<blockquote>
+  <p>프로토콜 프로퍼티 선언 시</p>
+</blockquote>
+
+<ul>
+  <li>프로토콜은 프로퍼티가 <strong>save</strong> 인지 <strong>operation</strong> 인지 명시하지 않는다.</li>
+  <li>읽기 가능한지, 읽기/쓰기 모두 가능한지 명시해야한다 ( ‘setter’ always be with ‘getter’)</li>
+  <li>프로퍼티 요구사항은 항상 <strong>var</strong> 로 선언되어야한다.</li>
+</ul>
+
+<h3 id="상수constant-변수variable-저장-프로퍼티">상수(Constant), 변수(Variable) 저장 프로퍼티</h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">Student</span><span class="p">:</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">let</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">gaki</span> <span class="o">=</span> <span class="kt">Student</span><span class="p">(</span><span class="kt">MyMajor</span><span class="p">:</span> <span class="s">"CES"</span><span class="p">)</span>
+
+<span class="n">gaki</span><span class="o">.</span><span class="n">myMajor</span> <span class="o">=</span> <span class="s">"Electric Engineering"</span> <span class="c1">// error 발생 </span>
+</code></pre>
+</div>
+
+<p>myMajor 프로퍼티가 let으로 선언되었기 때문에 값을 변경할 수 없다. var 로 선언 하게 되면 변경이 가능하다.</p>
+
+<h3 id="연산프로퍼티-gettable">연산프로퍼티 gettable</h3>
+
+<p>값을 저장하고 리턴할 변수가 따로 필요하다</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">Student</span><span class="p">:</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">university</span><span class="p">:</span> <span class="kt">String</span>
+	<span class="k">var</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    		
+     	<span class="k">return</span> <span class="n">university</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">gaki</span> <span class="o">=</span> <span class="kt">Student</span><span class="p">(</span><span class="nv">university</span><span class="p">:</span> <span class="s">"KNU"</span><span class="p">)</span>
+
+<span class="n">gaki</span><span class="o">.</span><span class="n">myMajor</span> <span class="o">=</span> <span class="s">"Electric Engineering"</span> <span class="c1">// error 발생 </span>
+</code></pre>
+</div>
+
+<ul>
+  <li>myMajor의 프로퍼티값은 읽기 전용이기 때문에 달느 값을 넣어 줄 수 없다.</li>
+  <li>연산프로퍼티는 값을 저장하는 것이 아니라 연산을 통해서 값을 설정하거나 반환 해준다.( gaki 인스턴스 초기화 시 매개변수로 myMajor가 아닌 university를 사용해서 myMajor의 값을 초기화 시켜주어야한다)</li>
+</ul>
+
+<h3 id="연산프로퍼티-settable">연산프로퍼티 settable</h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">Student</span><span class="p">:</span> <span class="kt">MajorInformed</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">university</span><span class="p">:</span> <span class="kt">String</span>
+	<span class="k">var</span> <span class="nv">myMajor</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    	
+        <span class="k">get</span> <span class="p">{</span>
+        
+     		<span class="k">return</span> <span class="n">university</span>
+        
+        <span class="p">}</span>
+        <span class="k">set</span> <span class="p">{</span>
+        
+        	<span class="n">university</span> <span class="o">=</span> <span class="n">newValue</span>
+            
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">var</span> <span class="nv">gaki</span> <span class="o">=</span> <span class="kt">Student</span><span class="p">(</span><span class="nv">university</span><span class="p">:</span> <span class="s">"KNU"</span><span class="p">)</span>
+
+<span class="n">gaki</span><span class="o">.</span><span class="n">myMajor</span> <span class="o">=</span> <span class="s">"Electric Engineering"</span>  <span class="c1">//가능</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>프로토콜이 gettable 및 settable 프로퍼티를 요구하면, 해당 프로퍼티 요구사항은 상수(constant) 저장 프로퍼티 또는 읽기 전용 연산 프로퍼티로 충족되서는 안된다.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge"><span class="p">{</span><span class="w"> </span><span class="err">set</span><span class="w"> </span><span class="p">}</span></code> 으로 선언 되어있는데 <code class="highlighter-rouge">let</code>으로 선언이 되어있으면 변수가 settable 하지 않기 때문에 <code class="highlighter-rouge">var</code> 로 선언</p>
+  </li>
+</ul>
+
+<h2 id="method-requirements메소드-요구사항">Method Requirements(메소드 요구사항)</h2>
+
+<ul>
+  <li>프로토콜은 특정 인스턴스 메소드 및 타입 메소드가 타입을 준수하여 구현하도록 요구가 가능하다.</li>
+</ul>
+
+<blockquote>
+  <p>프로토콜내 함수 선언</p>
+</blockquote>
+
+<p><img src="https://user-images.githubusercontent.com/33486820/53578393-f7459880-3bba-11e9-8e5e-f5a21b880813.png" alt="image" /></p>
+
+<blockquote>
+  <p>프로토콜 채택</p>
+</blockquote>
+
+<p><img width="566" alt="image" src="https://user-images.githubusercontent.com/33486820/53578680-6e7b2c80-3bbb-11e9-8cda-ddadfa16f0d8.png" /></p>
+
+<ul>
+  <li>프로토콜은 단순 정의만 진행하고 실제 구현은 프로토콜을 채택한 곳에서 수행</li>
+</ul>
+
+<h3 id="타입-프로퍼티와-프로토콜">타입 프로퍼티와 프로토콜</h3>
+
+<ul>
+  <li>
+    <p>타입 프로퍼티를 프로토콜에 정의한 경우, 다입베소드 요구사항에 항살 <strong>static</strong> 키워드를 붙여야 한다.</p>
+  </li>
+  <li>
+    <p>클래스에서 구현할 때, 타입 메소드 요구사항 앞에 <strong>class</strong> 또는 <strong>static</strong> 키워드가 접두사로 붙는 경우에도 마찬가지 이다.</p>
+  </li>
+</ul>
+
+<pre><code class="language-swfit">protocol SomeProtocol {
+
+    static func someTypeMethod()
+
+    static func anotherTypeMethod()
+
+    
+
+}
+</code></pre>
+
+<p>class 에서 채택</p>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Gaki</span> <span class="p">:</span> <span class="kt">SomeProtocol</span><span class="p">{</span>
+
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">someTypeMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kd">class</span> <span class="kd">func</span> <span class="nf">anotherTypeMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>gaki라는 클래스에서 <code class="highlighter-rouge">SomeProtocol</code> 을 채택하고 요구 메서드를 구현 한다. class 에서 프로토콜을 채택했기 때문에 요구 메소드는 static 도는 class 키워드를 추가해서 구현 할 수 있다.</p>
+
+<blockquote>
+  <p>서브클래스에서 override를 통해 구현</p>
+</blockquote>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="kt">Gaki</span> <span class="p">:</span> <span class="kt">SomeProtocol</span><span class="p">{</span>
+
+    <span class="kd">static</span> <span class="kd">func</span> <span class="nf">someTypeMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kd">class</span> <span class="kd">func</span> <span class="nf">anotherTypeMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">SubClass</span><span class="p">:</span> <span class="kt">Gaki</span> <span class="p">{</span>
+	
+    <span class="k">override</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">anotherTypeMethod</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">//overriding implementation</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="mutating-method-requirements">Mutating Method Requirements</h2>
+
+<ul>
+  <li><code class="highlighter-rouge">Mutating</code> 키워드는 구조체 또는 열거형에서만 채택시 사용 할 수 있다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">SomeProtocol</span><span class="p">{</span>
+
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="kt">SomeMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">num</span> <span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">struct</span> <span class="kt">SomeStruct</span> <span class="p">:</span> <span class="kt">SomeProtocol</span><span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">x</span> <span class="o">=</span> <span class="mi">0</span>
+	
+    <span class="c1">//프로토콜 측에서 이미 mutating을 선언 하고 있기 때문에 구현 시 생략이 가능하다.</span>
+    <span class="k">mutating</span> <span class="kd">func</span> <span class="kt">SomeMethod</span><span class="p">(</span><span class="n">_</span> <span class="nv">num</span> <span class="p">:</span><span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="n">x</span> <span class="o">+=</span> <span class="n">num</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>구조체 내부의 변수 x 의 값을 변경가능하게 하기 위해 <a href="https://blog.naver.com/guyeongjun/221436864605">mutating</a> 키워드를 통해 변수 x 값에 접근 가능하다.</li>
+</ul>
+
+<h2 id="initializer-requirement">Initializer Requirement</h2>
+
+<ul>
+  <li>프로토콜을 준수하려는 타입에게 특정 이니셜라이저를 필수적으로 구현 하도록 요구가 가능하다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+	
+    <span class="nf">init</span><span class="p">(</span><span class="nv">someParameter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="class-implementations-of-protocol-initializer-requirements">Class Implementations of Protocol Initializer Requirements</h3>
+
+<ul>
+  <li>
+    <p>프로토콜을 준수하는 <strong>클래스</strong>에서 프로토콜에서 요구하는 이니셜라이저 요구사항을 구현 할수 있다.</p>
+  </li>
+  <li>
+    <p><strong>required</strong> , <strong>modifier</strong> 키워드를 사용 (구조체의 경우 필요가 없다)</p>
+  </li>
+  <li>
+    <p>클래스가 <strong>final</strong> modifier로 표시 되었을때는 <strong>required</strong> 를 표시할 필요 없다. (final 클래스는 서브클래스화 할 수 없다)</p>
+  </li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">someParameter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">SomeClass</span><span class="p">:</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+
+    <span class="kd">required</span> <span class="nf">init</span><span class="p">(</span><span class="nv">someParameter</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="c1">// initializer implementation goes here</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>protocol의 init()</strong> 과 <strong>슈퍼클래스의 dssignated init()</strong> 를 재정의 할때 두 이니셜라이저가 일치 하는 경우 <strong>required override</strong> 를 명시한다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+
+    <span class="nf">init</span><span class="p">()</span>
+
+<span class="p">}</span>
+
+
+
+<span class="kd">class</span> <span class="kt">SomeSuperClass</span> <span class="p">{</span>
+
+    <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// initializer implementation goes here</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+
+
+<span class="kd">class</span> <span class="kt">SomeSubClass</span><span class="p">:</span> <span class="kt">SomeSuperClass</span><span class="p">,</span> <span class="kt">SomeProtocol</span> <span class="p">{</span>
+
+    <span class="c1">// "required" from SomeProtocol conformance; "override" from SomeSuperClass</span>
+
+    <span class="kd">required</span> <span class="k">override</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// initializer implementation goes here</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="protocols-as-type-타입으로서의-프로토콜">Protocols as Type (타입으로서의 프로토콜)</h2>
+
+<ul>
+  <li>
+    <p>프로토콜을 채택하는 것이 아니라 타입으로 프로토콜을 변수나 상수 프로퍼티로 선언하는 것</p>
+  </li>
+  <li>
+    <p>해당 프로토콜의 요구 메소드를 구현 할 필요 없이 접근이 가능하다.</p>
+  </li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">RandomNumberGenerator</span> <span class="p">{</span>
+
+    <span class="kd">func</span> <span class="nf">random</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Double</span>
+
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">LinearCongruentialGenerator</span><span class="p">:</span> <span class="kt">RandomNumberGenerator</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">lastRandom</span> <span class="o">=</span> <span class="mf">42.0</span>
+
+    <span class="k">let</span> <span class="nv">m</span> <span class="o">=</span> <span class="mf">139968.0</span>
+
+    <span class="k">let</span> <span class="nv">a</span> <span class="o">=</span> <span class="mf">3877.0</span>
+
+    <span class="k">let</span> <span class="nv">c</span> <span class="o">=</span> <span class="mf">29573.0</span>
+
+    <span class="kd">func</span> <span class="nf">random</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Double</span> <span class="p">{</span>
+
+        <span class="n">lastRandom</span> <span class="o">=</span> <span class="p">((</span><span class="n">lastRandom</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span><span class="o">.</span><span class="nf">truncatingRemainder</span><span class="p">(</span><span class="nv">dividingBy</span><span class="p">:</span><span class="n">m</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">lastRandom</span> <span class="o">/</span> <span class="n">m</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">Dice</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">sides</span><span class="p">:</span> <span class="kt">Int</span>
+    
+	<span class="c1">//상수 저장 프로퍼티를 선언 하고 타입을 protocol로 선언</span>
+    <span class="k">let</span> <span class="nv">generator</span><span class="p">:</span> <span class="kt">RandomNumberGenerator</span>
+
+    <span class="nf">init</span><span class="p">(</span><span class="nv">sides</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">generator</span><span class="p">:</span> <span class="kt">RandomNumberGenerator</span><span class="p">)</span> <span class="p">{</span>
+
+        <span class="k">self</span><span class="o">.</span><span class="n">sides</span> <span class="o">=</span> <span class="n">sides</span>
+
+        <span class="k">self</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="n">generator</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">roll</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Int</span> <span class="p">{</span>
+		<span class="c1">//요구메소드를 구현 하지 않고 바로 접근이 가능하다 </span>
+    	<span class="c1">//주의사항은 타입으로서 프로토콜을 사용할 때 해당 요구 메서드가 완벽하게 오류가 없이 구현이 되어있어야한다.</span>
+        <span class="k">return</span> <span class="kt">Int</span><span class="p">(</span><span class="n">generator</span><span class="o">.</span><span class="nf">random</span><span class="p">()</span> <span class="o">*</span> <span class="kt">Double</span><span class="p">(</span><span class="n">sides</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="p">}</span>
+
+<span class="p">}</span>
+<span class="k">var</span> <span class="nv">d6</span> <span class="o">=</span> <span class="kt">Dice</span><span class="p">(</span><span class="nv">sides</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="nv">generator</span><span class="p">:</span> <span class="kt">LinearCongruentialGenerator</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span><span class="o">...</span><span class="mi">5</span> <span class="p">{</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Random dice roll is </span><span class="se">\(</span><span class="n">d6</span><span class="o">.</span><span class="nf">roll</span><span class="p">()</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>위의 예제는 해당 프로토콜의 타입의 변수가 선언된 해당 클래스 내에서 구현 없이 접근 하는 것을 볼 수 있다.
+이런 것이 가능한 이유는 이전에 해당 프로토콜을 채택한 <code class="highlighter-rouge">LinearCongruentialGenerator</code> 클래스에서 요구 메서드를 구현 했고 이 클래스 또한 <code class="highlighter-rouge">RandomNumberGenerator</code> 타입이기 때문에 <code class="highlighter-rouge">Dice(sides: 6, generator: LinearCongruentialGenerator())</code> 이런 작업이 가능하다.
+그러므로 해당 generator의 경우 앞전에 구현된 요구 함수를 접근할 수 있다.</p>
+
+<h2 id="adding-protocol-conformance-with-an-extension">Adding Protocol Conformance with an Extension</h2>
+
+<ul>
+  <li>프로토콜을 Extension 하여 채택이 가능하다.</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">AddString</span> <span class="p">{</span>
+	
+    <span class="k">var</span> <span class="nv">addHello</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+    
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">String</span><span class="p">:</span> <span class="kt">AddString</span> <span class="p">{</span>
+
+	<span class="k">var</span> <span class="nv">addHello</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+    	<span class="c1">//self :addHello를 호출하는 String 인스턴스 자신</span>
+    	<span class="k">return</span> <span class="s">"Hello </span><span class="se">\(</span><span class="k">self</span><span class="se">)</span><span class="s">"</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">MyProtocol</span> <span class="p">{</span>
+	<span class="k">var</span> <span class="nv">returnDouble</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+   	<span class="k">mutating</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">Int</span><span class="p">:</span> <span class="kt">MyProtocol</span> <span class="p">{</span>
+	
+    <span class="k">var</span> <span class="nv">returnDouble</span><span class="p">:</span> <span class="kt">Double</span> <span class="p">{</span>
+    	<span class="k">return</span> <span class="kt">Double</span><span class="p">(</span><span class="k">self</span><span class="p">)</span>     
+	<span class="p">}</span>
+    
+    <span class="n">mytating</span> <span class="kd">func</span> <span class="nf">add</span><span class="p">(</span><span class="nv">n</span><span class="p">:</span> <span class="kt">Int</span><span class="p">)</span> <span class="p">{</span>
+    	<span class="k">self</span> <span class="o">+=</span> <span class="n">n</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//예제 출력</span>
+<span class="k">var</span> <span class="nv">number</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">number</span><span class="o">.</span><span class="n">returnDouble</span> <span class="c1">//10.0</span>
+
+<span class="n">number</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">n</span><span class="p">:</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">number</span><span class="o">.</span><span class="n">returnDouble</span> <span class="c1">//30.0</span>
+</code></pre>
+</div>
+
+<h2 id="collections-of-protocol-types">Collections of Protocol Types</h2>
+
+<ul>
+  <li>컬렉션 (배열 , 딕셔너리 등) 에 저장될 프로토타입</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">var</span> <span class="nv">protocolArray</span> <span class="o">=</span> <span class="p">[</span><span class="kt">MyProtocol</span><span class="p">]()</span>
+
+<span class="c1">// 위에서 extension 으로 Int 가 해당 프로토콜을 채택하고 있기 때문에 Int 형 자료를 append 할 수 있다.</span>
+<span class="n">protocolArray</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">protocolArray</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">protocolArray</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">//프로토콜 타입 인스턴스 생성</span>
+<span class="k">var</span> <span class="nv">protocolValue</span> <span class="o">=</span> <span class="kt">MyProtocol</span><span class="p">()</span>
+
+<span class="n">protocolArray</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">protocolValue</span><span class="p">)</span>
+</code></pre>
+</div>
+<ul>
+  <li>컬렉션 프로토콜 타입 인자 접근</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code>
+<span class="k">for</span> <span class="n">index</span> <span class="k">in</span> <span class="n">protocolArray</span> <span class="p">{</span>
+
+	<span class="nf">print</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">returnDouble</span><span class="p">)</span>		<span class="c1">// 0.0 1.0 2.0</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="protocol-inheritance">Protocol Inheritance</h2>
+
+<p>프로토콜은 하나 이상의 다른 프로토콜을 상속 할 수 있고, 상속 된 요구사항에 추가로 요구사항을 추가할 수 있다.</p>
+
+<h2 id="class-only-protocols">Class-Only Protocols</h2>
+
+<p><strong>AnyObject 프로토콜</strong>을 프로토콜의 상속 목록에 추가하여 프로토콜 채택을 클래스 타입을  제한할 수 있다.</p>
+
+<ul>
+  <li><strong>AnyObject를 상속한 프로토콜은 클래스만 채택이 가능하다</strong></li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">SomeClassOnlyProtocol</span><span class="p">:</span> <span class="kt">AnyObject</span><span class="p">,</span> <span class="kt">SomeInheritedProtocol</span> <span class="p">{</span>
+	<span class="c1">// class-only protocol definition goes here</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>AnyObject를 상속 받으면 , SomeClassOnlyProtocol 은 클래스에서만 채택할 수 있게 된다.</p>
+  </li>
+  <li>
+    <p>Class-Only Protocol은 정의된 동작이 값타입(Value Type)이 아닌 참조타입(Reference Type)이라고 가정하거나 요구할 경우에 클래스 전용 프로토콜을 사용해야한다.</p>
+  </li>
+</ul>
+
+<h2 id="protocol-composition">Protocol Composition</h2>
+
+<ul>
+  <li>
+    <p>하나의 타입이 동시에 여러 프로토콜을 준수하도록 요구하는것이 유용할 수 있다.</p>
+  </li>
+  <li>
+    <p>Protocol Composition은 새로운 프로토콜 타입을 정의하지 않는다.</p>
+  </li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Named</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">protocol</span> <span class="kt">Aged</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">age</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>프로토콜을 동시에 두개를 채택하고 있는 Person 구조체</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">Person</span><span class="p">:</span> <span class="kt">Named</span><span class="p">,</span> <span class="kt">Aged</span> <span class="p">{</span>
+
+    <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span>
+
+    <span class="k">var</span> <span class="nv">age</span><span class="p">:</span> <span class="kt">Int</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Person 구조체 밖에 위치한 함수</li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">wishHappyBirthday</span><span class="p">(</span><span class="n">to</span> <span class="nv">celebrator</span><span class="p">:</span> <span class="kt">Named</span> <span class="o">&amp;</span> <span class="kt">Aged</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="nf">print</span><span class="p">(</span><span class="s">"Happy birthday, </span><span class="se">\(</span><span class="n">celebrator</span><span class="o">.</span><span class="n">name</span><span class="se">)</span><span class="s">, you're </span><span class="se">\(</span><span class="n">celebrator</span><span class="o">.</span><span class="n">age</span><span class="se">)</span><span class="s">!"</span><span class="p">)</span>
+
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p>의미: 해당 함수의 파라미터로는 <strong>Named Protocol</strong> 과 <strong>Aged Protocol</strong> 둘 모두를 <strong>준수</strong> 하는 타입어야 한다.</p>
+  </li>
+  <li>
+    <p>Person 구조체 타입의 파라미터로 명시하는 것이 아니라 해당 구조체가 체택하고 있는 프로토콜의 타입을 들 명시 해주어서 보다 명확하게 프로토콜 준수 사항을 확인할 수 있다.</p>
+  </li>
+</ul>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="k">let</span> <span class="nv">birthdayPerson</span> <span class="o">=</span> <span class="kt">Person</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"Malcolm"</span><span class="p">,</span> <span class="nv">age</span><span class="p">:</span> <span class="mi">21</span><span class="p">)</span>
+
+<span class="nf">wishHappyBirthday</span><span class="p">(</span><span class="nv">to</span><span class="p">:</span> <span class="n">birthdayPerson</span><span class="p">)</span>
+
+<span class="c1">// Prints "Happy birthday, Malcolm, you're 21!"</span>
+</code></pre>
+</div>
+
+<h3 id="해당-프로토콜을-준수하는-객체를-선별-하는-방법">해당 프로토콜을 준수하는 객체를 선별 하는 방법</h3>
+
+<div class="language-swift highlighter-rouge"><pre class="highlight"><code><span class="kd">protocol</span> <span class="kt">Named</span><span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span> <span class="p">{</span><span class="k">get</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="kt">A</span> <span class="p">:</span> <span class="kt">Named</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span><span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">class</span> <span class="kt">B</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">name</span> <span class="p">:</span> <span class="kt">String</span>
+    <span class="nf">init</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span><span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">let</span> <span class="nv">objectA</span> <span class="o">=</span> <span class="kt">A</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"gaki"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">objectB</span> <span class="o">=</span> <span class="kt">B</span><span class="p">(</span><span class="nv">named</span><span class="p">:</span> <span class="s">"tsukai"</span><span class="p">)</span>
+
+<span class="k">var</span> <span class="nv">arr</span> <span class="o">=</span> <span class="p">[</span><span class="kt">AnyObject</span><span class="p">]()</span>
+
+<span class="n">arr</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">objectA</span><span class="p">)</span>
+<span class="n">arr</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">objectB</span><span class="p">)</span>
+
+<span class="c1">//해당 프로토콜을 채택하고 있는 클래스 객체인지 배열에서 판별하는 법</span>
+
+<span class="k">for</span> <span class="n">index</span> <span class="k">in</span> <span class="n">arr</span> <span class="p">{</span>
+
+	<span class="k">if</span> <span class="k">let</span> <span class="nv">object</span> <span class="o">=</span> <span class="n">index</span> <span class="k">as?</span> <span class="kt">Named</span> <span class="p">{</span>
+    	<span class="nf">print</span><span class="p">(</span><span class="n">object</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    
+    	<span class="nf">print</span><span class="p">(</span><span class="s">"Not following Protocol by "</span><span class="kt">Named</span><span class="s">")
+	}
+}
+</span></code></pre>
+</div>
+
+<p><br /></p>
+
+<h2 id="optional-protocol-requirements">Optional Protocol Requirements</h2>
+
+<ul>
+  <li>
+    <p>프로토콜에 대한 Optional한 요구사항을 정의 할 수 있다.</p>
+  </li>
+  <li>
+    <p>선택적요구사항에 <strong>optional</strong> 수정자를 접두어로 붙는다.</p>
+  </li>
+  <li>
+    <p>선택적 요구사항을 사용할 수 있으므로 Objective-C와 상호 운용되는 코드를 작성할 수 있다.</p>
+  </li>
+  <li>
+    <p>@objc 프로토콜은 Objective-C 클래스 나 다른 @objc 클래스를 상속받은 클래스에서만 사용할 수 있다</p>
+  </li>
+  <li>
+    <p>그들은 구조체나 열거형에 의해 채택 될 수 없다.</p>
+  </li>
+  <li>
+    <p>메소드나 프로퍼티에 사용시 해당 타입이 자동으로 옵셔널이 된다.
+(ex (Int)-&gt;String타입의 메소드는 ((Int)-&gt;String)? )</p>
+  </li>
+  <li>
+    <p>요구사항이 프로토콜을 준수하는 타입으로 구현되지 않았을 가능성을 나타내기위해 <strong>optional chainning</strong> 을 사용하여 호출 할 수 있다.</p>
+  </li>
+</ul>
+
+
+    <br />
+    <br />
+  </div>
+  
+
+</article>
+
+<!--<hr class="dingbat" />-->
+<!--
+<div class="share">
+  <h2>Share this post</h2>
+  <div class="share-body">
+    <a href="http://twitter.com/share?text=iOS Protocol Basic & Protocol Oriented Programming&amp;url=http://localhost:4000/ios/2019/09/26/iOS-POP-01/"
+      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+      <span class="icon-twitter">
+      </span>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/ios/2019/09/26/iOS-POP-01/"
+      onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+      <span class="icon-facebook">
+      </span>
+    </a>
+  </div>
+</div>
+-->
+<br />
+
+
+
+
+
+
+  <aside class="author" role="complementary">
+    <div class="author">
+  <h2 class="page-title hr">
+    About
+  </h2>
+<div class="author-body">
+  
+    
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+  
+  <div class="author-body-description">
+    <p>오늘을 기록하고 내일을 코딩하는 개발자</p>
+
+  </div>
+</div>
+</div>
+
+  </aside>
+
+
+
+
+<aside class="related" role="complementary">
+  <h2 class="hr">Related Posts</h2>
+
+  <ul class="related-posts">
+    
+      
+      
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-xib%EC%82%AC%EC%9A%A9%EB%B2%95/" data-flip="title">
+    <span>xib를 통해 CustomView 만들기 & xib와 nib의 차이</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/06/29/iOS-Basic-maskToBounds&clipsToBounds/" data-flip="title">
+    <span>masksToBounds 와 clipsToBounds의 차이점</span>
+  </a>
+  <small><time datetime="2020-06-29T00:00:00+09:00">
+    29 Jun 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+          
+
+
+<li class="h4">
+  <a href="/ios/2020/05/28/iOS-Basic-15/" data-flip="title">
+    <span>SwiftGen</span>
+  </a>
+  <small><time datetime="2020-05-28T00:00:00+09:00">
+    28 May 2020
+  </time></small>
+</li>
+
+        
+      
+        
+        
+      
+    
+  </ul>
+</aside>
+
+
+      
+        <aside class="comments" role="complementary">
+  <h2>Comments</h2>
+  <hr/>
+
+  <div id="disqus_thread"></div>
+
+  <script>
+    !function(s,i){function e(e){var t=s.pageYOffset||i.body.scrollTop;s.DISQUS&&!s._disqusThis&&!s._disqusFirst&&t+s.innerHeight>=s._disqusThreadOffsetTop&&(s._disqusThis=!0,s.DISQUS.reset({reload:!0,config:d}))}var d=function(){this.page.title="iOS Protocol Basic & Protocol Oriented Programming",this.page.identifier="/ios/2019/09/26/iOS-POP-01",this.page.url="http://localhost:4000/ios/2019/09/26/iOS-POP-01/"};s._disqusFirst=void 0===s._disqusFirst||s._disqusFirst,s._disqusLoading=void 0!==s._disqusLoading&&s._disqusLoading,s._disqusThis=!1,s._disqusThreadOffsetTop=i.getElementById("disqus_thread").offsetTop,s._disqusLoading?s._disqusFirst=!1:(s._disqusLoading=!0,loadJSDeferred("//gaki.disqus.com/embed.js"),s.addEventListener?s.addEventListener("scroll",e,{passive:!0}):s.attachEvent?s.attachEvent("onscroll",e):s.onscroll=e)}(window,document);
+
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</aside>
+
+      
+
+      <footer>
+  <hr/>
+  
+    <p>© 2020. by Gaki</p>
+
+  
+  <p>
+    <code>Powered by <a href="https://gaki2745.github.io/">gaki</a></code>
+  </p>
+</footer>
+
+    </main>
+    <div class="right-side">
+  <br />
+  <br />
+</div>
+
+  </div>
+  <div id="_yDrawer">
+  <div id="_sidebar" class="sidebar">
+    <div class="sidebar-bg" style="background-color:#4f86aa;background-image:url(/assets/img/kumo.jpg)"></div>
+    <header class="sidebar-sticky" role="banner">
+      <br/>
+      <div class="sidebar-about">
+        <h1><a id="_title" href="/">Gaki</a></h1>
+        <p>오늘을 기록하고 내일을 코딩하는 iOS 개발자</p>
+
+      </div>
+
+      <br/>
+      <br/>
+      <nav class="sidebar-nav heading" role="navigation">
+        <span class="sr-only">Navigation:</span>
+<ul>
+  
+
+  
+
+  
+  
+  
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-1"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/ios/">iOS</a>
+       <label class="folder" for="list-item-1">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EB%94%94%EC%9E%90%EC%9D%B8%ED%8C%A8%ED%84%B4/">디자인패턴</a>
+             </li>
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90%ED%8C%A8%ED%84%B4/">아키텍쳐패턴</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-%ED%85%8C%EC%8A%A4%ED%8C%85/">테스팅</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-ui%EB%94%94%EC%9E%90%EC%9D%B8/">UI디자인</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-arkit/">ARKit</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-avfoundation/">AVFoundation</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/ios-pop/">POP</a>
+             </li>
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-2"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swift/">Swift</a>
+       <label class="folder" for="list-item-2">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-basic/">Basic</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-rxswift/">RxSwift</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swift-oop/">OOP</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-3"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/algorithm/">Algorithm</a>
+       <label class="folder" for="list-item-3">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-problem/">문제풀이</a>
+             </li>
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/algorithm-swiftalgorithm/">SwiftAlgorithm</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-4"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/swiftui/">SwiftUI</a>
+       <label class="folder" for="list-item-4">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/swiftui-combine/">Combine</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-5"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/wwdc/">WWDC</a>
+       <label class="folder" for="list-item-5">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/wwdc-2019/">2019</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-6"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/category/life/">Life</a>
+       <label class="folder" for="list-item-6">▾</label>
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-review/">후기</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+             <li>
+               <a class="sidebar-nav-subitem" href="/tag/life-retrospect/">회고</a>
+             </li>
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+  
+    <li>
+      <input type="checkbox" id="list-item-7"/>
+      <div  class="list-wrapper">
+      <a class="sidebar-nav-item" href="/about/">About</a>
+       
+    </div>
+     <ul class="list-body">
+       
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+           
+         
+     </ul>
+    </li>
+
+  
+</ul>
+
+      </nav>
+    <br/>
+    <br/>
+      <div class="sidebar-box">
+        
+          
+  
+
+  
+
+  <img
+    src="/assets/img/me.jpg"
+    class="me"
+    alt="youngjun gu"
+    srcset="/assets/img/me.jpg 1x,/assets/img/me.jpg 2x"
+    
+  />
+
+
+        
+      </div>
+      <p>Be Faithful to the Basic!!</p>
+
+      
+      
+        <div class="sidebar-social">
+          <span class="sr-only">Social:</span>
+<ul>
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://facebook.com/yeongjun.gu">
+    <span class="icon-facebook" title="Facebook"></span>
+    <span class="sr-only">Facebook</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://github.com/gaki2745">
+    <span class="icon-github" title="GitHub"></span>
+    <span class="sr-only">GitHub</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:guyeongjun@naver.com">
+    <span class="icon-mail" title="Email"></span>
+    <span class="sr-only">Email</span>
+  </a>
+</li>
+
+  
+    
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="https://gaki2745.github.io/feed.xml">
+    <span class="icon-rss2" title="RSS"></span>
+    <span class="sr-only">RSS</span>
+  </a>
+</li>
+
+  
+</ul>
+
+        </div>
+      
+    </header>
+  </div>
+</div>
+</div>
+
+<!-- =============== -->
+<!-- SCRIPTS         -->
+<!-- =============== -->
+
+<script>
+  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  ga('create', 'UA-92346434-1', 'auto');
+  ga('send', 'pageview');
+  loadJSDeferred('https://www.google-analytics.com/analytics.js');
+</script>
+
+
+
+
+
+<!--[if gt IE 8]><!---->
+<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script>
+  WebFont.load({
+    
+    google: {
+      families: 'Lato'.split('|')
+    },
+    
+
+    custom: {
+      families: ['icomoon'],
+      urls: ['/assets/icomoon/style.css']
+    }
+  });
+</script>
+<!--<![endif]-->
+
+
+  <!--[if gt IE 9]><!---->
+  
+  <script>loadJSDeferred('/assets/js/hydejack.js?v=6.4.0');</script>
+
+  
+  <!--<![endif]-->
+
+
+
+</body>
+
+</html>
