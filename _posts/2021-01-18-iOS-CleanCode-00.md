@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Clean Code) 이 책을 시작으로
+title: 이 책을 시작으로
 subtitle: ""
 categories: ios
 tags: cleanCode
