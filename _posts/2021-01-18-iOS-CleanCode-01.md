@@ -1,12 +1,13 @@
 ---
 layout: post
-title: Clean Code) 1장 깨끗한 코드
+title: 1장) 깨끗한 코드
 subtitle: ""
 categories: ios
 tags: cleanCode
 comments: false
 ---
 
+## [CleanCode] 의미있는 이름
 
 #### 코드가 존재하리라
 
